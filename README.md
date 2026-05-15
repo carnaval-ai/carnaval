@@ -4,7 +4,7 @@
 
 <h1 align="center">Carnaval</h1>
 
-<p align="center"><em>The art of the mask &mdash; hide the identity, keep the meaning.</em></p>
+<p align="center"><em>The art of the mask - hide the identity, keep the meaning.</em></p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache 2.0"></a>
