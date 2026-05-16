@@ -7,7 +7,7 @@ name = "carnaval"
 version = "0.1.0"
 description = "Reversible PII anonymization framework with an encrypted vault"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 authors = [
@@ -16,13 +16,16 @@ authors = [
 maintainers = [
     { name = "Patrice AUBERT", email = "carnaval.oss@gmail.com" },
 ]
-keywords = ["pii", "anonymization", "nlp", "ner", "privacy", "gdpr"]
+keywords = [
+    "pii", "pii-anonymization", "anonymization", "pseudonymization",
+    "data-masking", "privacy", "data-protection", "gdpr", "compliance",
+    "nlp", "ner", "named-entity-recognition", "llm",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -37,6 +40,13 @@ dependencies = [
     "structlog>=24.1",
     "lingua-language-detector>=2.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/carnaval-ai/carnaval"
+Repository = "https://github.com/carnaval-ai/carnaval"
+Documentation = "https://github.com/carnaval-ai/carnaval/wiki"
+Issues = "https://github.com/carnaval-ai/carnaval/issues"
+Changelog = "https://github.com/carnaval-ai/carnaval/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 # Detection PII zero-shot par modele NER. Optionnel : tire torch (lourd).
