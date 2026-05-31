@@ -1,0 +1,29 @@
+# Configuration par defaut du pipeline carnaval.
+# Surchargee par les profils dans profiles/<type>/.
+
+pipeline:
+  default_language: fr
+  use_gliner: true
+  gliner_threshold: 0.4
+  cleanup_pipes: false
+  score_threshold: 0.4
+
+# Politique des placeholders par defaut.
+# Surchargeable par profils via policies/placeholder_format.yaml.
+placeholder:
+  format: "[{prefix}_{index}]"
+  singleton_format: "[{prefix}]"
+
+# Modeles AI charges (premiere fois = telechargement HF)
+ai:
+  gliner_model: "urchade/gliner_multi_pii-v1"
+  gliner_labels:
+    - person
+    - email
+    - phone number
+    - address
+    - street address
+    - postal code
+    - city
+    - organization
+    - company

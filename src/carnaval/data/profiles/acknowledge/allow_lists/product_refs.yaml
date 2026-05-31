@@ -1,0 +1,27 @@
+# Patterns de references produit a NE PAS masquer.
+#
+# Une reference produit est une donnee metier structuree. Si un recognizer
+# en masque un fragment (un bout numerique pris pour un telephone...), la
+# couche de protection (carnaval/core/allow_list) ecarte le span fautif :
+# tout span qui touche un de ces motifs est retire avant le masquage.
+#
+# Motifs volontairement conservateurs : un motif trop large happerait des
+# noms propres en majuscules ou des numeros fiscaux. Pour les formats de
+# reference propres a une organisation, utiliser un profil prive
+# (profiles_private/).
+product_ref_patterns:
+  # Reference segmentee par tirets, 3e segment numerique (ex: KHZ-DA-032).
+  # Le groupe \d final exclut les noms propres tiret-separes.
+  - "[A-Z]{2,4}-[A-Z0-9]{2,8}-\\d{2,4}"
+  # Code a groupes numeriques espaces sur une meme ligne (ex: 7828 00 10).
+  # Separateur [ \t] et non \s : un \s engloberait un saut de ligne et
+  # happerait la jonction de deux nombres voisins (fin d'un n. TVA + debut
+  # d'un telephone sur la ligne suivante), ecartant a tort ces deux PII.
+  #
+  # IMPORTANT : on EXCLUT explicitement les 4 premiers chiffres commencant
+  # par "00" ou "0033" : c'est un prefixe international telephonique
+  # (cas "0033 02 43 44 02 48"), pas une reference produit. Sans cette
+  # exclusion, l'allow_list ecartait des telephones FR en footer.
+  # Le (?!00) garantit que les 4 chiffres ne forment pas un prefixe
+  # de telephone international type 0033/0044/0049.
+  - "(?!00)\\d{4}[ \\t]\\d{2}[ \\t]\\d{2}"

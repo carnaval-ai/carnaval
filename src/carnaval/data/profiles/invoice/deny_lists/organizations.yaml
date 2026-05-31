@@ -1,0 +1,14 @@
+organizations:
+  - "Initech"
+  - "Initech S.A.S."
+  - "Vandelay Industries"
+  - "Vandelay"
+  - "Soylent Corp"
+  - "Soylent Corporation"
+  - "Tyrell Corporation"
+
+supplier_domains:
+  - "initech.example"
+  - "vandelay.example"
+  - "soylent.example"
+  - "tyrell.example"

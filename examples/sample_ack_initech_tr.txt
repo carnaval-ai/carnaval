@@ -1,0 +1,35 @@
+# Kaynak: Initech_Siparis_Onayi_2024_TR_009.pdf
+Initech Anonim Sirketi - Buyukdere Caddesi 100, 34394 Sisli, Istanbul
+Vergi No: 1234567890 - Ticaret Sicil No: 123456 - MERSIS: 0123456789012345
+Tel: +90 212 123 45 67 - Faks: +90 212 123 45 68
+Web: www.initech.example   E-posta: satis@initech.example
+
+Faturalandirma:                          Teslimat adresi:
+Cyberdyne Sistemleri A.S.                Cyberdyne Ankara Deposu
+Ataturk Bulvari 200                      OSB 5. Cadde No: 22
+06680 Cankaya / Ankara                   06900 Sincan / Ankara
+Sn. Patrick Park dikkatine                Mal Kabul Birimi
+
+Siparisiniz: CYB/4700009012 - Duzenleme tarihi: 12.04.2024
+Onay numaramiz: ONAY-2024-074-TR
+Musteri kodu: 8852266
+Hesap yoneticisi: Sn. Selma Sahin
+
+Siparis kalemleri:
+No | Adet | Urun kodu                | Aciklama                     | B. fiyat TRY | Teslimat   | Tutar
+10 |   12 | RKMCK3                   | Endustriyel kontrolcu v3     |     3850.00  | 02.05.2024 | 46200.00
+20 |    4 | KHZ-DA-032-0050-M        | Hidrolik aktuator 32mm       |     3120.00  | 06.05.2024 | 12480.00
+30 |    1 | TRX-2024-014             | Ozel transformator 380V      |    18500.00  | 18.05.2024 | 18500.00
+
+Ara toplam: TRY 77180.00
+Kargo masraflari: TRY 350.00
+Net toplam: TRY 77530.00
+KDV 20%: TRY 15506.00
+Genel toplam: TRY 93036.00
+
+Odeme kosullari: Fatura tarihinden itibaren 60 gun vadeli
+Teslim sekli: DAP Ankara
+Tasiyici: Aras Kargo
+
+Not: Bu onay onceki tekliflerin yerine gecer. Tam odeme yapilana kadar
+mulkiyet Initech firmasinda kalir (TBK madde 209).

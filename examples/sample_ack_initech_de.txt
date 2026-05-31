@@ -1,0 +1,35 @@
+# Quelle: Initech_Auftragsbestaetigung_2024_DE_003.pdf
+Initech GmbH - Sitz: Marienplatz 1, 80331 Muenchen, Deutschland
+Handelsregister Muenchen HRB 123456 - USt-IdNr. DE123456789
+Tel.: +49 89 1234 5678 - Fax: +49 89 1234 5679
+Web: www.initech.example  E-Mail: vertrieb@initech.example
+
+Rechnungsanschrift:                Lieferanschrift:
+Cyberdyne Systems GmbH             Cyberdyne Werk II
+Postfach 1234                      Industriestrasse 15
+60311 Frankfurt am Main             63303 Dreieich
+Z.Hd. Herr David Davis             Wareneingang Tor 4
+
+Ihre Bestellung: CYB/4700003456 vom 18.03.2024
+Auftragsbestaetigung Nr.: AB-2024-019-DE
+Kundennummer: 7708834
+Sachbearbeiter: Frau Emma Evans
+
+Bestellpositionen:
+Pos | Menge | Artikelnummer            | Bezeichnung                 | Einzelpreis EUR | Liefertermin  | Gesamt
+ 10 |    20 | RKMCK3                   | Industrieregler v3          |          95.40  |   12.04.2024  | 1908.00
+ 20 |     5 | KHZ-DA-032-0050-M        | Hydraulikzylinder 32mm      |          73.60  |   15.04.2024  |  368.00
+ 30 |     1 | TRX-2024-014             | Spezialtrafo 400V           |         450.00  |   25.04.2024  |  450.00
+
+Summe netto: EUR 2726.00
+Frachtkosten: EUR 35.00
+Gesamtbetrag netto: EUR 2761.00
+USt 19%: EUR 524.59
+Gesamtbetrag brutto: EUR 3285.59
+
+Zahlungsbedingungen: Zahlbar binnen 30 Tagen netto
+Lieferbedingungen: DAP Dreieich
+Versandart: DHL Spedition
+
+Hinweis: Diese Auftragsbestaetigung ersetzt frueherer Angebote.
+Eigentumsvorbehalt nach §449 BGB bis vollstaendiger Zahlung.

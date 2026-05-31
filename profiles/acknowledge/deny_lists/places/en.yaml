@@ -1,0 +1,82 @@
+# English-speaking toponyms (UK, US, AU, CA, IE, NZ).
+# Active when active language includes "en".
+
+places:
+  # UK
+  - "London"
+  - "Manchester"
+  - "Birmingham"
+  - "Liverpool"
+  - "Leeds"
+  - "Sheffield"
+  - "Bristol"
+  - "Glasgow"
+  - "Edinburgh"
+  - "Cardiff"
+  - "Belfast"
+  - "Newcastle"
+  - "Nottingham"
+  - "Southampton"
+  - "Cambridge"
+  - "Oxford"
+  - "Coventry"
+  - "Leicester"
+  - "Bradford"
+  - "Plymouth"
+
+  # USA
+  - "New York"
+  - "Los Angeles"
+  - "Chicago"
+  - "Houston"
+  - "Phoenix"
+  - "Philadelphia"
+  - "San Antonio"
+  - "San Diego"
+  - "Dallas"
+  - "San Jose"
+  - "Austin"
+  - "Jacksonville"
+  - "San Francisco"
+  - "Indianapolis"
+  - "Seattle"
+  - "Denver"
+  - "Washington"
+  - "Boston"
+  - "Detroit"
+  - "Atlanta"
+  - "Miami"
+  - "Minneapolis"
+
+  # Canada
+  - "Toronto"
+  - "Montreal"
+  - "Vancouver"
+  - "Calgary"
+  - "Ottawa"
+  - "Edmonton"
+  - "Quebec"
+
+  # Australia / NZ
+  - "Sydney"
+  - "Melbourne"
+  - "Brisbane"
+  - "Perth"
+  - "Adelaide"
+  - "Auckland"
+  - "Wellington"
+
+  # Ireland
+  - "Dublin"
+  - "Cork"
+  - "Galway"
+
+  # Etats / regions
+  - "California"
+  - "Texas"
+  - "Florida"
+  - "New England"
+  - "Midwest"
+  - "Scotland"
+  - "Wales"
+  - "Northern Ireland"

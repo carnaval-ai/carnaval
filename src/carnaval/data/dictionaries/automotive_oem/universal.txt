@@ -1,0 +1,224 @@
+# Constructeurs automobiles et equipementiers majeurs.
+#
+# Couvre OEM (constructeurs) + Tier-1 (equipementiers) mondiaux. La
+# detection est case-insensitive et tolerante aux accents. Une entree
+# ici masque la mention en clair d'un acteur du secteur dans un AR /
+# facture / commande (ex: "(A2569 - Renault G)" en commentaire libre).
+#
+# Liste universelle (independante de la langue du document) - les noms
+# d'entreprises restent stables a travers les langues.
+#
+# REGLE de selection : entrees suffisamment specifiques pour eviter
+# les faux positifs (mots communs). Pas de "Smart", "Ford" (verbe EN),
+# "MAN" (mot commun), "Lotus" (fleur), "Mini" (adjectif), "Polo".
+
+# === Constructeurs automobiles ===
+# Groupe Renault
+Renault
+Dacia
+Alpine
+Lada
+# Groupe Stellantis
+Stellantis
+Peugeot
+Citroen
+Citroën
+Opel
+Vauxhall
+Fiat
+Alfa Romeo
+Lancia
+Maserati
+Abarth
+Jeep
+Chrysler
+Dodge
+Ram Trucks
+# Groupe Volkswagen
+Volkswagen
+Audi
+Porsche
+Skoda
+Škoda
+SEAT
+Cupra
+Bentley
+Lamborghini
+Bugatti
+# Groupe BMW
+BMW
+Rolls-Royce
+Rolls Royce
+# Groupe Mercedes / Daimler
+Mercedes
+Mercedes-Benz
+Mercedes Benz
+Daimler
+AMG
+Maybach
+# Groupe Toyota
+Toyota
+Lexus
+Daihatsu
+Hino Motors
+# Groupe Honda
+Honda
+Acura
+# Groupe Nissan-Mitsubishi
+Nissan
+Infiniti
+Mitsubishi Motors
+Mitsubishi Fuso
+# Autres japonais
+Mazda
+Subaru
+Suzuki
+Isuzu
+# Coreens
+Hyundai
+Kia Motors
+Kia Corp
+Genesis Motor
+SsangYong
+# Americains
+Ford Motor
+Lincoln Motor
+General Motors
+Chevrolet
+Cadillac
+Buick
+GMC
+Tesla
+# Britanniques / suedois
+Jaguar
+Land Rover
+Range Rover
+JLR
+Volvo Cars
+Polestar
+# Italiens / sportif
+Ferrari
+Pagani
+# Britanniques sportif
+Aston Martin
+McLaren Automotive
+Lotus Cars
+# Chinois
+Geely
+Lynk & Co
+Great Wall Motors
+Haval
+GWM
+BYD Auto
+Denza
+NIO
+XPeng
+Li Auto
+Chery
+Dongfeng
+SAIC Motor
+SAIC-GM
+MG Motor
+GAC Motor
+BAIC
+FAW
+Changan
+# Indiens
+Tata Motors
+Mahindra
+# Camions / utilitaires
+Iveco
+Scania
+Volvo Trucks
+Volvo Group
+Renault Trucks
+DAF Trucks
+Paccar
+Kenworth
+Peterbilt
+Freightliner
+Navistar
+International Trucks
+
+# === Equipementiers Tier-1 ===
+Bosch
+Robert Bosch
+Continental AG
+Schaeffler
+ZF Friedrichshafen
+ZF Sachs
+ZF Wabco
+Wabco
+Valeo
+Faurecia
+Forvia
+HELLA
+Plastic Omnium
+OPmobility
+Magna International
+Aptiv
+Delphi Technologies
+Denso
+DENSO
+Aisin
+Aisin Seiki
+Sumitomo Electric
+Sumitomo Wiring
+MAHLE
+Mahle GmbH
+Brembo
+# === Pneumatiques ===
+Michelin
+Pirelli
+Bridgestone
+Goodyear
+Hankook
+Yokohama Rubber
+Cooper Tire
+# === Autres equipementiers significatifs ===
+Hitachi
+Foundation Brakes
+Chassis Brakes International
+Nexteer
+Garrett Motion
+Mubea
+BorgWarner
+Knorr-Bremse
+Knorr Bremse
+Akebono
+Lear Corporation
+Yazaki
+Furukawa Electric
+Calsonic Kansei
+Magneti Marelli
+Marelli Corp
+NTN Bearing
+NSK Bearing
+JTEKT
+Tenneco
+Federal-Mogul
+Webasto
+Eberspächer
+Eberspacher
+Stoneridge
+Gentherm
+Visteon
+Mando
+Hyundai Mobis
+Linamar
+Dana Incorporated
+Eaton Vehicle
+Schaeffler Automotive
+# === Sous-traitants electronique / capteurs auto ===
+Infineon
+NXP Semiconductors
+STMicroelectronics
+Renesas
+Texas Instruments Auto
+# === Glass / interieurs ===
+Saint-Gobain Sekurit
+AGC Automotive
+Antolin
+Adient
+GKN Automotive
+GKN Driveline

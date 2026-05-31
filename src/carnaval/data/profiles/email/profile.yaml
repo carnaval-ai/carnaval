@@ -1,0 +1,17 @@
+profile:
+  name: email
+  description: |
+    Anonymisation d'emails professionnels (echanges B2B). Format typique :
+    signature avec contact direct, coordonnees, references.
+  language: fr
+  expected_entities:
+    - PERSON
+    - ORGANIZATION
+    - EMAIL
+    - PHONE
+    - LOCATION
+    - URL
+  preserve:
+    - subject_line
+    - dates
+    - references_in_subject

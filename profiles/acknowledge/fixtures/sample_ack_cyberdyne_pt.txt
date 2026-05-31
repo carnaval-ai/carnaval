@@ -1,0 +1,35 @@
+# Origem: Cyberdyne_Confirmacao_Encomenda_2024_PT_006.pdf
+Cyberdyne Systems Lda. - Rua Augusta 100, 1100-053 Lisboa, Portugal
+NIPC: 501234567 - Conservatoria do Registo Comercial de Lisboa
+Telefone: +351 21 123 4567 - Fax: +351 21 123 4568
+Web: www.cyberdyne.example   Email: vendas@cyberdyne.example
+
+Faturar a:                               Entregar em:
+Tyrell Industries Portugal S.A.          Tyrell Armazem Sintra
+Avenida da Liberdade 200                 Parque Industrial de Albarraque
+1250-147 Lisboa - Portugal                2710-297 Sintra - Portugal
+A/c Sr. Jose Jimenez                     Cais de descarga 2
+
+Sua encomenda: TYR/4700006789 de 02.04.2024
+Numero de confirmacao: CONF-2024-042-PT
+Codigo do cliente: 2284459
+Gestor de conta: Sra. Katia Kelly
+
+Linhas da encomenda:
+Pos | Qtd | Referencia               | Descricao                    | PU EUR | Data entrega | Total
+ 10 |  18 | RKMCK3                   | Controlador industrial v3    |  96.80 |  22.04.2024  | 1742.40
+ 20 |   4 | KHZ-DA-032-0050-M        | Atuador hidraulico 32mm      |  82.50 |  26.04.2024  |  330.00
+ 30 |   2 | TRX-2024-014             | Transformador customizado    | 510.00 |  08.05.2024  | 1020.00
+
+Subtotal sem IVA: EUR 3092.40
+Portes de envio: EUR 32.00
+Total sem IVA: EUR 3124.40
+IVA 23%: EUR 718.61
+Total com IVA: EUR 3843.01
+
+Condicoes de pagamento: 45 dias data fatura
+Condicoes de entrega: DAP Sintra
+Transportadora: CTT Expresso
+
+Observacao: A presente confirmacao prevalece sobre orcamentos anteriores.
+Reserva de propriedade conforme art. 408 do Codigo Civil portugues.

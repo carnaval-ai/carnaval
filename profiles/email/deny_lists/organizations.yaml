@@ -1,0 +1,14 @@
+organizations:
+  - "Globex Inc."
+  - "Initech"
+  - "Vandelay Industries"
+  - "Soylent Corp"
+  - "Cyberdyne Systems"
+  - "InGen"
+  - "Tyrell Corporation"
+
+supplier_domains:
+  - "globex.example"
+  - "initech.example"
+  - "vandelay.example"
+  - "soylent.example"

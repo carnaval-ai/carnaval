@@ -1,0 +1,49 @@
+# Toponimos portugueses (Portugal + Brasil + PALOP).
+# Ativo quando a lingua ativa inclui "pt".
+
+places:
+  # Portugal
+  - "Lisboa"
+  - "Lisbon"             # forme EN
+  - "Lisbonne"           # forme FR
+  - "Porto"
+  - "Oporto"
+  - "Braga"
+  - "Coimbra"
+  - "Funchal"
+  - "Faro"
+  - "Aveiro"
+  - "Setubal"
+  - "Vila Nova de Gaia"
+  - "Almada"
+  - "Amadora"
+  - "Sintra"
+  - "Cascais"
+  - "Loures"
+  - "Madeira"
+  - "Acores"
+
+  # Bresil top villes
+  - "Sao Paulo"
+  - "Rio de Janeiro"
+  - "Brasilia"
+  - "Salvador"
+  - "Fortaleza"
+  - "Belo Horizonte"
+  - "Manaus"
+  - "Curitiba"
+  - "Recife"
+  - "Porto Alegre"
+
+  # Pays
+  - "Portugal"
+  - "Brasil"
+  - "Brazil"            # forme EN
+  - "Bresil"            # forme FR
+
+  # Regions / regions autonomes
+  - "Algarve"
+  - "Alentejo"
+  - "Beira"
+  - "Minho"
+  - "Tras-os-Montes"

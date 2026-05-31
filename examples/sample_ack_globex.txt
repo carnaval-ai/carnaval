@@ -1,0 +1,34 @@
+# Fichier source: Globex_acknowledgment_2024_001.pdf
+Globex Inc. au capital de 50000 EUR - RCS Paris B 123456789 - SIRET 12345678900012
+Bureau : 42 Main Street
+75001 PARIS
+Tel : 01.23.45.67.89  - Fax : 01.23.45.67.90
+Web : www.globex.example    Email : sales@globex.example
+
+Adresse de facturation : Adresse de livraison:
+Acme Corp Acme Corp
+1 Avenue de la Liberte ZAC INDUSTRIELLE NORD
+75002 PARIS 75003 PARIS
+A l'attention de M. ANDERSON Alice
+
+Votre commande : ACM/4700001234 Le 12/03/2024 14:30:00
+Numero AR : AR-2024-001
+Suivi par : Alice Anderson - Enregistrement : 1245678
+
+Articles :
+1 | 10 | RKMCK3 - Globex Inc. - Ref 042Q00852 - 10.76 EUR - Delai 05/04/2024
+2 | 5 | KHZ-DA-032-0050-M - Verin a course reduite - 79.50 EUR - Delai 12/04/2024
+
+Total HT : 187.10 EUR
+TVA 20% : 37.42 EUR
+Total TTC : 224.52 EUR
+
+Conditions de paiement : 30 jours fin de mois
+Mode de reglement : Virement
+TVA intracom : FR99123456789
+IBAN : FR763000600001234567890141
+BIC : AAAAFR2XXXX
+
+En vous remerciant de votre confiance.
+Cordialement,
+Alice Anderson - Globex Inc.

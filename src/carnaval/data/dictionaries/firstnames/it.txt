@@ -1,0 +1,61 @@
+# Prenoms (seed minimale). A enrichir depuis :
+#   FR  : INSEE etat civil (https://www.insee.fr)
+#   DE  : WikiData property P735 + filtre par usage allemand
+#   EN  : SSA baby names / UK ONS
+#   ES  : INE Espana
+#   IT  : ISTAT
+Alessandra
+Alessandro
+Alessia
+Andrea
+Anna
+Antonella
+Antonio
+Aurora
+Beatrice
+Bruno
+Chiara
+Claudio
+Cristina
+Daniele
+Davide
+Edoardo
+Elena
+Fabio
+Federica
+Federico
+Francesca
+Francesco
+Giorgia
+Giovanni
+Giulia
+Giulio
+Giuseppe
+Greta
+Laura
+Lorenzo
+Luca
+Marco
+Maria
+Mario
+Martina
+Massimo
+Matteo
+Mattia
+Monica
+Nicolo
+Paola
+Paolo
+Riccardo
+Roberta
+Roberto
+Sara
+Sergio
+Silvia
+Simone
+Sofia
+Stefania
+Stefano
+Tommaso
+Valentina
+Vincenzo

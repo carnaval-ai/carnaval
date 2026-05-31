@@ -1,0 +1,646 @@
+# Lexique metier universel : libelles a ne jamais masquer.
+#
+# But : un accuse de reception / une commande contient des libelles
+# structurants (objet, destinataire, quantite, prix, remise, montant,
+# port...). Ce ne sont jamais des donnees personnelles ; les masquer
+# nuirait a la lecture du document par un service d'extraction. Ce
+# lexique les protege.
+#
+# Portee : ce fichier est dans la couche `config/` (couche de base) -> il
+# s'applique a TOUS les profils et a tous les documents.
+#
+# Forme : des mots litteraux, un bloc par langue. L'appariement est
+# insensible a la casse et aux accents ; un mot est borne par des limites
+# de mot (sauf en ecriture chinoise). Pas de regex ici - voir les autres
+# fichiers `allow_lists/` (*_patterns) pour les motifs.
+#
+# Trame : releve sur des AR fournisseurs reels (FR) + check-list des
+# business terms de la norme EN 16931 (facturation electronique).
+business_lexicon:
+
+  # ----- Francais -------------------------------------------------------
+  fr:
+    # structure du document
+    - objet
+    - destinataire
+    - expéditeur
+    - émetteur
+    - société émettrice
+    - fournisseur
+    - interlocuteur
+    - contact
+    - service
+    - service commercial
+    - commercial
+    - portail
+    - facture
+    - entrepôt
+    - suivi
+    - adresse
+    - date
+    # tableau de lignes
+    - quantité
+    - qté
+    - qtité
+    - qty
+    - prix
+    - prix unitaire
+    - prix net
+    - p.u
+    - montant
+    - montant total
+    - montant net
+    - sous-total
+    - total
+    - somme
+    - net
+    - brut
+    - hors taxes
+    - unité
+    - pièce
+    - pièces
+    - pce
+    - remise
+    - rabais
+    - escompte
+    - ristourne
+    - surcoût
+    - surcharge
+    - pourcentage
+    - taux
+    - tva
+    - ht
+    - ttc
+    - taxe
+    # livraison
+    - frais de port
+    - frais de livraison
+    - frais de traitement
+    - fret
+    - emballage
+    - franco
+    - livraison
+    - délai
+    - date de livraison
+    - date d'expédition
+    - incoterm
+    # reference / commande
+    - référence
+    - désignation
+    - description
+    - article
+    - code article
+    - position
+    - poste
+    - ligne
+    - commande
+    - confirmation de commande
+    - accusé de réception
+    - bon de commande
+    - conditions de paiement
+    - échéance
+    - devise
+    - poids
+    # termes contractuels generiques (acheteur / vendeur / client)
+    - client
+    - acheteur
+    - vendeur
+    # codes Incoterms : donnees contractuelles critiques, a ne pas masquer
+    - incoterms
+    - DAP
+    - CIP
+    - CPT
+    - EXW
+    - FOB
+    - DDP
+    - FCA
+    - DPU
+    - DAT
+    - FAS
+    - CFR
+    - CIF
+    # devises (le mot, pas le code ISO deja gere par d'autres regles)
+    - euros
+    - euro
+
+  # ----- English --------------------------------------------------------
+  en:
+    # structure du document
+    - subject
+    - recipient
+    - sender
+    - issuer
+    - issuing company
+    - supplier
+    - contact
+    - department
+    - sales
+    - sales department
+    - portal
+    - invoice
+    - warehouse
+    - tracking
+    - address
+    - date
+    # tableau de lignes
+    - quantity
+    - qty
+    - price
+    - unit price
+    - net price
+    - amount
+    - total amount
+    - net amount
+    - subtotal
+    - total
+    - sum
+    - net
+    - gross
+    - unit
+    - piece
+    - pieces
+    - pcs
+    - discount
+    - rebate
+    - allowance
+    - surcharge
+    - percentage
+    - rate
+    - vat
+    - tax
+    # livraison
+    - shipping
+    - shipping costs
+    - freight
+    - carriage
+    - packaging
+    - handling
+    - delivery
+    - lead time
+    - delivery date
+    - dispatch date
+    - incoterm
+    # reference / commande
+    - reference
+    - description
+    - designation
+    - item
+    - item number
+    - position
+    - line
+    - order
+    - order confirmation
+    - acknowledgement
+    - purchase order
+    - payment terms
+    - due date
+    - currency
+    - weight
+    # contractual generic terms
+    - buyer
+    - purchaser
+    - customer
+    # currency words
+    - dollar
+    - dollars
+    - pound
+    - pounds
+
+  # ----- Deutsch --------------------------------------------------------
+  de:
+    # structure du document
+    - Betreff
+    - Empfänger
+    - Absender
+    - Aussteller
+    - ausstellende Firma
+    - Lieferant
+    - Ansprechpartner
+    - Kontakt
+    - Abteilung
+    - Vertrieb
+    - Vertriebsabteilung
+    - Portal
+    - Rechnung
+    - Lieferschein
+    - Lager
+    - Sendungsverfolgung
+    - Adresse
+    - Anschrift
+    - Datum
+    # tableau de lignes
+    - Menge
+    - Anzahl
+    - Stückzahl
+    - Preis
+    - Einzelpreis
+    - Stückpreis
+    - Nettopreis
+    - Betrag
+    - Gesamtbetrag
+    - Nettobetrag
+    - Zwischensumme
+    - Summe
+    - Gesamt
+    - Gesamtsumme
+    - netto
+    - brutto
+    - Einheit
+    - Stück
+    - Stk
+    - Rabatt
+    - Nachlass
+    - Skonto
+    - Zuschlag
+    - Prozent
+    - Prozentsatz
+    - Satz
+    - MwSt
+    - USt
+    - Mehrwertsteuer
+    - Umsatzsteuer
+    - Steuer
+    # livraison
+    - Versandkosten
+    - Portokosten
+    - Lieferkosten
+    - Fracht
+    - Verpackung
+    - frei Haus
+    - Lieferung
+    - Lieferzeit
+    - Lieferfrist
+    - Liefertermin
+    - Lieferdatum
+    - Versanddatum
+    - Versandtermin
+    - Incoterm
+    # reference / commande
+    - Referenz
+    - Bezeichnung
+    - Beschreibung
+    - Artikel
+    - Artikelnummer
+    - Artikel-Nr
+    - Position
+    - Posten
+    - Zeile
+    - Bestellung
+    - Auftrag
+    - Auftragsbestätigung
+    - Bestellbestätigung
+    - Empfangsbestätigung
+    - Eingangsbestätigung
+    - Zahlungsbedingungen
+    - Fälligkeit
+    - Währung
+    - Gewicht
+    # termes contractuels generiques
+    - Kunde
+    - Käufer
+    - Verkäufer
+    - Euro
+
+  # ----- Espanol --------------------------------------------------------
+  es:
+    # structure du document
+    - asunto
+    - destinatario
+    - remitente
+    - emisor
+    - empresa emisora
+    - proveedor
+    - contacto
+    - departamento
+    - comercial
+    - departamento comercial
+    - portal
+    - factura
+    - almacén
+    - seguimiento
+    - dirección
+    - fecha
+    # tableau de lignes
+    - cantidad
+    - precio
+    - precio unitario
+    - precio neto
+    - importe
+    - importe total
+    - importe neto
+    - subtotal
+    - total
+    - suma
+    - neto
+    - bruto
+    - base imponible
+    - unidad
+    - pieza
+    - piezas
+    - uds
+    - descuento
+    - rebaja
+    - bonificación
+    - recargo
+    - porcentaje
+    - tasa
+    - iva
+    - impuesto
+    # livraison
+    - gastos de envío
+    - gastos de transporte
+    - flete
+    - embalaje
+    - gastos de tramitación
+    - entrega
+    - plazo de entrega
+    - fecha de entrega
+    - fecha de expedición
+    - incoterm
+    # reference / commande
+    - referencia
+    - descripción
+    - designación
+    - artículo
+    - código de artículo
+    - posición
+    - línea
+    - partida
+    - pedido
+    - confirmación de pedido
+    - acuse de recibo
+    - orden de compra
+    - condiciones de pago
+    - vencimiento
+    - divisa
+    - peso
+
+  # ----- Portugues ------------------------------------------------------
+  pt:
+    # structure du document
+    - assunto
+    - destinatário
+    - remetente
+    - emitente
+    - empresa emitente
+    - fornecedor
+    - contacto
+    - departamento
+    - comercial
+    - departamento comercial
+    - portal
+    - fatura
+    - armazém
+    - seguimento
+    - morada
+    - endereço
+    - data
+    # tableau de lignes
+    - quantidade
+    - qtd
+    - preço
+    - preço unitário
+    - preço líquido
+    - montante
+    - valor total
+    - subtotal
+    - total
+    - líquido
+    - bruto
+    - unidade
+    - peça
+    - peças
+    - desconto
+    - abatimento
+    - bonificação
+    - acréscimo
+    - percentagem
+    - taxa
+    - iva
+    - imposto
+    # livraison
+    - portes
+    - despesas de envio
+    - frete
+    - embalagem
+    - despesas de transporte
+    - entrega
+    - prazo de entrega
+    - data de entrega
+    - data de expedição
+    - incoterm
+    # reference / commande
+    - referência
+    - descrição
+    - designação
+    - artigo
+    - código do artigo
+    - posição
+    - linha
+    - item
+    - encomenda
+    - confirmação de encomenda
+    - aviso de receção
+    - ordem de compra
+    - condições de pagamento
+    - vencimento
+    - moeda
+    - peso
+
+  # ----- Polski ---------------------------------------------------------
+  pl:
+    # structure du document
+    - temat
+    - odbiorca
+    - nadawca
+    - wystawca
+    - dostawca
+    - kontakt
+    - dział
+    - sprzedaż
+    - portal
+    - faktura
+    - magazyn
+    - śledzenie
+    - adres
+    - data
+    # tableau de lignes
+    - ilość
+    - cena
+    - cena jednostkowa
+    - cena netto
+    - kwota
+    - wartość
+    - wartość całkowita
+    - suma
+    - netto
+    - brutto
+    - jednostka
+    - sztuka
+    - sztuki
+    - szt
+    - rabat
+    - upust
+    - zniżka
+    - dopłata
+    - narzut
+    - procent
+    - stawka
+    - vat
+    - podatek
+    # livraison
+    - przesyłka
+    - koszty wysyłki
+    - fracht
+    - opakowanie
+    - koszty transportu
+    - dostawa
+    - termin dostawy
+    - data dostawy
+    - data wysyłki
+    - incoterm
+    # reference / commande
+    - referencja
+    - opis
+    - oznaczenie
+    - artykuł
+    - numer artykułu
+    - pozycja
+    - wiersz
+    - zamówienie
+    - potwierdzenie zamówienia
+    - zamówienie zakupu
+    - warunki płatności
+    - termin płatności
+    - waluta
+    - waga
+
+  # ----- Turkce ---------------------------------------------------------
+  tr:
+    # structure du document
+    - konu
+    - alıcı
+    - gönderen
+    - düzenleyen
+    - tedarikçi
+    - irtibat
+    - departman
+    - satış
+    - satış departmanı
+    - portal
+    - fatura
+    - depo
+    - takip
+    - adres
+    - tarih
+    # tableau de lignes
+    - miktar
+    - adet
+    - fiyat
+    - birim fiyat
+    - net fiyat
+    - tutar
+    - toplam tutar
+    - ara toplam
+    - toplam
+    - net
+    - brüt
+    - birim
+    - parça
+    - indirim
+    - iskonto
+    - ek ücret
+    - yüzde
+    - oran
+    - kdv
+    - vergi
+    # livraison
+    - nakliye
+    - kargo
+    - navlun
+    - ambalaj
+    - taşıma ücreti
+    - işlem ücreti
+    - teslimat
+    - teslim süresi
+    - teslim tarihi
+    - sevk tarihi
+    - incoterm
+    # reference / commande
+    - referans
+    - açıklama
+    - tanım
+    - ürün
+    - ürün kodu
+    - pozisyon
+    - satır
+    - kalem
+    - sipariş
+    - sipariş onayı
+    - satınalma siparişi
+    - ödeme koşulları
+    - vade
+    - para birimi
+    - ağırlık
+
+  # ----- Zhongwen (chinois) --------------------------------------------
+  zh:
+    # structure du document
+    - 主题
+    - 收件人
+    - 发件人
+    - 开具公司
+    - 供应商
+    - 联系人
+    - 部门
+    - 销售
+    - 销售部
+    - 门户
+    - 发票
+    - 仓库
+    - 跟踪
+    - 地址
+    - 日期
+    # tableau de lignes
+    - 数量
+    - 单价
+    - 价格
+    - 净价
+    - 金额
+    - 总金额
+    - 小计
+    - 合计
+    - 总计
+    - 净额
+    - 单位
+    - 折扣
+    - 回扣
+    - 附加费
+    - 百分比
+    - 税率
+    - 增值税
+    - 税额
+    # livraison
+    - 运费
+    - 运输费
+    - 包装费
+    - 手续费
+    - 交货
+    - 交货期
+    - 交货日期
+    - 发货日期
+    # reference / commande
+    - 参考号
+    - 描述
+    - 名称
+    - 规格
+    - 物料编号
+    - 项目
+    - 行项目
+    - 订单
+    - 订单确认
+    - 采购订单
+    - 付款条件
+    - 付款期限
+    - 币种
+    - 重量

@@ -1,0 +1,35 @@
+# Origen: Soylent_Confirmacion_Pedido_2024_ES_005.pdf
+Soylent Corp S.L. - Calle Gran Via 28, 28013 Madrid, Espana
+CIF: B12345678 - Registro Mercantil Madrid Tomo 12345
+Telefono: +34 91 123 4567 - Fax: +34 91 123 4568
+Web: www.soylent.example   Email: ventas@soylent.example
+
+Facturar a:                              Entregar en:
+InGen Corporation S.A.                   InGen Almacen Central
+Avenida Diagonal 500                     Poligono Industrial Zona Franca
+08029 Barcelona - Espana                 08040 Barcelona - Espana
+Atn: Sr. Henry Hudson                    Muelle de carga 7
+
+Su pedido: ING/4700005678 del 28.03.2024
+Numero de confirmacion: CONF-2024-035-ES
+Codigo cliente: 3387721
+Comercial responsable: Sra. Isabel Ibarra
+
+Lineas del pedido:
+Pos | Cant | Referencia               | Descripcion                  | P.U. EUR | Entrega    | Total
+ 10 |   25 | RKMCK3                   | Controlador industrial v3    |   92.10  | 18.04.2024 | 2302.50
+ 20 |    8 | KHZ-DA-032-0050-M        | Actuador hidraulico 32mm     |   78.30  | 22.04.2024 |  626.40
+ 30 |    3 | TRX-2024-014             | Transformador especial 400V  |  475.00  | 02.05.2024 | 1425.00
+
+Subtotal: EUR 4353.90
+Gastos de envio: EUR 28.00
+Base imponible: EUR 4381.90
+IVA 21%: EUR 920.20
+Total factura: EUR 5302.10
+
+Condiciones de pago: 60 dias fecha factura
+Incoterm: DAP Barcelona
+Transportista: SEUR Express
+
+Nota: Esta confirmacion anula ofertas anteriores. Reserva de dominio
+hasta pago integro segun art. 1124 del Codigo Civil espanol.

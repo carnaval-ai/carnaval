@@ -1,0 +1,62 @@
+# Prenoms (seed minimale). A enrichir depuis :
+#   FR  : INSEE etat civil (https://www.insee.fr)
+#   DE  : WikiData property P735 + filtre par usage allemand
+#   EN  : SSA baby names / UK ONS
+#   ES  : INE Espana
+#   IT  : ISTAT
+Adrian
+Alberto
+Alejandro
+Ana
+Andrea
+Andres
+Antonia
+Antonio
+Beatriz
+Carlos
+Carmen
+Concepcion
+Cristina
+Daniel
+Diego
+Dolores
+Eduardo
+Elena
+Enrique
+Esther
+Felipe
+Fernando
+Francisca
+Francisco
+Hector
+Ignacio
+Isabel
+Javier
+Jorge
+Jose
+Juan
+Laura
+Lucia
+Luis
+Manuel
+Manuela
+Maria
+Mario
+Marta
+Mercedes
+Miguel
+Pablo
+Patricia
+Paula
+Pedro
+Pilar
+Rafael
+Ricardo
+Roberto
+Rosa
+Ruben
+Salvador
+Sara
+Sergio
+Sofia
+Teresa

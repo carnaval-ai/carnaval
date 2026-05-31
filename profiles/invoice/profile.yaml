@@ -1,0 +1,25 @@
+# Profil : Facture / note d'honoraires
+profile:
+  name: invoice
+  description: |
+    Anonymisation de factures emises par un fournisseur. Format typique :
+    numero de facture, montants HT/TTC, TVA, conditions de paiement,
+    coordonnees bancaires.
+  language: fr
+  expected_entities:
+    - PERSON
+    - ORGANIZATION
+    - EMAIL
+    - PHONE
+    - LOCATION
+    - IBAN
+    - BIC
+    - VAT
+    - SIRET
+    - SIREN
+  preserve:
+    - invoice_numbers
+    - amounts
+    - tax_rates
+    - product_references
+    - dates

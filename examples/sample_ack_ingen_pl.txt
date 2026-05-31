@@ -1,0 +1,35 @@
+# Zrodlo: InGen_Potwierdzenie_Zamowienia_2024_PL_007.pdf
+InGen Polska Sp. z o.o. - ul. Marszalkowska 100, 00-026 Warszawa
+NIP: 1234567890 - REGON: 123456789 - KRS: 0000123456
+Telefon: +48 22 123 45 67 - Fax: +48 22 123 45 68
+Web: www.ingen.example   E-mail: sprzedaz@ingen.example
+
+Faktura na:                              Dostawa do:
+Tyrell Corporation Sp. z o.o.            Tyrell Magazyn Krakow
+Aleje Jerozolimskie 50                   ul. Przemyslowa 14
+00-024 Warszawa - Polska                 30-701 Krakow - Polska
+Do rak: Pan Lech Lewandowski             Rampa wyladowcza 5
+
+Wasze zamowienie: TYR/4700007890 z dnia 05.04.2024
+Numer potwierdzenia: POT-2024-051-PL
+Kod klienta: 6633218
+Opiekun handlowy: Pani Magda Malinowska
+
+Pozycje zamowienia:
+Poz | Ilosc | Referencja               | Opis                         | Cena jedn. PLN | Termin dostawy | Wartosc
+ 10 |    30 | RKMCK3                   | Sterownik przemyslowy v3     |        420.00  |   24.04.2024   | 12600.00
+ 20 |    10 | KHZ-DA-032-0050-M        | Silownik hydrauliczny 32mm   |        345.50  |   28.04.2024   |  3455.00
+ 30 |     2 | TRX-2024-014             | Transformator specjalny 400V |       2150.00  |   10.05.2024   |  4300.00
+
+Wartosc netto: PLN 20355.00
+Koszty transportu: PLN 150.00
+Suma netto: PLN 20505.00
+VAT 23%: PLN 4716.15
+Suma brutto: PLN 25221.15
+
+Warunki platnosci: 30 dni od daty wystawienia faktury
+Warunki dostawy: DAP Krakow
+Przewoznik: InPost Kurier
+
+Uwaga: Niniejsze potwierdzenie zastepuje wszelkie wczesniejsze oferty.
+Zastrzezenie prawa wlasnosci do chwili pelnej zaplaty (art. 589 KC).
