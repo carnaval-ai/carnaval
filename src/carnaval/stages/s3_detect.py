@@ -824,7 +824,7 @@ def detect(
 
     # 7bis. Automotive OEM + Tier-1 equipment manufacturers dictionary.
     #       Anti-re-identification by cross-reference: masks clear-text mentions
-    #       of "Renault", "Bosch", "Hitachi", "OEM customer" etc.
+    #       of "Renault", "Bosch", "Denso", "OEM customer" etc.
     #       Universal (one dictionary for all languages).
     spans.extend(recognize_automotive_oem(text))
 

@@ -37,11 +37,11 @@ class Config:
         return self.raw.get("patterns", {})
 
     @property
-    def deny_lists(self) -> dict[str, list[str]]:
+    def deny_lists(self) -> dict[str, Any]:
         return self.raw.get("deny_lists", {})
 
     @property
-    def allow_lists(self) -> dict[str, list[str]]:
+    def allow_lists(self) -> dict[str, Any]:
         return self.raw.get("allow_lists", {})
 
     @property

@@ -12,7 +12,7 @@
 ## Contexte
 
 - **Demarrage** : 14/05/2026
-- **Auteur** : Mia avec Patrice
+- **Auteur** : Patrice AUBERT
 - **Mission** : Construire un framework generique d'anonymisation reversible,
   sous Apache 2.0, en remplacement d'un POC initial base sur Microsoft Presidio
   (trop d'abstractions implicites, 7 hacks documentes).

@@ -176,7 +176,6 @@ Hankook
 Yokohama Rubber
 Cooper Tire
 # === Autres equipementiers significatifs ===
-Hitachi
 Foundation Brakes
 Chassis Brakes International
 Nexteer

@@ -1,5 +1,11 @@
 # carnaval
 
+[![CI](https://github.com/carnaval-ai/carnaval/actions/workflows/ci.yml/badge.svg)](https://github.com/carnaval-ai/carnaval/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/carnaval-ai/carnaval/branch/master/graph/badge.svg)](https://codecov.io/gh/carnaval-ai/carnaval)
+[![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
+[![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue.svg)](http://mypy-lang.org/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 > *The art of masking: concealing identity, preserving the essentials.*
 
 **carnaval** is a **reversible** Python anonymization framework for text documents. It masks sensitive entities (people, organizations, emails, phone numbers, bank identifiers...) before sending them to a cloud LLM, and allows restoring the original values in the structured response (JSON or XML).

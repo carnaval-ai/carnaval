@@ -3,7 +3,7 @@
 """Recognizer de constructeurs automobiles et equipementiers Tier-1.
 
 Detecte les mentions de constructeurs (Renault, Toyota, Stellantis...)
-et d'equipementiers (Bosch, Continental, ZF, Hitachi...) dans
+et d'equipementiers (Bosch, Continental, ZF, Denso...) dans
 le texte. Le dictionnaire est universel (independant de la langue du
 document) car les noms d'entreprises restent stables a travers les
 langues - "Renault" s'ecrit "Renault" en francais, anglais, allemand,

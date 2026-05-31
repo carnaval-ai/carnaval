@@ -128,7 +128,7 @@ class Vault:
     def _derive_key(self, salt: bytes) -> bytes:
         """Derive a 256-bit key from the password using PBKDF2-HMAC-SHA256."""
         return PBKDF2(
-            self._password,
+            self._password,  # type: ignore[arg-type]
             salt,
             dkLen=self.KEY_SIZE,
             count=self.PBKDF2_ITERATIONS,

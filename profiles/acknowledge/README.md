@@ -1,48 +1,51 @@
-# Profil `acknowledge`
+# `acknowledge` Profile
 
-Anonymisation d'**accuses de reception fournisseur** (AR).
+Anonymization of **supplier order acknowledgements** (OAs).
 
-## Cas d'usage
+## Use case
 
-Un client envoie une commande a un fournisseur. Le fournisseur retourne un
-PDF de confirmation (AR). Le client extrait le texte et veut le faire
-traiter par un LLM cloud pour extraire les donnees structurees, sans envoyer
-en clair :
-- Le nom du fournisseur
-- Les contacts commerciaux
-- Les coordonnees bancaires
-- Les adresses
+A customer sends an order to a supplier. The supplier returns a confirmation
+PDF (the acknowledgement). The customer extracts the text and wants it
+processed by a cloud LLM to extract structured data, without sending in
+cleartext:
+- The supplier name
+- Sales contacts
+- Bank details
+- Addresses
 
-Il faut en revanche **preserver** :
-- Le numero de commande (pour le rattachement metier)
-- Les references produit
-- Les montants
-- Les delais
+The following, however, must be **preserved**:
+- The order number (for business reconciliation)
+- Product references
+- Amounts
+- Lead times
 
-## Entites masquees
+## Masked entities
 
-| Type | Detecteur principal |
+| Type | Primary detector |
 |---|---|
-| PERSON | GLiNER + NameCommaRegex + Civilites |
+| PERSON | GLiNER + NameCommaRegex + Honorifics |
 | ORGANIZATION | DenyList `deny_lists/organizations.yaml` + GLiNER fallback |
 | EMAIL | Regex |
-| PHONE | Regex FR |
+| PHONE | FR regex |
 | LOCATION | GLiNER + PostalCity + Zone |
 | IBAN/BIC | Regex + checksum |
 | VAT/SIRET/SIREN | Regex |
 
-## Donnees fictives livrees
+## Bundled fictional data
 
-Le profil contient des donnees **fictives** (Apache 2.0) pour tests :
-- Fournisseurs : Globex Inc., Initech, Vandelay Industries
-- Personnes : Alice Anderson, Bob Brown, Carol Carter
-- Adresses : zones d'activite genericiques en France
+The profile ships with **fictional** data (Apache 2.0) for testing:
+- Suppliers: Globex Inc., Initech, Vandelay Industries
+- People: Alice Anderson, Bob Brown, Carol Carter
+- Addresses: generic business parks in France
 
-## Surcharger pour vos donnees reelles
+## Overriding with your real data
 
-Voir `profiles_private/README.md` pour cloner ce profil avec vos vrais
-fournisseurs / contacts sans les exposer dans un repo public.
+See `profiles_private/README.md` to clone this profile with your actual
+suppliers / contacts without exposing them in a public repo.
 
-## Fixtures de test
+## Test fixtures
 
-`fixtures/sample_ack_globex.txt` : AR fictif representatif.
+`fixtures/sample_ack_globex.txt`: representative fictional OA.
+
+---
+Author : Patrice Aubert

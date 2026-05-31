@@ -1,12 +1,15 @@
-# Profil `email`
+# `email` Profile
 
-Anonymisation d'**emails professionnels** (echanges B2B).
+Anonymization of **professional emails** (B2B exchanges).
 
-## Cas d'usage
+## Use case
 
-- Resume automatique d'echanges email
-- Tri / classification par LLM
-- Aide a la redaction de reponse
+- Automatic summarization of email threads
+- LLM-based triage / classification
+- Reply-drafting assistance
 
-Masquer : expediteur, destinataires, signature, coordonnees.
-Preserver : objet, dates, references metier dans le corps.
+Mask: sender, recipients, signature, contact details.
+Preserve: subject, dates, business references in the body.
+
+---
+Author: Patrice Aubert

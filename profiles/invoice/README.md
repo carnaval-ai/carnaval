@@ -1,20 +1,23 @@
-# Profil `invoice`
+# `invoice` Profile
 
-Anonymisation de **factures** emises par un fournisseur vers un client.
+Anonymization of **invoices** issued by a supplier to a customer.
 
-## Cas d'usage
+## Use case
 
-- Comptabilite assistee par LLM : extraction structuree des factures
-- Audit / controle de gestion
-- Reconciliation paiements
+- LLM-assisted accounting: structured extraction from invoices
+- Audit / management control
+- Payment reconciliation
 
-Masquer : emetteur, contacts, coordonnees bancaires.
-Preserver : numero facture, montants, TVA, dates, references.
+Mask: issuer, contacts, bank details.
+Preserve: invoice number, amounts, VAT, dates, references.
 
-## Donnees fictives livrees
+## Bundled fictional data
 
-Emetteurs : Initech, Vandelay Industries, Soylent Corp.
+Issuers: Initech, Vandelay Industries, Soylent Corp.
 
 ## Fixtures
 
 `fixtures/sample_invoice_initech.txt`
+
+---
+Author: Patrice Aubert

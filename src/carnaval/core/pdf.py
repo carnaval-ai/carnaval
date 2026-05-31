@@ -41,7 +41,7 @@ Primitives exposees :
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterable, cast
 
 import pymupdf  # alias historique : fitz
 
@@ -100,7 +100,7 @@ def extract_text_from_pdf(pdf_path: Path | str) -> str:
     doc = pymupdf.open(p)
     try:
         pages_texts: list[str] = []
-        for index, page in enumerate(doc, start=1):
+        for index, page in enumerate(cast("Iterable[pymupdf.Page]", doc), start=1):
             lines = extract_blocks_from_page(page)
             if lines:
                 pages_texts.append(f"[PAGE {index}]\n" + "\n".join(lines))
