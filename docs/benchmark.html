@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PII Anonymization Benchmark — Carnaval vs. Microsoft Presidio, SpaCy, LLMs</title>
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-base: #080c14;
+            --bg-surface: #101622;
+            --bg-surface-glow: #182235;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --accent-purple: #c084fc;
+            --accent-purple-glow: rgba(192, 132, 252, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-glow: rgba(59, 130, 246, 0.15);
+            --accent-emerald: #2dd4bf;
+            --accent-emerald-glow: rgba(45, 212, 191, 0.15);
+            --accent-rose: #f43f5e;
+            
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .glow-orb-1 {
+            position: absolute;
+            top: -100px;
+            left: 5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, rgba(192, 132, 252, 0) 70%);
+            z-index: -1;
+            filter: blur(80px);
+            animation: floatGlow 12s ease-in-out infinite alternate;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            top: 700px;
+            right: 5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.06) 0%, rgba(45, 212, 191, 0) 70%);
+            z-index: -1;
+            filter: blur(100px);
+            animation: floatGlow 15s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translateY(0px) translateX(0px) scale(1); }
+            100% { transform: translateY(50px) translateX(30px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Navigation Header */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            backdrop-filter: blur(16px);
+            background-color: rgba(8, 12, 20, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05rem;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent-purple);
+            -webkit-text-fill-color: var(--accent-purple);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-github {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-github:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 3rem 0;
+            text-align: center;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, var(--accent-purple-glow), var(--accent-blue-glow));
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            color: var(--accent-purple);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.08rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            font-weight: 400;
+        }
+
+        /* Interactive Benchmark Metrics Chart */
+        .chart-section {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .chart-title h3 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .chart-title p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .chart-selectors {
+            display: flex;
+            gap: 0.5rem;
+            background-color: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem;
+            border-radius: 12px;
+        }
+
+        .selector-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .selector-btn.active {
+            background-color: var(--accent-purple);
+            color: var(--bg-base);
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .bar-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 60px;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .bar-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .bar-track {
+            height: 24px;
+            background-color: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .bar-val {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* Matrix Table Section */
+        .matrix-section {
+            margin-bottom: 4rem;
+        }
+
+        .matrix-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .matrix-title h2 {
+            font-family: var(--font-title);
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: var(--bg-surface);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: rgba(255,255,255,0.02);
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255,255,255,0.01);
+        }
+
+        .col-carnaval {
+            background-color: rgba(192, 132, 252, 0.03);
+            border-left: 2px solid var(--accent-purple);
+            border-right: 2px solid var(--accent-purple);
+        }
+
+        th.col-carnaval {
+            background-color: rgba(192, 132, 252, 0.06);
+        }
+
+        .status-pro {
+            color: var(--accent-emerald);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .status-con {
+            color: var(--accent-rose);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .status-neutral {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Feature Cards */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .scenario-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(192, 132, 252, 0.3);
+        }
+
+        .scenario-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .scenario-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-comparison {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        .comp-line {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .comp-label {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .comp-val-carnaval {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        /* CTA Footer */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(24, 34, 53, 0.8), rgba(16, 22, 34, 0.8));
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 6rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .cta-box h2 {
+            font-family: var(--font-title);
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-purple);
+            color: var(--bg-base);
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(192, 132, 252, 0.4);
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .bar-row { grid-template-columns: 1fr; gap: 0.5rem; }
+            .bar-val { text-align: left; }
+            .scenarios-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                carnaval<span>.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Documentation</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="benchmark.html" style="color: var(--accent-purple);">Benchmark</a></li>
+                <li>
+                    <a href="https://github.com/carnaval-ai/carnaval" class="btn-github">
+                        <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor" style="display:inline-block;vertical-align:middle;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        GitHub
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="badge">Performance & Security</div>
+            <h1>B2B PII Anonymization Benchmark</h1>
+            <p class="lead">How Carnaval stacks up against Microsoft Presidio, custom SpaCy pipelines, LLM-based maskers, and Scrubadub for B2B LLM data pipelines.</p>
+        </section>
+
+        <!-- Interactive Chart Section -->
+        <section class="chart-section">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <h3>Performance Comparison</h3>
+                    <p>Select a metric below to visualize the benchmark results.</p>
+                </div>
+                <div class="chart-selectors">
+                    <button class="selector-btn active" onclick="setMetric('reversibility')">Reversibility Effort</button>
+                    <button class="selector-btn" onclick="setMetric('latency')">Latency (Speed)</button>
+                    <button class="selector-btn" onclick="setMetric('infrastructure')">Infra Footprint</button>
+                    <button class="selector-btn" onclick="setMetric('precision')">Out-of-the-Box Precision</button>
+                </div>
+            </div>
+
+            <div class="bar-container">
+                <!-- Carnaval -->
+                <div class="bar-row">
+                    <div class="bar-name">Carnaval</div>
+                    <div class="bar-track">
+                        <div id="bar-carnaval" class="bar-fill" style="background: linear-gradient(90deg, #c084fc, #3b82f6);"></div>
+                    </div>
+                    <div id="val-carnaval" class="bar-val">0</div>
+                </div>
+                <!-- MS Presidio -->
+                <div class="bar-row">
+                    <div class="bar-name">Microsoft Presidio</div>
+                    <div class="bar-track">
+                        <div id="bar-presidio" class="bar-fill" style="background: #3b82f6;"></div>
+                    </div>
+                    <div id="val-presidio" class="bar-val">0</div>
+                </div>
+                <!-- SpaCy custom -->
+                <div class="bar-row">
+                    <div class="bar-name">SpaCy Custom NER</div>
+                    <div class="bar-track">
+                        <div id="bar-spacy" class="bar-fill" style="background: #94a3b8;"></div>
+                    </div>
+                    <div id="val-spacy" class="bar-val">0</div>
+                </div>
+                <!-- LLM Masker -->
+                <div class="bar-row">
+                    <div class="bar-name">LLM-based Masker</div>
+                    <div class="bar-track">
+                        <div id="bar-llm" class="bar-fill" style="background: #64748b;"></div>
+                    </div>
+                    <div id="val-llm" class="bar-val">0</div>
+                </div>
+                <!-- Scrubadub -->
+                <div class="bar-row">
+                    <div class="bar-name">Scrubadub</div>
+                    <div class="bar-track">
+                        <div id="bar-scrubadub" class="bar-fill" style="background: #475569;"></div>
+                    </div>
+                    <div id="val-scrubadub" class="bar-val">0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Matrix Table -->
+        <section class="matrix-section">
+            <div class="matrix-title">
+                <h2>Comparison Matrix</h2>
+                <p class="lead" style="font-size:1.05rem;">Detailed features and architectural differences.</p>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature / Criteria</th>
+                            <th class="col-carnaval">Carnaval</th>
+                            <th>MS Presidio</th>
+                            <th>SpaCy NER</th>
+                            <th>LLM Masker</th>
+                            <th>Scrubadub</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Native Reversibility</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ Built-in (AES Vault)</span></td>
+                            <td><span class="status-con">✗ No (Requires custom code)</span></td>
+                            <td><span class="status-con">✗ No</span></td>
+                            <td><span class="status-con">✗ No (Requires DB lookup)</span></td>
+                            <td><span class="status-con">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maturity & Testing</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ 184 tests (95% cov)</span></td>
+                            <td class="status-pro">✓ Production ready</td>
+                            <td class="status-pro">✓ Production ready</td>
+                            <td class="status-con">✗ Non-deterministic</td>
+                            <td class="status-neutral">Neutral (Simple library)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Typing Support</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ mypy (100% strict)</span></td>
+                            <td class="status-neutral">Partial</td>
+                            <td class="status-neutral">Partial</td>
+                            <td class="status-con">✗ None</td>
+                            <td class="status-con">✗ None</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Zero-Shot Capabilities</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ High (via GLiNER)</span></td>
+                            <td><span class="status-con">✗ No (Strict Regex/NER)</span></td>
+                            <td><span class="status-con">✗ No (Must train)</span></td>
+                            <td class="status-pro">✓ High (LLM native)</td>
+                            <td><span class="status-con">✗ No</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memory Footprint</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ Low (Offline / <100MB)</span></td>
+                            <td><span class="status-con">✗ Medium (Requires heavy models)</span></td>
+                            <td><span class="status-neutral">Medium</span></td>
+                            <td><span class="status-con">✗ High (Heavy Local or Cloud)</span></td>
+                            <td class="status-pro">✓ Very Low</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operational Costs</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ $0 (100% Local Open-Source)</span></td>
+                            <td class="status-pro">✓ $0</td>
+                            <td class="status-pro">✓ $0</td>
+                            <td><span class="status-con">✗ Expensive (API Tokens)</span></td>
+                            <td class="status-pro">✓ $0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contextual Preservation</strong></td>
+                            <td class="col-carnaval"><span class="status-pro">✓ Native YAML Config</span></td>
+                            <td><span class="status-con">✗ Requires custom code</span></td>
+                            <td><span class="status-con">✗ Requires training</span></td>
+                            <td class="status-neutral">Prompt-dependent</td>
+                            <td><span class="status-con">✗ No</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Use Case Scenarios -->
+        <section>
+            <div class="matrix-title">
+                <h2>Real-World Scenarios</h2>
+                <p class="lead" style="font-size:1.05rem;">How frameworks behave in concrete enterprise situations.</p>
+            </div>
+            <div class="scenarios-grid">
+                <!-- Scenario 1 -->
+                <div class="scenario-card">
+                    <div class="scenario-icon">📄</div>
+                    <h3>B2B Commercial Documents</h3>
+                    <p>Masking supplier order acknowledgements (OAs) or invoices while preserving purchase order numbers and product names for LLM processing.</p>
+                    <div class="scenario-comparison">
+                        <div class="comp-line">
+                            <span class="comp-label">MS Presidio:</span>
+                            <span class="status-con">Fails to preserve context</span>
+                        </div>
+                        <div class="comp-line">
+                            <span class="comp-label">LLM Masker:</span>
+                            <span class="status-con">High latency & cost per run</span>
+                        </div>
+                        <div class="comp-line">
+                            <span class="comp-label">Carnaval:</span>
+                            <span class="comp-val-carnaval">Ideal (Preserves configs natively)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Scenario 2 -->
+                <div class="scenario-card">
+                    <div class="scenario-icon">✉️</div>
+                    <h3>Multi-Lingual B2B Emails</h3>
+                    <p>Summarizing client exchange threads involving multiple languages (EN, FR, DE, JA) and B2B custom product references.</p>
+                    <div class="scenario-comparison">
+                        <div class="comp-line">
+                            <span class="comp-label">SpaCy NER:</span>
+                            <span class="status-con">Requires multi-model setups</span>
+                        </div>
+                        <div class="comp-line">
+                            <span class="comp-label">Scrubadub:</span>
+                            <span class="status-con">Struggles with non-English entities</span>
+                        </div>
+                        <div class="comp-line">
+                            <span class="comp-label">Carnaval:</span>
+                            <span class="comp-val-carnaval">Ideal (GLiNER multi + 12 regex engines)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Box -->
+        <section class="cta-box">
+            <h2>Ready to secure your LLM pipelines?</h2>
+            <p>Adopt Carnaval to build compliant, stateless, and 100% reversible anonymization workflows for your business.</p>
+            <a href="index.html" class="btn-primary">Get Started with Carnaval</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Carnaval Project. Under Apache 2.0 License. Maintained by <a href="https://github.com/carnaval-ai">carnaval-ai</a>.</p>
+    </footer>
+
+    <!-- Interactive Chart Logic -->
+    <script>
+        const data = {
+            reversibility: {
+                carnaval: 100, // 0 effort (native)
+                presidio: 20,  // custom DB implementation
+                spacy: 10,     // manual mapper code
+                llm: 35,       // prompt-based map back (unreliable)
+                scrubadub: 5   // impossible
+            },
+            latency: {
+                carnaval: 85,  // <0.5s without AI, ~3s with GLiNER
+                presidio: 70,  // ~1-3s due to SpaCy pipelines
+                spacy: 80,     // Fast but limited
+                llm: 5,        // Extremely slow (>5s network overhead)
+                scrubadub: 95  // Instant (regex only)
+            },
+            infrastructure: {
+                carnaval: 100, // Stateless local files (AES GCM)
+                presidio: 40,  // Stateful workers
+                spacy: 50,     // Stateful
+                llm: 10,       // Requires cloud connections / API keys
+                scrubadub: 100 // Stateless
+            },
+            precision: {
+                carnaval: 90,  // GLiNER + 12 localized regexes
+                presidio: 75,  // Regex + basic SpaCy
+                spacy: 60,     // Low without custom training
+                llm: 95,       // Very high (but hallucination risk)
+                scrubadub: 50  // Basic regex only
+            }
+        };
+
+        const labels = {
+            reversibility: {
+                carnaval: "100% Native (stateless)",
+                presidio: "Custom coding required",
+                spacy: "Manual mapping required",
+                llm: "Prompt mapping (unstable)",
+                scrubadub: "Not supported"
+            },
+            latency: {
+                carnaval: "< 1s (regex-mode)",
+                presidio: "~2.5s average",
+                spacy: "~1.5s average",
+                llm: "> 5.0s (network cost)",
+                scrubadub: "< 0.1s (regex-only)"
+            },
+            infrastructure: {
+                carnaval: "Stateless (Local)",
+                presidio: "Stateful (Needs DB/Redis)",
+                spacy: "Manual storage state",
+                llm: "Cloud-dependent API",
+                scrubadub: "Stateless (Local)"
+            },
+            precision: {
+                carnaval: "GLiNER + local checks",
+                presidio: "Basic Presidio NER",
+                spacy: "Requires fine-tuning",
+                llm: "High (Non-deterministic)",
+                scrubadub: "Basic Regex matches"
+            }
+        };
+
+        function setMetric(metric) {
+            // Update active selector button
+            document.querySelectorAll('.selector-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Animate bars
+            document.getElementById('bar-carnaval').style.width = data[metric].carnaval + '%';
+            document.getElementById('bar-presidio').style.width = data[metric].presidio + '%';
+            document.getElementById('bar-spacy').style.width = data[metric].spacy + '%';
+            document.getElementById('bar-llm').style.width = data[metric].llm + '%';
+            document.getElementById('bar-scrubadub').style.width = data[metric].scrubadub + '%';
+
+            // Update text values
+            document.getElementById('val-carnaval').innerText = labels[metric].carnaval;
+            document.getElementById('val-presidio').innerText = labels[metric].presidio;
+            document.getElementById('val-spacy').innerText = labels[metric].spacy;
+            document.getElementById('val-llm').innerText = labels[metric].llm;
+            document.getElementById('val-scrubadub').innerText = labels[metric].scrubadub;
+        }
+
+        // Initial load
+        window.onload = () => {
+            setMetric('reversibility');
+        };
+    </script>
+
+</body>
+</html>
