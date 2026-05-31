@@ -738,6 +738,40 @@
             </div>
         </section>
 
+        <!-- Technical Verdict Section -->
+        <section class="verdict-section" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; padding: 2.5rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                <span class="badge" style="margin-bottom: 0;">Reviewer's Verdict</span>
+                <h3 style="font-family: var(--font-title); font-size: 1.5rem; font-weight: 700;">When to Choose What?</h3>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem;">
+                These frameworks are not direct competitors; they serve different design paradigms. The choice depends on your pipeline requirements:
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                <div style="background-color: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
+                    <h4 style="font-family: var(--font-title); font-size: 1.2rem; font-weight: 600; color: var(--accent-purple); margin-bottom: 0.75rem;">Choose Carnaval if:</h4>
+                    <ul style="list-style-type: none; color: var(--text-secondary); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li>• You need <strong>100% reversible anonymization</strong> (restoring values after LLM processing).</li>
+                        <li>• You want a <strong>stateless, local utility</strong> without deploying database/Redis infrastructure.</li>
+                        <li>• You process structured business documents (invoices, emails, orders) where custom preservation is vital.</li>
+                        <li>• You require zero-shot custom entity extraction (GLiNER) without fine-tuning models.</li>
+                    </ul>
+                </div>
+                <div style="background-color: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 12px;">
+                    <h4 style="font-family: var(--font-title); font-size: 1.2rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.75rem;">Choose Microsoft Presidio if:</h4>
+                    <ul style="list-style-type: none; color: var(--text-secondary); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li>• You only need to <strong>redact/delete PII</strong> (one-way masking) for logging or storage compliance.</li>
+                        <li>• You require out-of-the-box support for extensive <strong>country-specific PII types</strong> (medical, governmental).</li>
+                        <li>• You prefer a mature, Microsoft-backed API cluster deployable via Docker/Kubernetes.</li>
+                        <li>• You are running high-volume, centralized databases and already have Redis/state infrastructure.</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; font-style: italic; color: var(--text-muted); font-size: 0.95rem;">
+                <strong>Conclusion:</strong> Carnaval is a specialized, high-performance tool for modern <strong>LLM-agent pipelines</strong> requiring data reconstruction, whereas Microsoft Presidio remains the standard for general-purpose <strong>PII redaction</strong>.
+            </div>
+        </section>
+
         <!-- CTA Box -->
         <section class="cta-box">
             <h2>Ready to secure your LLM pipelines?</h2>
