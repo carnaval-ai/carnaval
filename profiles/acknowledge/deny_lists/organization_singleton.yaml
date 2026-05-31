@@ -1,0 +1,12 @@
+# Entite "mere" unique a anonymiser (votre entreprise).
+# Toutes les variantes pointent vers le placeholder unique [ORG].
+#
+# Donnees fictives. Pour votre vrai nom d'entreprise : profiles_private/.
+
+organization_singleton:
+  - "Acme Corp"
+  - "Acme Corporation"
+  - "ACME CORP"
+  - "Acme Corp."
+  - "ACMECORP"
+  - "Acme"

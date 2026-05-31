@@ -1,0 +1,35 @@
+# Origine: Vandelay_Conferma_Ordine_2024_IT_004.pdf
+Vandelay Industries S.r.l. - Via Roma 42, 20121 Milano, Italia
+Codice Fiscale e P.IVA: IT01234567890 - REA MI-1234567
+Telefono: +39 02 1234 5678 - Fax: +39 02 1234 5679
+Web: www.vandelay.example   Email: vendite@vandelay.example
+
+Fatturazione a:                        Consegna a:
+Tyrell Corporation S.p.A.              Tyrell Stabilimento Nord
+Piazza del Duomo 15                    Via Industria 22
+00185 Roma - Italia                    20090 Segrate (MI) - Italia
+Att. Sig. Frank Fischer                Magazzino accettazione
+
+Vostro ordine: TYR/4700004567 del 22.03.2024
+Conferma d'ordine n.: CONF-2024-027-IT
+Codice cliente: 5582910
+Riferimento commerciale: Sig.ra Grace Garcia
+
+Righe d'ordine:
+Pos | Q.ta | Codice articolo          | Descrizione                 | Prezzo unitario EUR | Data consegna | Totale
+ 10 |   15 | RKMCK3                   | Controllore industriale v3  |              98.20  |   18.04.2024  | 1473.00
+ 20 |     6 | KHZ-DA-032-0050-M        | Attuatore idraulico 32mm    |              81.50  |   22.04.2024  |  489.00
+ 30 |     2 | TRX-2024-014             | Trasformatore custom 380V   |             495.00  |   05.05.2024  |  990.00
+
+Subtotale netto: EUR 2952.00
+Spese di trasporto: EUR 45.00
+Totale imponibile: EUR 2997.00
+IVA 22%: EUR 659.34
+Totale documento: EUR 3656.34
+
+Condizioni di pagamento: 30 giorni data fattura
+Resa: DAP Segrate
+Vettore: SDA Express Courier
+
+Note: La presente conferma annulla eventuali quotazioni precedenti.
+La proprieta della merce resta della Vandelay fino al saldo completo.

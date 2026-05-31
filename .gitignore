@@ -1,0 +1,29 @@
+# Virtual env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Tests / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local data
+.env
+inbox/
+outbox*
+gliner_cache/
+
+# Private profiles (never commit)
+profiles_private/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/

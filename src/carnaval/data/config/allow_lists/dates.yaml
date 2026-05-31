@@ -1,0 +1,30 @@
+# Noms de mois en contexte de date - zones a ne jamais masquer.
+#
+# Un mois precede d'un jour ("14 mai", "14 May") fait partie d'une date :
+# il ne doit pas etre masque. Mais un mois ISOLE peut etre un prenom
+# (May, June, April, Avril, Nisan, Ekim...) et doit, lui, rester masquable.
+# D'ou l'ancrage sur un jour : chaque motif exige "<nombre> <mois>".
+#
+# Couche de base -> universel (tous profils). Motifs regex (cle hors
+# `business_lexicon`). Les lettres accentuees sont gerees par des classes
+# de caracteres ([ée], [çc]...) : les motifs regex ne sont pas, eux,
+# deplie-accents par la couche de protection.
+date_patterns:
+  # English
+  - "(?i)\\b\\d{1,2}\\s+(?:of\\s+)?(january|february|march|april|may|june|july|august|september|october|november|december)\\b"
+  # Francais
+  - "(?i)\\b\\d{1,2}\\s+(?:de\\s+)?(janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre)\\b"
+  # Espanol
+  - "(?i)\\b\\d{1,2}\\s+(?:de\\s+)?(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\\b"
+  # Portugues
+  - "(?i)\\b\\d{1,2}\\s+(?:de\\s+)?(janeiro|fevereiro|mar[çc]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\\b"
+  # Deutsch
+  - "(?i)\\b\\d{1,2}\\.?\\s+(januar|februar|m[äa]rz|april|mai|juni|juli|august|september|oktober|november|dezember)\\b"
+  # Italiano
+  - "(?i)\\b\\d{1,2}\\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\\b"
+  # Polski (genitif, forme employee dans les dates)
+  - "(?i)\\b\\d{1,2}\\s+(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|wrze[śs]nia|pa[źz]dziernika|listopada|grudnia)\\b"
+  # Turkce
+  - "(?i)\\b\\d{1,2}\\s+(ocak|[şs]ubat|mart|nisan|may[ıi]s|haziran|temmuz|a[ğg]ustos|eyl[üu]l|ekim|kas[ıi]m|aral[ıi]k)\\b"
+  # Zhongwen : composants de date (annee / mois / jour collent au chiffre)
+  - "\\d{1,4}\\s*[年月日]"

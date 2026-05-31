@@ -1,0 +1,55 @@
+# Toponimos espanoles / hispanoamericanos.
+# Activo cuando la lengua activa incluye "es".
+
+places:
+  # Espana
+  - "Madrid"
+  - "Barcelona"
+  - "Valencia"
+  - "Sevilla"
+  - "Zaragoza"
+  - "Malaga"
+  - "Murcia"
+  - "Palma"
+  - "Las Palmas"
+  - "Bilbao"
+  - "Alicante"
+  - "Cordoba"
+  - "Valladolid"
+  - "Vigo"
+  - "Gijon"
+  - "Granada"
+  - "Vitoria"
+  - "Pamplona"
+  - "Santander"
+  - "Toledo"
+  - "Salamanca"
+  - "Burgos"
+  - "Tarragona"
+
+  # Mexico
+  - "Mexico"
+  - "Ciudad de Mexico"
+  - "Guadalajara"
+  - "Monterrey"
+  - "Puebla"
+  - "Tijuana"
+  - "Leon"
+
+  # Amerique du Sud (B2B frequents)
+  - "Buenos Aires"
+  - "Sao Paulo"          # (PT mais souvent dans contextes ES)
+  - "Santiago"
+  - "Lima"
+  - "Bogota"
+  - "Caracas"
+
+  # Communautes autonomes
+  - "Cataluna"
+  - "Andalucia"
+  - "Galicia"
+  - "Pais Vasco"
+  - "Castilla y Leon"
+  - "Castilla-La Mancha"
+  - "Aragon"
+  - "Asturias"

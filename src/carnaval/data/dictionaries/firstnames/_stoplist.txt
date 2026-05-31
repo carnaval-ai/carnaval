@@ -1,0 +1,11 @@
+# Mots qui sont des prenoms ET des noms communs frequents.
+# Exclus du dictionnaire de prenoms pour eviter les faux positifs.
+april
+iris
+ivy
+june
+lys
+marie
+may
+rose
+victoire

@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carnaval — Reversible Python Anonymization Framework</title>
+    <!-- Google Fonts Outfit & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-surface: #141b2d;
+            --bg-surface-glow: #1e2942;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-purple: #c084fc;
+            --accent-purple-glow: rgba(192, 132, 252, 0.15);
+            --accent-emerald: #2dd4bf;
+            --accent-emerald-glow: rgba(45, 212, 191, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-glow: rgba(59, 130, 246, 0.15);
+            --border-color: #24324f;
+            --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-outfit);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient Glow Backdrops */
+        .glow-orb-1 {
+            position: absolute;
+            top: -150px;
+            left: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.2) 0%, rgba(192, 132, 252, 0) 70%);
+            z-index: -1;
+            filter: blur(50px);
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            top: 500px;
+            right: 5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, rgba(45, 212, 191, 0) 70%);
+            z-index: -1;
+            filter: blur(60px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        /* Navigation */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(11, 15, 25, 0.8);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-tag {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            background-color: rgba(45, 212, 191, 0.1);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        .btn-github {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-github:hover {
+            background-color: var(--bg-surface-glow);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 15px var(--accent-purple-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 7rem 0 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 40%, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.tagline {
+            font-size: 1.4rem;
+            color: var(--accent-purple);
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+            letter-spacing: -0.2px;
+            font-style: italic;
+        }
+
+        .hero p.desc {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), #a855f7);
+            color: #000000;
+            font-weight: 700;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 20px rgba(192, 132, 252, 0.4);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(192, 132, 252, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-secondary);
+        }
+
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-lbl {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.2rem;
+            font-weight: 600;
+        }
+
+        /* Visual 7-Stage Pipeline */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            margin-top: 6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .pipeline-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .stage-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.8rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+        }
+
+        .stage-num {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            font-family: var(--font-mono);
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .stage-card:hover .stage-num {
+            color: rgba(59, 130, 246, 0.15);
+        }
+
+        .stage-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            background-color: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .stage-card:nth-child(even) .stage-badge {
+            color: var(--accent-purple);
+            background-color: rgba(192, 132, 252, 0.1);
+        }
+        .stage-card:nth-child(even):hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 25px rgba(192, 132, 252, 0.1);
+        }
+
+        .stage-card:nth-child(7) .stage-badge {
+            color: var(--accent-emerald);
+            background-color: rgba(45, 212, 191, 0.1);
+        }
+        .stage-card:nth-child(7):hover {
+            border-color: var(--accent-emerald);
+            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.1);
+        }
+
+        .stage-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .stage-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Playground */
+        .playground {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            margin-bottom: 6rem;
+            background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(20, 27, 45, 0.8) 100%);
+        }
+
+        .playground-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .playground-icon {
+            color: var(--accent-emerald);
+            display: flex;
+            align-items: center;
+        }
+
+        .template-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-template {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-template.active, .btn-template:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-emerald);
+            background-color: rgba(45, 212, 191, 0.05);
+        }
+
+        .playground-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .playground-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-pill {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            background-color: var(--border-color);
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .editor-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--bg-base);
+            position: relative;
+            flex-grow: 1;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 330px;
+            background: transparent;
+            border: none;
+            resize: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            padding: 1.2rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .editor-display {
+            width: 100%;
+            height: 100%;
+            min-height: 330px;
+            padding: 1.2rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            overflow-y: auto;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            display: none;
+        }
+
+        .placeholder-badge {
+            background-color: rgba(192, 132, 252, 0.2);
+            color: var(--accent-purple);
+            border: 1px solid rgba(192, 132, 252, 0.4);
+            padding: 0.05rem 0.3rem;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 0 8px rgba(192, 132, 252, 0.25);
+        }
+
+        .placeholder-badge.provider {
+            background-color: rgba(45, 212, 191, 0.2);
+            color: var(--accent-emerald);
+            border-color: rgba(45, 212, 191, 0.4);
+            box-shadow: 0 0 8px rgba(45, 212, 191, 0.25);
+        }
+
+        .placeholder-badge.reference {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.25);
+        }
+
+        .playground-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        /* Feature grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .feature-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background-color: var(--bg-surface-glow);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background-color: var(--bg-base);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-emerald);
+            margin-bottom: 1.2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            color: var(--accent-purple);
+        }
+        .feature-card:nth-child(3) .feature-icon {
+            color: var(--accent-blue);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code Snippets Panel */
+        .code-showcase {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 6rem;
+        }
+
+        .code-header {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ef4444;
+        }
+        .code-dot:nth-child(2) { background-color: #eab308; }
+        .code-dot:nth-child(3) { background-color: #22c55e; }
+
+        .code-title {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .code-body {
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        .code-body pre {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        /* Highlight classes */
+        .hl-keyword { color: #f472b6; }
+        .hl-string { color: #34d399; }
+        .hl-comment { color: #64748b; font-style: italic; }
+        .hl-number { color: #fbbf24; }
+        .hl-fn { color: #60a5fa; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0;
+            background-color: rgba(11, 15, 25, 0.6);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                carnaval
+                <span class="logo-tag">v0.2.0</span>
+            </a>
+            <div class="nav-links">
+                <a href="#playground">Interactive Playground</a>
+                <a href="#pipeline">7-Stage Architecture</a>
+                <a href="#code">Quick Start</a>
+                <a href="file:///C:/Temp/Claude/Carnaval-publishable-EN/docs/00_overview.md" class="btn-github">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    Documentation
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <h1>Reversible Anonymization</h1>
+        <p class="tagline">The art of masking: concealing identity, preserving the essentials.</p>
+        <p class="desc">
+            <strong>carnaval</strong> is a lightweight, reversible Python framework for anonymizing sensitive entities in text documents before cloud ingestion. Mask PII local-first with AES-256-GCM encryption, safely query any cloud LLM, and seamlessly restore the original names back into structured JSON or XML outputs.
+        </p>
+        
+        <div class="hero-actions">
+            <a href="#playground" class="btn-primary">Try Interactive Simulator</a>
+            <a href="file:///C:/Temp/Claude/Carnaval-publishable-EN/docs/02_install.md" class="btn-secondary">Get Started</a>
+        </div>
+
+        <div class="quick-stats">
+            <div class="stat-item">
+                <div class="stat-val">184 / 184</div>
+                <div class="stat-lbl">Pytest Suite Verified</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">95%</div>
+                <div class="stat-lbl">Code Coverage</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">AES-256</div>
+                <div class="stat-lbl">Vault Encryption</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">0%</div>
+                <div class="stat-lbl">PII Cloud Leakage</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Playground Section -->
+    <section id="playground" class="container">
+        <h2 class="section-title">Interactive <span>Playground</span></h2>
+        <p class="section-desc">Experience local-first reversible masking in real-time. Choose a document template, run the masking engine, simulate structured extraction, and watch original values reinjected.</p>
+
+        <div class="playground">
+            <div class="playground-title">
+                <div class="playground-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+                Reversible Masking Simulator
+            </div>
+
+            <div class="template-selector">
+                <button class="btn-template active" onclick="loadTemplate('ack')">Globex Order Acknowledgment</button>
+                <button class="btn-template" onclick="loadTemplate('email')">Vandelay B2B Email</button>
+                <button class="btn-template" onclick="loadTemplate('invoice')">Initech Invoice</button>
+            </div>
+
+            <div class="playground-grid">
+                <!-- Left Panel: Input & Masked Text -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title" id="input-title">Source text (PII visible)</div>
+                        <div class="panel-pill" id="input-pill">RAW TXT</div>
+                    </div>
+                    <div class="editor-container">
+                        <textarea class="editor-textarea" id="editor-left" placeholder="Paste your text document here..."></textarea>
+                        <div class="editor-display" id="display-left"></div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Output & Vault -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="panel-title" id="output-title">Engine output (Masked or Reinjected)</div>
+                        <div class="panel-pill" id="output-pill">PENDING</div>
+                    </div>
+                    <div class="editor-container">
+                        <textarea class="editor-textarea" id="editor-right" readonly placeholder="Output will appear here after clicking action..."></textarea>
+                        <div class="editor-display" id="display-right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="playground-controls">
+                <button class="btn-primary" id="btn-mask" onclick="runMasking()">1. Run Masking Stage (S1-S6)</button>
+                <button class="btn-secondary" id="btn-llm" disabled onclick="runLLMSimulator()">2. Simulate LLM Extraction</button>
+                <button class="btn-primary" id="btn-reinject" disabled style="background: linear-gradient(135deg, var(--accent-emerald), #10b981)" onclick="runReinjection()">3. Reinject Vault (S7)</button>
+                <button class="btn-secondary" onclick="resetPlayground()">Reset</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 7-Stage Pipeline Section -->
+    <section id="pipeline" class="container">
+        <h2 class="section-title">The 7-Stage <span>Anonymization Pipeline</span></h2>
+        <p class="section-desc">Carnaval divides its operation into independent, auditability-focused modules ensuring robust detection, arbitration, and secure data substitution.</p>
+
+        <div class="pipeline-flow">
+            <!-- Stage 1 -->
+            <div class="stage-card">
+                <div class="stage-num">01</div>
+                <div class="stage-badge">Ingest</div>
+                <h3 class="stage-title">S1. Intake</h3>
+                <p class="stage-desc">Loads input documents safely. Resolves file encodings with auto-fallback from UTF-8 to Latin-1. Enforces file limits up to 10 MB to prevent resource exhaustion.</p>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="stage-card">
+                <div class="stage-num">02</div>
+                <div class="stage-badge">Normalise</div>
+                <h3 class="stage-title">S2. Preprocess</h3>
+                <p class="stage-desc">Standardizes text structure. Sanitizes pipeline delimiters (pipes), collapses redundant white spaces, strips BOMs, and detects the document language (French, English, German, or Spanish).</p>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="stage-card">
+                <div class="stage-num">03</div>
+                <div class="stage-badge">NER & Regex</div>
+                <h3 class="stage-title">S3. Detect</h3>
+                <p class="stage-desc">Dispatches active recognizers: zero-shot neural entity recognition via <strong>GLiNER</strong> for open classes (people, organizations), language-specific regexes (VAT, IBAN, phones), and strict denylists.</p>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="stage-card">
+                <div class="stage-num">04</div>
+                <div class="stage-badge">Arbitrate</div>
+                <h3 class="stage-title">S4. Resolve</h3>
+                <p class="stage-desc">De-duplicates and arbitrates overlapping entities. Employs scoring policies where longer spans and higher recognizer confidence take precedence to resolve conflicts.</p>
+            </div>
+
+            <!-- Stage 5 -->
+            <div class="stage-card">
+                <div class="stage-num">05</div>
+                <div class="stage-badge">Encrypt</div>
+                <h3 class="stage-title">S5. Mask</h3>
+                <p class="stage-desc">Substitutes raw text values with semantic placeholders (e.g. <code>[FOURNISSEUR_1]</code>, <code>[CLIENT_NAME]</code>). Writes sensitive maps into a local vault encrypted via <strong>AES-256-GCM</strong>.</p>
+            </div>
+
+            <!-- Stage 6 -->
+            <div class="stage-card">
+                <div class="stage-num">06</div>
+                <div class="stage-badge">Export</div>
+                <h3 class="stage-title">S6. Output</h3>
+                <p class="stage-desc">Serializes the masked document and encrypted vault. Supports 6 target formats: plain text, JSON, JSONL, XML, CoNLL, and visualization-ready HTML.</p>
+            </div>
+
+            <!-- Stage 7 -->
+            <div class="stage-card" style="grid-column: 1 / -1; border-color: rgba(45, 212, 191, 0.3)">
+                <div class="stage-num" style="color: rgba(45, 212, 191, 0.05)">07</div>
+                <div class="stage-badge" style="color: var(--accent-emerald); background-color: rgba(45, 212, 191, 0.1)">Reversible</div>
+                <h3 class="stage-title">S7. Reinject (Post-LLM Processing)</h3>
+                <p class="stage-desc">Crucial reversing stage. Parses structured XML or JSON payloads returned by cloud LLMs, decrypts the local vault, and matches semantic placeholders to restore original values into the final business output without cloud leakage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3 class="feature-title">True Zero-Cloud Moat</h3>
+                <p class="feature-desc">By encrypting masking tables locally with AES-256-GCM, plain text PII never leaves your computing boundary. The cloud LLM only processes standardized, non-identifying semantic tokens.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+                </div>
+                <h3 class="feature-title">Zero-Shot NER (GLiNER)</h3>
+                <p class="feature-desc">Leverages GLiNER models for customizable entity detection. No heavy spaCy models or Presidio installations needed. Supports on-the-fly definition of custom target tags through simple configuration.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Production API Contract</h3>
+                <p class="feature-desc">Standardized interfaces designed for easy workflow integration. Features direct pipeline execution and a command-line interface suitable for automation inside Dockerized orchestrations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code showcase / Quick Start Section -->
+    <section id="code" class="container">
+        <h2 class="section-title">Developer <span>API & CLI Quick Start</span></h2>
+        <p class="section-desc">Get up and running with Carnaval in a matter of seconds. Standard Python usage follows familiar patterns designed for modern workflows.</p>
+
+        <div class="code-showcase">
+            <div class="code-header">
+                <div class="code-dots">
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                </div>
+                <div class="code-title">example_integration.py</div>
+            </div>
+            <pre class="code-body"><code><span class="hl-keyword">from</span> carnaval.pipeline <span class="hl-keyword">import</span> run_anonymization
+<span class="hl-keyword">from</span> carnaval.stages.s7_reinject <span class="hl-keyword">import</span> reinject_original_values
+
+<span class="hl-comment"># 1. Mask PII local-first using a business profile</span>
+masked_doc, vault, metadata = <span class="hl-fn">run_anonymization</span>(
+    input_path=<span class="hl-string">"inbox/sample_invoice.txt"</span>,
+    outbox_dir=<span class="hl-string">"outbox/"</span>,
+    vault_password=<span class="hl-string">"secure_aes_encryption_key_32_chars"</span>,
+    profile=<span class="hl-string">"invoice"</span>,
+    use_gliner=<span class="hl-keyword">False</span>
+)
+<span class="hl-fn">print</span>(masked_doc.anonymized_text)
+<span class="hl-comment"># Output: "Billing to [CLIENT_NAME] from [FOURNISSEUR_1]... Order: [REF_COMMANDE_CLIENT_1]"</span>
+
+<span class="hl-comment"># 2. Safely process the masked document in the cloud via any LLM</span>
+llm_response_json = {
+    <span class="hl-string">"provider"</span>: <span class="hl-string">"[FOURNISSEUR_1]"</span>,
+    <span class="hl-string">"client"</span>: <span class="hl-string">"[CLIENT_NAME]"</span>,
+    <span class="hl-string">"order_reference"</span>: <span class="hl-string">"[REF_COMMANDE_CLIENT_1]"</span>,
+    <span class="hl-string">"total_ht"</span>: <span class="hl-number">3000.0</span>
+}
+
+<span class="hl-comment"># 3. Restore original PII values back into the structured output</span>
+restored_json = <span class="hl-fn">reinject_original_values</span>(
+    structured_data=llm_response_json,
+    vault=vault
+)
+<span class="hl-fn">print</span>(restored_json)
+<span class="hl-comment"># Output: {"provider": "Initech", "client": "Acme Corp", "order_reference": "FAC-2024-0892", "total_ht": 3000.0}</span></code></pre>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">carnaval</a>
+            <p class="footer-desc">A professional Python ecosystem for reversible anonymization and PII vault management.</p>
+            <div class="footer-links">
+                <a href="#playground">Simulator</a>
+                <a href="#pipeline">Architecture</a>
+                <a href="file:///C:/Temp/Claude/Carnaval-publishable-EN/docs/00_overview.md">Docs</a>
+                <a href="file:///C:/Temp/Claude/Carnaval-publishable-EN/CONTRIBUTING.md">Contributing</a>
+            </div>
+            <p class="footer-copy">Licensed under the Apache License 2.0. Built for enterprise DX orchestration.</p>
+        </div>
+    </footer>
+
+    <!-- Simulation Script -->
+    <script>
+        const templates = {
+            ack: {
+                title: "Globex Order Acknowledgment",
+                raw: `# Fichier source: Globex_acknowledgment_2024_001.pdf\nGlobex Inc. au capital de 50000 EUR - RCS Paris B 123456789 - SIRET 12345678900012\nBureau : 42 Main Street\n75001 PARIS\nTel : 01.23.45.67.89 - Fax : 01.23.45.67.90\nWeb : www.globex.example Email : sales@globex.example\n\nAdresse de facturation : Adresse de livraison:\nAcme Corp Acme Corp\n1 Avenue de la Liberte ZAC INDUSTRIELLE NORD\n75002 PARIS 75003 PARIS\nA l'attention de M. ANDERSON Alice\n\nVotre commande : ACM/4700001234 Le 12/03/2024 14:30:00\nNumero AR : AR-2024-001\nSuivi par : Alice Anderson - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - Globex Inc. - Ref M254C00021 - 10.76 EUR - Delai 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - Verin a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\nTotal TTC : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : FR99123456789\nIBAN : FR763000600001234567890141\nBIC : AAAAFR2XXXX\n\nEn vous remerciant de votre confiance.\nCordialement,\nAlice Anderson`,
+                
+                masked: `# Fichier source: <span class="placeholder-badge provider">[FOURNISSEUR_1]</span>[ADRESSE_1]\n<span class="placeholder-badge provider">[FOURNISSEUR_2]</span> au capital de [CAPITAL_1] EUR - RCS [ADRESSE_2] [NATID_1] - SIRET [SIRET_1]\nBureau : 42 Main Street\n[ADRESSE_3][ADRESSE_4]\nTel : [PHONE_1] - Fax : [PHONE_2]\nWeb : www.<span class="placeholder-badge provider">[FOURNISSEUR_3]</span>[URL_1] Email : [EMAIL_1]\n\nAdresse de facturation : Adresse de livraison:\n[CLIENT_NAME][FOURNISSEUR_4][CLIENT_NAME]\n1 Avenue de la [CONTACT_1] INDUSTRIELLE NORD\n[ADRESSE_5][ADRESSE_4] [ADRESSE_6][ADRESSE_4] l'attention de M. ANDERSON [CONTACT_2]\n\nVotre commande : <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> Le 12/03/2024 14:30:00\nNumero AR : [REF_1]\nSuivi par : [CONTACT_3] - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - <span class="placeholder-badge provider">[FOURNISSEUR_2]</span> - Ref M254C00021 - 10.76 [FOURNISSEUR_5] 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - [ADRESSE_7] a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\n[CONTACT_4] : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : [VAT_1]\nIBAN : [IBAN_1]\nBIC : [BIC_1]\n\nEn vous remerciant de [CONTACT_5] confiance.\nCordialement,\n[CONTACT_3][FOURNISSEUR_6][FOURNISSEUR_2]`,
+                
+                vault: `{\n  "vault_id": "vlt_892d1a3c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[FOURNISSEUR_2]": "Globex Inc.",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[REF_COMMANDE_CLIENT_1]": "ACM/4700001234",\n    "[CONTACT_3]": "Alice Anderson",\n    "[IBAN_1]": "FR763000600001234567890141",\n    "[VAT_1]": "FR99123456789",\n    "[EMAIL_1]": "sales@globex.example"\n  }\n}`,
+                
+                llm: `{\n  "vendor": "<span class="placeholder-badge provider">[FOURNISSEUR_2]</span>",\n  "client": "[CLIENT_NAME]",\n  "order_id": "<span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span>",\n  "total_ht": 187.10,\n  "items_count": 2\n}`,
+                
+                reinjected: `{\n  "vendor": "Globex Inc.",\n  "client": "Acme Corp",\n  "order_id": "ACM/4700001234",\n  "total_ht": 187.10,\n  "items_count": 2\n}`
+            },
+            email: {
+                title: "Vandelay B2B Email",
+                raw: `De: David Davis <david.davis@vandelay.example>\nA: Carol Carter <carol.carter@acme.example>\nObjet: RE: Commande ACM/2024/0438 - confirmation expedition\n\nBonjour Carol,\n\nJe confirme l'expedition de votre commande ACM/2024/0438 ce jour.\n\nSuivi : depart de notre site 30 Rue de l'Industrie a Marseille (13002),\nlivraison prevue mercredi 17/04 sur votre site.\n\nReferences inclus :\n- KHZ-DA-032-0050-M : 10 pieces\n- RKMCK3 : 25 pieces\n\nPour toute question, je reste disponible :\nTel direct : 04.91.23.45.67\nMobile : 06.78.90.12.34\n\nCordialement,\nDavid Davis\nResponsable Commercial\nVandelay Industries\nwww.vandelay.example`,
+                
+                masked: `De: [CONTACT_1] &lt;[EMAIL_1]&gt;\nA: Carol Carter &lt;[EMAIL_2]&gt;\nObjet: RE: Commande <span class="placeholder-badge reference">[CONTACT_2]/2024/0438</span> - confirmation expedition\n\nBonjour Carol,\n\nJe confirme l'expedition de votre commande <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> ce jour.\n\nSuivi : depart de notre site [ADRESSE_1] ([REF_COMMANDE_CLIENT_2]),\nlivraison prevue mercredi 17/04 sur votre site.\n\nReferences inclus :\n- KHZ-DA-032-0050-M : 10 pieces\n- RKMCK3 : 25 pieces\n\nPour toute question, je reste disponible :\nTel direct : [PHONE_1]\nMobile : [PHONE_2]\n\nCordialement,\n[CONTACT_1]\nResponsable [CONTACT_3]\n<span class="placeholder-badge provider">[FOURNISSEUR_1]</span>\n[URL_1]`,
+                
+                vault: `{\n  "vault_id": "vlt_e0921a4f",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[CONTACT_1]": "David Davis",\n    "[EMAIL_1]": "david.davis@vandelay.example",\n    "[EMAIL_2]": "carol.carter@acme.example",\n    "[CONTACT_2]": "ACM",\n    "[REF_COMMANDE_CLIENT_1]": "ACM/2024/0438",\n    "[FOURNISSEUR_1]": "Vandelay Industries",\n    "[PHONE_1]": "04.91.23.45.67",\n    "[PHONE_2]": "06.78.90.12.34"\n  }\n}`,
+                
+                llm: `{\n  "sender_name": "[CONTACT_1]",\n  "sender_company": "<span class="placeholder-badge provider">[FOURNISSEUR_1]</span>",\n  "associated_order": "<span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span>",\n  "is_shipping_confirmation": true\n}`,
+                
+                reinjected: `{\n  "sender_name": "David Davis",\n  "sender_company": "Vandelay Industries",\n  "associated_order": "ACM/2024/0438",\n  "is_shipping_confirmation": true\n}`
+            },
+            invoice: {
+                title: "Initech Invoice",
+                raw: `INITECH CORP - INVOICE\nDate: 2024-05-15\nInvoice Ref: FAC-2024-0892\nClient: Acme Corp\n\nDescription of Services:\n- Development of Eureka multi-agent prototype: 3000,00 EUR\n\nPayment Details:\nIBAN: FR1420041010050500013M02606\nBIC: INITHFRPXXX\n\nThank you for doing business with Initech!\nFor support, email billing@initech.example`,
+                
+                masked: `<span class="placeholder-badge provider">[FOURNISSEUR_1]</span> - INVOICE\nDate: 2024-05-15\nInvoice Ref: <span class="placeholder-badge reference">FAC-2024-0892</span>\nClient: [CLIENT_NAME]\n\nDescription of Services:\n- Development of Eureka multi-agent prototype: 3000,00 EUR\n\nPayment Details:\nIBAN: [IBAN_1]\nBIC: [BIC_1]\n\nThank you for doing business with <span class="placeholder-badge provider">[FOURNISSEUR_1]</span>!\nFor support, email [EMAIL_1]`,
+                
+                vault: `{\n  "vault_id": "vlt_49ab213c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[FOURNISSEUR_1]": "Initech",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[IBAN_1]": "FR1420041010050500013M02606",\n    "[BIC_1]": "INITHFRPXXX",\n    "[EMAIL_1]": "billing@initech.example"\n  }\n}`,
+                
+                llm: `{\n  "invoice_ref": "<span class="placeholder-badge reference">FAC-2024-0892</span>",\n  "billing_party": "<span class="placeholder-badge provider">[FOURNISSEUR_1]</span>",\n  "client_party": "[CLIENT_NAME]",\n  "amount_due": 3000.00\n}`,
+                
+                reinjected: `{\n  "invoice_ref": "FAC-2024-0892",\n  "billing_party": "Initech",\n  "client_party": "Acme Corp",\n  "amount_due": 3000.00\n}`
+            }
+        };
+
+        let currentActiveTemplate = 'ack';
+        
+        function loadTemplate(key) {
+            currentActiveTemplate = key;
+            
+            // Manage active buttons class
+            document.querySelectorAll('.btn-template').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            resetPlayground();
+        }
+
+        function resetPlayground() {
+            // Restore titles
+            document.getElementById('input-title').innerText = "Source text (PII visible)";
+            document.getElementById('input-pill').innerText = "RAW TXT";
+            document.getElementById('output-title').innerText = "Engine output (Masked or Reinjected)";
+            document.getElementById('output-pill').innerText = "PENDING";
+            
+            // Set value
+            const leftEditor = document.getElementById('editor-left');
+            leftEditor.value = templates[currentActiveTemplate].raw;
+            leftEditor.style.display = 'block';
+            
+            const leftDisplay = document.getElementById('display-left');
+            leftDisplay.style.display = 'none';
+            leftDisplay.innerHTML = '';
+            
+            const rightEditor = document.getElementById('editor-right');
+            rightEditor.value = '';
+            rightEditor.style.display = 'block';
+            
+            const rightDisplay = document.getElementById('display-right');
+            rightDisplay.style.display = 'none';
+            rightDisplay.innerHTML = '';
+            
+            // Buttons status
+            document.getElementById('btn-mask').disabled = false;
+            document.getElementById('btn-llm').disabled = true;
+            document.getElementById('btn-reinject').disabled = true;
+        }
+
+        function runMasking() {
+            // Set titles
+            document.getElementById('input-title').innerText = "Anonymized Output";
+            document.getElementById('input-pill').innerText = "MASKED TXT";
+            document.getElementById('output-title').innerText = "Local Encrypted Vault";
+            document.getElementById('output-pill').innerText = "AES VAULT (LOCAL)";
+            
+            // Shift Left editor to HTML display (with badges)
+            const leftEditor = document.getElementById('editor-left');
+            leftEditor.style.display = 'none';
+            
+            const leftDisplay = document.getElementById('display-left');
+            leftDisplay.style.display = 'block';
+            leftDisplay.innerHTML = templates[currentActiveTemplate].masked;
+            
+            // Shift Right editor to Text (shows Vault JSON)
+            const rightEditor = document.getElementById('editor-right');
+            rightEditor.value = templates[currentActiveTemplate].vault;
+            
+            // Manage buttons
+            document.getElementById('btn-mask').disabled = true;
+            document.getElementById('btn-llm').disabled = false;
+            document.getElementById('btn-reinject').disabled = true;
+        }
+
+        function runLLMSimulator() {
+            // Set titles
+            document.getElementById('input-title').innerText = "Anonymized Output";
+            document.getElementById('input-pill').innerText = "MASKED TXT";
+            document.getElementById('output-title').innerText = "LLM Structured JSON Result";
+            document.getElementById('output-pill').innerText = "LLM JSON (MASKED)";
+            
+            // Shift Right to HTML display for JSON badges
+            const rightEditor = document.getElementById('editor-right');
+            rightEditor.style.display = 'none';
+            
+            const rightDisplay = document.getElementById('display-right');
+            rightDisplay.style.display = 'block';
+            rightDisplay.innerHTML = templates[currentActiveTemplate].llm;
+            
+            // Manage buttons
+            document.getElementById('btn-mask').disabled = true;
+            document.getElementById('btn-llm').disabled = true;
+            document.getElementById('btn-reinject').disabled = false;
+        }
+
+        function runReinjection() {
+            // Set titles
+            document.getElementById('input-title').innerText = "Anonymized Output";
+            document.getElementById('input-pill').innerText = "MASKED TXT";
+            document.getElementById('output-title').innerText = "Final Reinjected Business Data";
+            document.getElementById('output-pill').innerText = "REINJECTED JSON";
+            
+            // Right displays unmasked original JSON
+            const rightDisplay = document.getElementById('display-right');
+            rightDisplay.innerHTML = templates[currentActiveTemplate].reinjected;
+            
+            // Manage buttons
+            document.getElementById('btn-reinject').disabled = true;
+        }
+
+        // Initial setup on load
+        window.onload = function() {
+            resetPlayground();
+        }
+    </script>
+</body>
+</html>

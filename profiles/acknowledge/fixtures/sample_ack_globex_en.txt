@@ -1,0 +1,35 @@
+# Source: Globex_acknowledgment_2024_EN_002.pdf
+Globex Inc., a Delaware corporation - EIN 12-3456789
+Headquarters: 1 Globex Plaza, Suite 200, New York NY 10001
+Phone: +1 212 555 0199  Fax: +1 212 555 0188
+Web: www.globex.example   Email: sales@globex.example
+
+Bill to:                       Ship to:
+Acme Corp                      Acme Corp Warehouse
+500 Industrial Boulevard       2200 Logistics Drive
+Chicago, IL 60601 - USA        Memphis, TN 38101 - USA
+Attn: Mr. Bob Brown            Attn: Receiving Dock 3
+
+Your purchase order: ACM/PO-4700002345 dated 2024-04-15
+Order acknowledgment number: ACK-2024-008-EN
+Customer reference: 1245678
+Account manager: Alice Anderson
+
+Order lines:
+Line | Qty | Reference                | Description                 | Unit price (USD) | Delivery date | Total
+  10 |   8 | RKMCK3                   | Industrial controller v3    |          112.45  |   2024-05-10  |   899.60
+  20 |  12 | KHZ-DA-032-0050-M        | Hydraulic actuator 32mm     |           87.20  |   2024-05-14  |  1046.40
+  30 |   4 | TRX-2024-014             | Custom transformer 480V     |          540.00  |   2024-05-22  |  2160.00
+
+Subtotal HT: USD 4106.00
+Shipping & handling: USD 75.00
+Total HT: USD 4181.00
+Sales tax (8.25%): USD 344.93
+Grand total TTC: USD 4525.93
+
+Payment terms: Net 30 days
+Incoterm: DAP Memphis, TN
+Carrier: UPS Ground
+
+Notes: This acknowledgment supersedes any prior quotation. Goods remain
+the property of Globex Inc. until full payment is received.

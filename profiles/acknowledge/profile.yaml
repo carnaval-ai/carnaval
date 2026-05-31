@@ -1,0 +1,25 @@
+# Profil : Accuse de reception fournisseur
+profile:
+  name: acknowledge
+  description: |
+    Anonymisation d'accuses de reception (AR) envoyes par un fournisseur
+    au client final. Format typique : confirmation de commande avec
+    references produit, prix, delais, IBAN fournisseur.
+  language: fr
+  expected_entities:
+    - PERSON         # contact commercial fournisseur
+    - ORGANIZATION   # nom du fournisseur
+    - EMAIL          # email contact
+    - PHONE          # tel/fax
+    - LOCATION       # adresse fournisseur
+    - IBAN           # coordonnees bancaires fournisseur
+    - BIC
+    - VAT
+    - SIRET
+    - SIREN
+  preserve:
+    - order_numbers       # numero de commande client (a conserver !)
+    - product_references  # references articles
+    - amounts             # quantites, prix, totaux
+    - customs_codes       # codes douaniers
+    - dates               # dates de commande/livraison

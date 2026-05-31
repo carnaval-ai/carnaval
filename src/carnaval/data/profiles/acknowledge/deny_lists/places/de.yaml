@@ -1,0 +1,77 @@
+# Toponymes germanophones (Allemagne, Autriche, Suisse alemanique).
+# Active quand la langue active inclut "de".
+
+places:
+  # Top villes Allemagne
+  - "Berlin"
+  - "Hamburg"
+  - "Munchen"
+  - "Munich"            # variante FR/EN
+  - "Koln"
+  - "Cologne"           # variante FR/EN
+  - "Frankfurt"
+  - "Frankfurt am Main"
+  - "Stuttgart"
+  - "Dusseldorf"
+  - "Leipzig"
+  - "Dortmund"
+  - "Essen"
+  - "Bremen"
+  - "Dresden"
+  - "Hannover"
+  - "Nurnberg"
+  - "Nuremberg"
+  - "Duisburg"
+  - "Bochum"
+  - "Wuppertal"
+  - "Bielefeld"
+  - "Bonn"
+  - "Munster"
+  - "Karlsruhe"
+  - "Mannheim"
+  - "Augsburg"
+  - "Wiesbaden"
+  - "Aachen"
+  - "Mainz"
+  - "Mongladbach"
+  - "Braunschweig"
+  - "Kiel"
+  - "Erfurt"
+  - "Magdeburg"
+  - "Lubeck"
+  - "Heidelberg"
+  - "Tettnang"          # exemple : commune siege d'un fournisseur
+
+  # Top villes Autriche
+  - "Wien"
+  - "Vienne"            # variante FR
+  - "Graz"
+  - "Linz"
+  - "Salzburg"
+  - "Innsbruck"
+  - "Klagenfurt"
+
+  # Top villes Suisse alemanique
+  - "Zurich"
+  - "Bern"
+  - "Berne"
+  - "Basel"
+  - "Bale"
+  - "Luzern"
+  - "Lucerne"
+  - "St. Gallen"
+  - "Winterthur"
+
+  # Lander / regions
+  - "Bayern"
+  - "Baden-Wurttemberg"
+  - "Nordrhein-Westfalen"
+  - "Hessen"
+  - "Sachsen"
+  - "Niedersachsen"
+  - "Rheinland-Pfalz"
+  - "Schleswig-Holstein"
+  - "Thuringen"
+  - "Brandenburg"
+  - "Mecklenburg-Vorpommern"
+  - "Saarland"

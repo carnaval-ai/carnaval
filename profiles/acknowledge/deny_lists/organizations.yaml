@@ -1,0 +1,32 @@
+# Fournisseurs fictifs (donnees Apache 2.0)
+# Pour vos vrais fournisseurs : voir profiles_private/
+
+organizations:
+  - "Globex Inc."
+  - "Globex Industries"
+  - "GLOBEX"
+
+  - "Initech"
+  - "Initech S.A.S."
+
+  - "Vandelay Industries"
+  - "Vandelay"
+
+  - "Soylent Corp"
+  - "Soylent Corporation"
+
+  - "Cyberdyne Systems"
+  - "Cyberdyne"
+
+  - "InGen"
+  - "InGen Corp."
+
+  - "Tyrell Corporation"
+  - "Tyrell Corp"
+
+supplier_domains:
+  - "globex.example"
+  - "initech.example"
+  - "vandelay.example"
+  - "soylent.example"
+  - "cyberdyne.example"
