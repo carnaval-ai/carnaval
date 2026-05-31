@@ -8,14 +8,15 @@
 
 > *The art of masking: concealing identity, preserving the essentials.*
 
-**carnaval** is a **reversible** Python anonymization framework for text documents. It masks sensitive entities (people, organizations, emails, phone numbers, bank identifiers...) before sending them to a cloud LLM, and allows restoring the original values in the structured response (JSON or XML).
+**carnaval** is a **reversible** Python framework for text-document anonymization. It masks sensitive entities (people, organizations, emails, phone numbers, bank identifiers, etc.) before sending them to a cloud LLM, and restores the original values in the structured response (JSON or XML) on the way back.
 
-## Status: Functional POC
+## Status: Stable (Beta) — v0.2.0
 
 - License: **Apache 2.0**
-- Stack: Python 3.13, GLiNER (zero-shot NER), regex, AES-256-GCM
+- Stack: Python 3.11 / 3.12 / 3.13, GLiNER (zero-shot NER), regex, AES-256-GCM
 - **No external PII framework** (no Presidio, no spaCy NER)
-- 179 tests passed, 95% coverage
+- 184 tests passing, ~95% coverage, mypy-checked, CI on every push
+- Used internally in production at one enterprise (anonymization of supplier acknowledgments before LLM extraction). Public API may evolve until v1.0.
 
 ## Quick Start
 

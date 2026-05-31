@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 ## [0.1.0] - 2026-05-30
 
 ### Added
-- Initial version (functional POC).
+- Initial version (internal pre-release, not published).
 - 7-stage architecture for anonymization and reinjection.
 - Support for masking sensitive entities (people, organizations, emails, phone numbers, bank identifiers, etc.).
 - Integration of GLiNER model (zero-shot NER) and regex/list-based recognizers.
