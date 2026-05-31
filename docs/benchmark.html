@@ -661,11 +661,11 @@
                         </tr>
                         <tr>
                             <td><strong>Memory Footprint</strong></td>
-                            <td class="col-carnaval"><span class="status-pro">✓ Low (Offline / <100MB)</span></td>
-                            <td><span class="status-con">✗ Medium (Requires heavy models)</span></td>
-                            <td><span class="status-neutral">Medium</span></td>
-                            <td><span class="status-con">✗ High (Heavy Local or Cloud)</span></td>
-                            <td class="status-pro">✓ Very Low</td>
+                            <td class="col-carnaval"><span class="status-neutral">Medium (~1.5GB with GLiNER, <100MB without)</span></td>
+                            <td><span class="status-neutral">Medium (with standard model)</span></td>
+                            <td><span class="status-neutral">Low to Medium</span></td>
+                            <td><span class="status-con">✗ High (Local model) / None (Cloud)</span></td>
+                            <td class="status-pro">✓ Very Low (<20MB)</td>
                         </tr>
                         <tr>
                             <td><strong>Operational Costs</strong></td>
@@ -755,31 +755,31 @@
         const data = {
             reversibility: {
                 carnaval: 100, // 0 effort (native)
-                presidio: 20,  // custom DB implementation
-                spacy: 10,     // manual mapper code
-                llm: 35,       // prompt-based map back (unreliable)
+                presidio: 30,  // custom DB implementation
+                spacy: 15,     // manual mapper code
+                llm: 45,       // prompt-based map back (unreliable)
                 scrubadub: 5   // impossible
             },
             latency: {
-                carnaval: 85,  // <0.5s without AI, ~3s with GLiNER
-                presidio: 70,  // ~1-3s due to SpaCy pipelines
-                spacy: 80,     // Fast but limited
-                llm: 5,        // Extremely slow (>5s network overhead)
-                scrubadub: 95  // Instant (regex only)
+                carnaval: 60,  // ~3s with GLiNER
+                presidio: 80,  // ~1.5s average (SpaCy)
+                spacy: 90,     // <0.5s average
+                llm: 10,       // Extremely slow (>5s network overhead)
+                scrubadub: 98  // Instant (regex only)
             },
             infrastructure: {
-                carnaval: 100, // Stateless local files (AES GCM)
-                presidio: 40,  // Stateful workers
-                spacy: 50,     // Stateful
-                llm: 10,       // Requires cloud connections / API keys
-                scrubadub: 100 // Stateless
+                carnaval: 65,  // Stateless but requires PyTorch/model memory (~1.5GB RAM)
+                presidio: 55,  // Stateful (Needs Redis/DB for reversibility)
+                spacy: 70,     // Requires custom storage
+                llm: 20,       // Cloud dependency
+                scrubadub: 98  // Extremely lightweight (<15MB RAM)
             },
             precision: {
-                carnaval: 90,  // GLiNER + 12 localized regexes
-                presidio: 75,  // Regex + basic SpaCy
-                spacy: 60,     // Low without custom training
-                llm: 95,       // Very high (but hallucination risk)
-                scrubadub: 50  // Basic regex only
+                carnaval: 78,  // High on B2B / custom fields
+                presidio: 85,  // Excellent for generic PII
+                spacy: 55,     // Requires manual fine-tuning
+                llm: 92,       // Very high (General PII)
+                scrubadub: 45  // Basic regex rules
             }
         };
 
@@ -792,25 +792,25 @@
                 scrubadub: "Not supported"
             },
             latency: {
-                carnaval: "< 1s (regex-mode)",
-                presidio: "~2.5s average",
-                spacy: "~1.5s average",
+                carnaval: "~3s (GLiNER active)",
+                presidio: "~1.5s average (SpaCy)",
+                spacy: "< 0.5s average",
                 llm: "> 5.0s (network cost)",
-                scrubadub: "< 0.1s (regex-only)"
+                scrubadub: "< 0.05s (regex-only)"
             },
             infrastructure: {
-                carnaval: "Stateless (Local)",
-                presidio: "Stateful (Needs DB/Redis)",
-                spacy: "Manual storage state",
+                carnaval: "Stateless (~1.5GB RAM)",
+                presidio: "Stateful (Needs Redis/DB)",
+                spacy: "Requires custom storage",
                 llm: "Cloud-dependent API",
-                scrubadub: "Stateless (Local)"
+                scrubadub: "Lightweight (<15MB RAM)"
             },
             precision: {
-                carnaval: "GLiNER + local checks",
-                presidio: "Basic Presidio NER",
-                spacy: "Requires fine-tuning",
-                llm: "High (Non-deterministic)",
-                scrubadub: "Basic Regex matches"
+                carnaval: "High on B2B / custom fields",
+                presidio: "Excellent for generic PII",
+                spacy: "Requires manual fine-tuning",
+                llm: "Very high (General PII)",
+                scrubadub: "Basic regex rules"
             }
         };
 
