@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "carnaval"
-version = "0.2.0"
+version = "0.2.1"
 description = "Reversible PII anonymization framework for LLM data pipelines"
 readme = "README.md"
 authors = [

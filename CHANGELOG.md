@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.2.1] - 2026-05-31
+
+### Added
+- New interactive benchmark page `docs/benchmark.html` comparing Carnaval to other frameworks (Presidio, etc.) with an objective Reviewer's Verdict section.
+
+### Fixed
+- `docs/benchmark.html`: JS `ReferenceError` on page load (decoupled button activation from the global event object).
+- `docs/benchmark.html`: layout — widened right column for long text labels.
+
+### Notes
+- Patch release. No change to the runtime API or core anonymization logic; docs/website only.
+
 ## [0.2.0] - 2026-05-31
 
 ### Added
