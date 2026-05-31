@@ -1269,9 +1269,9 @@ print(restored_json)
             </div>
 
             <div class="template-selector">
-                <button class="btn-template active" onclick="loadTemplate('ack')">Globex Order Acknowledgment</button>
-                <button class="btn-template" onclick="loadTemplate('email')">Vandelay B2B Email</button>
-                <button class="btn-template" onclick="loadTemplate('invoice')">Initech Invoice</button>
+                <button class="btn-template active" onclick="loadTemplate('ack', this)">Globex Order Acknowledgment</button>
+                <button class="btn-template" onclick="loadTemplate('email', this)">Vandelay B2B Email</button>
+                <button class="btn-template" onclick="loadTemplate('invoice', this)">Initech Invoice</button>
             </div>
 
             <div class="playground-grid">
@@ -1335,9 +1335,9 @@ print(restored_json)
                 title: "Globex Order Acknowledgment",
                 raw: `# Fichier source: Globex_acknowledgment_2024_001.pdf\nGlobex Inc. au capital de 50000 EUR - RCS Paris B 123456789 - SIRET 12345678900012\nBureau : 42 Main Street\n75001 PARIS\nTel : 01.23.45.67.89 - Fax : 01.23.45.67.90\nWeb : www.globex.example Email : sales@globex.example\n\nAdresse de facturation : Adresse de livraison:\nAcme Corp Acme Corp\n1 Avenue de la Liberte ZAC INDUSTRIELLE NORD\n75002 PARIS 75003 PARIS\nA l'attention de M. ANDERSON Alice\n\nVotre commande : ACM/4700001234 Le 12/03/2024 14:30:00\nNumero AR : AR-2024-001\nSuivi par : Alice Anderson - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - Globex Inc. - Ref M254C00021 - 10.76 EUR - Delai 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - Verin a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\nTotal TTC : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : FR99123456789\nIBAN : FR763000600001234567890141\nBIC : AAAAFR2XXXX\n\nEn vous remerciant de votre confiance.\nCordialement,\nAlice Anderson`,
                 
-                masked: `# Fichier source: <span class="placeholder-badge provider">[FOURNISSEUR_1]</span>[ADRESSE_1]\n<span class="placeholder-badge provider">[FOURNISSEUR_2]</span> au capital de [CAPITAL_1] EUR - RCS [ADRESSE_2] [NATID_1] - SIRET [SIRET_1]\nBureau : 42 Main Street\n[ADRESSE_3][ADRESSE_4]\nTel : [PHONE_1] - Fax : [PHONE_2]\nWeb : www.<span class="placeholder-badge provider">[FOURNISSEUR_3]</span>[URL_1] Email : [EMAIL_1]\n\nAdresse de facturation : Adresse de livraison:\n[CLIENT_NAME][FOURNISSEUR_4][CLIENT_NAME]\n1 Avenue de la [CONTACT_1] INDUSTRIELLE NORD\n[ADRESSE_5][ADRESSE_4] [ADRESSE_6][ADRESSE_4] l'attention de M. ANDERSON [CONTACT_2]\n\nVotre commande : <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> Le 12/03/2024 14:30:00\nNumero AR : [REF_1]\nSuivi par : [CONTACT_3] - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - <span class="placeholder-badge provider">[FOURNISSEUR_2]</span> - Ref M254C00021 - 10.76 [FOURNISSEUR_5] 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - [ADRESSE_7] a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\n[CONTACT_4] : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : [VAT_1]\nIBAN : [IBAN_1]\nBIC : [BIC_1]\n\nEn vous remerciant de [CONTACT_5] confiance.\nCordialement,\n[CONTACT_3][FOURNISSEUR_6][FOURNISSEUR_2]`,
+                masked: `# Fichier source: <span class="placeholder-badge provider">[FOURNISSEUR_1]</span>[ADRESSE_1]\n<span class="placeholder-badge provider">[FOURNISSEUR_2]</span> au capital de [CAPITAL_1] EUR - RCS [ADRESSE_2] [NATID_1] - SIRET [SIRET_1]\nBureau : <span class="placeholder-badge address">[ADRESSE_2]</span>\n[ADRESSE_3][ADRESSE_4]\nTel : [PHONE_1] - Fax : [PHONE_2]\nWeb : www.<span class="placeholder-badge provider">[FOURNISSEUR_3]</span>[URL_1] Email : [EMAIL_1]\n\nAdresse de facturation : Adresse de livraison:\n[CLIENT_NAME][FOURNISSEUR_4][CLIENT_NAME]\n1 Avenue de la [CONTACT_1] INDUSTRIELLE NORD\n[ADRESSE_5][ADRESSE_4] [ADRESSE_6][ADRESSE_4] l'attention de M. <span class="placeholder-badge contact">[CONTACT_4]</span> [CONTACT_2]\n\nVotre commande : <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> Le 12/03/2024 14:30:00\nNumero AR : [REF_1]\nSuivi par : [CONTACT_3] - Enregistrement : <span class="placeholder-badge reference">[REF_REG_1]</span>\n\nArticles :\n1 | 10 | <span class="placeholder-badge reference">[REF_PROD_1]</span> - <span class="placeholder-badge provider">[FOURNISSEUR_2]</span> - Ref <span class="placeholder-badge reference">[REF_ARTICLE_1]</span> - 10.76 [FOURNISSEUR_5] 05/04/2024\n2 | 5 | <span class="placeholder-badge reference">[REF_PROD_2]</span> - [ADRESSE_7] a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\n[CONTACT_4] : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : [VAT_1]\nIBAN : [IBAN_1]\nBIC : [BIC_1]\n\nEn vous remerciant de [CONTACT_5] confiance.\nCordialement,\n[CONTACT_3][FOURNISSEUR_6][FOURNISSEUR_2]`,
                 
-                vault: `{\n  "vault_id": "vlt_892d1a3c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[FOURNISSEUR_2]": "Globex Inc.",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[REF_COMMANDE_CLIENT_1]": "ACM/4700001234",\n    "[CONTACT_3]": "Alice Anderson",\n    "[IBAN_1]": "FR763000600001234567890141",\n    "[VAT_1]": "FR99123456789",\n    "[EMAIL_1]": "sales@globex.example"\n  }\n}`,
+                vault: `{\n  "vault_id": "vlt_892d1a3c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[FOURNISSEUR_2]": "Globex Inc.",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[CONTACT_4]": "Anderson",\n    "[CONTACT_3]": "Alice Anderson",\n    "[ADRESSE_2]": "42 Main Street",\n    "[REF_ARTICLE_1]": "M254C00021",\n    "[REF_PROD_1]": "RKMCK3",\n    "[REF_PROD_2]": "KHZ-DA-032-0050-M",\n    "[REF_COMMANDE_CLIENT_1]": "ACM/4700001234",\n    "[IBAN_1]": "FR763000600001234567890141",\n    "[VAT_1]": "FR99123456789",\n    "[EMAIL_1]": "sales@globex.example"\n  }\n}`,
                 
                 llm: `{\n  "vendor": "<span class="placeholder-badge provider">[FOURNISSEUR_2]</span>",\n  "client": "[CLIENT_NAME]",\n  "order_id": "<span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span>",\n  "total_ht": 187.10,\n  "items_count": 2\n}`,
                 
@@ -1371,12 +1371,14 @@ print(restored_json)
 
         let currentActiveTemplate = 'ack';
         
-        function loadTemplate(key) {
+        function loadTemplate(key, btn) {
             currentActiveTemplate = key;
             
             // Manage active buttons class
-            document.querySelectorAll('.btn-template').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if (btn) {
+                document.querySelectorAll('.btn-template').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
             
             resetPlayground();
         }
