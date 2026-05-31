@@ -195,11 +195,33 @@
             box-shadow: 0 4px 12px var(--accent-blue-glow);
         }
 
-        /* Hero Section */
         .hero {
             padding: 6.5rem 0 4.5rem 0;
             text-align: center;
             position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('mask_bg.jpg');
+            background-position: center 35%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+            pointer-events: none;
+            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 75%);
+            mask-image: radial-gradient(circle, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 75%);
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
