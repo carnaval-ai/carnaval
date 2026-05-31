@@ -557,10 +557,10 @@
                     <p>Select a metric below to visualize the benchmark results.</p>
                 </div>
                 <div class="chart-selectors">
-                    <button class="selector-btn active" onclick="setMetric('reversibility')">Reversibility Effort</button>
-                    <button class="selector-btn" onclick="setMetric('latency')">Latency (Speed)</button>
-                    <button class="selector-btn" onclick="setMetric('infrastructure')">Infra Footprint</button>
-                    <button class="selector-btn" onclick="setMetric('precision')">Out-of-the-Box Precision</button>
+                    <button class="selector-btn active" onclick="setMetric('reversibility', this)">Reversibility Effort</button>
+                    <button class="selector-btn" onclick="setMetric('latency', this)">Latency (Speed)</button>
+                    <button class="selector-btn" onclick="setMetric('infrastructure', this)">Infra Footprint</button>
+                    <button class="selector-btn" onclick="setMetric('precision', this)">Out-of-the-Box Precision</button>
                 </div>
             </div>
 
@@ -814,12 +814,14 @@
             }
         };
 
-        function setMetric(metric) {
-            // Update active selector button
-            document.querySelectorAll('.selector-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+        function setMetric(metric, btn) {
+            // Update active selector button if provided
+            if (btn) {
+                document.querySelectorAll('.selector-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+            }
 
             // Animate bars
             document.getElementById('bar-carnaval').style.width = data[metric].carnaval + '%';
