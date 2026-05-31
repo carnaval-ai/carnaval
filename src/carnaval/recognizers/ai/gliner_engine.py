@@ -56,7 +56,7 @@ def _load_model(model_name: str = DEFAULT_MODEL):
     global _MODEL
     if _MODEL is None:
         try:
-            from gliner import GLiNER  # type: ignore
+            from gliner import GLiNER
         except ImportError as e:
             raise ImportError(
                 "Le package 'gliner' n'est pas installe. " "Lance : pip install gliner"

@@ -85,7 +85,9 @@ class TestReinjectXml:
         xml = "<root><contact>[PERSON_1]</contact></root>"
         out = reinject_xml_string(xml, vault_filled)
         root = ET.fromstring(out)
-        assert root.find("contact").text == "Alice"
+        contact = root.find("contact")
+        assert contact is not None
+        assert contact.text == "Alice"
 
     def test_attribute(self, vault_filled):
         xml = '<root supplier="[ORG_1]"/>'
@@ -104,9 +106,15 @@ class TestReinjectXml:
         out = reinject_xml_string(xml, vault_filled)
         root = ET.fromstring(out)
         assert root.attrib["vat"] == "FR99123456789"
-        assert root.find("contact").text == "Alice"
-        assert root.find("supplier").text == "Globex Inc."
-        assert root.find("amount").text == "1200"
+        contact = root.find("contact")
+        supplier = root.find("supplier")
+        amount = root.find("amount")
+        assert contact is not None
+        assert supplier is not None
+        assert amount is not None
+        assert contact.text == "Alice"
+        assert supplier.text == "Globex Inc."
+        assert amount.text == "1200"
 
     def test_unknown_placeholder_preserved(self, vault_filled):
         xml = "<root>[UNKNOWN_42]</root>"
