@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "carnaval"
+version = "0.2.0"
+description = "Reversible PII anonymization framework for LLM data pipelines"
+readme = "README.md"
+authors = [
+    { name = "Patrice AUBERT", email = "carnaval.oss@gmail.com" }
+]
+license = { text = "Apache-2.0" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pycryptodome>=3.20",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0",
+    "structlog>=24.1",
+    "lingua-language-detector>=2.0",
+    "gliner>=0.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/carnaval-ai/carnaval"
+Repository = "https://github.com/carnaval-ai/carnaval"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+markers = [
+    "slow: slow tests (model downloads, real AI inference)"
+]
+
+[tool.mypy]
+mypy_path = "src"
+check_untyped_defs = true
+ignore_missing_imports = true
+show_error_codes = true
+warn_unused_ignores = true
+warn_redundant_casts = true
