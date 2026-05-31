@@ -27,6 +27,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install mypy types-PyYAML
+
+    - name: Run static type checks (mypy)
+      run: |
+        mypy src tests anonymize.py reinject.py
 
     - name: Run tests with coverage
       env:

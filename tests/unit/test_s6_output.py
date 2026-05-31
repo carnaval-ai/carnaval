@@ -68,6 +68,7 @@ class TestSerializers:
         root = ET.fromstring(out)
         assert root.tag == "carnavalResult"
         entities = root.find("entities")
+        assert entities is not None
         assert len(entities) == 2
 
     def test_conll(self):
