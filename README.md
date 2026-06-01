@@ -7,6 +7,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![PyPI Version](https://img.shields.io/pypi/v/carnaval.svg)](https://pypi.org/project/carnaval/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/carnaval.svg)](https://pypi.org/project/carnaval/)
+[![CodeQL Analysis](https://github.com/carnaval-ai/carnaval/actions/workflows/codeql.yml/badge.svg)](https://github.com/carnaval-ai/carnaval/actions/workflows/codeql.yml)
 
 > *The art of masking: concealing identity, preserving the essentials.*
 
