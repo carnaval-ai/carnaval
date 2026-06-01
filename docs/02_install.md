@@ -11,14 +11,26 @@
 
 ## Installation
 
-### 1. Clone or retrieve the code
+### Method A: Standard Installation (from PyPI)
+
+If you only want to use `carnaval` as a dependency in your project, install it directly from PyPI:
+
+```bash
+pip install carnaval
+```
+
+### Method B: Local Source & Development Installation
+
+If you want to run tests, contribute, or build/test packaging distributions locally:
+
+#### 1. Clone or retrieve the code
 
 ```bash
 git clone <url>
 cd carnaval
 ```
 
-### 2. Create a virtual environment
+#### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -30,11 +42,31 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+#### 3. Install in editable development mode
 
 ```bash
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install -e .
+```
+
+#### 4. Building and Testing the Distributable Wheels (Optional)
+
+To verify the packaging build structure locally (ensuring all static data directories and compiled modules are correctly bundled):
+
+```bash
+# Install the build tool
+pip install build
+
+# Build the source distribution (tar.gz) and wheel (.whl)
+python -m build
+
+# Create a clean temporary environment to test the wheel
+python -m venv test_env
+.\test_env\Scripts\Activate.ps1   # Windows
+# or: source test_env/bin/activate # Linux/macOS
+
+# Install the locally built wheel
+pip install dist/carnaval-*.whl
 ```
 
 Installed dependencies:
