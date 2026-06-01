@@ -5,6 +5,8 @@
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue.svg)](http://mypy-lang.org/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PyPI Version](https://img.shields.io/pypi/v/carnaval.svg)](https://pypi.org/project/carnaval/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/carnaval.svg)](https://pypi.org/project/carnaval/)
 
 > *The art of masking: concealing identity, preserving the essentials.*
 
@@ -116,6 +118,18 @@ pytest -m slow                  # real AI tests (downloads GLiNER ~500 MB)
 pytest --cov=src/carnaval       # coverage
 ```
 
+## Examples
+
+You can find programmatic library usage examples in the [examples/](examples/) directory:
+* [examples/quickstart_api.py](examples/quickstart_api.py): A simple, commented python script that walks through using the library programmatically to anonymize data and reinject original values back into simulated LLM output.
+
 ## Contributing
 
-Apache 2.0. Issues and PRs welcome. No personal or client data in public fixtures: use only fictitious entities (Acme Corp, Globex, Initech, etc.).
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before getting started.
+
+* **Issues and PRs**: Welcome! Please ensure no personal or client data is included in public fixtures (use fictitious entities like Acme Corp, Globex, Initech, etc.).
+* **Security Policy**: For reporting security vulnerabilities, please check [SECURITY.md](SECURITY.md) to report responsibly via email.
+
+## License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
