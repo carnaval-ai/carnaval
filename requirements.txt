@@ -7,6 +7,7 @@ PyYAML>=6.0                # YAML config
 python-dotenv>=1.0         # .env loader
 structlog>=24.1            # logs structures
 lingua-language-detector>=2.0  # detection langue (remplace fasttext)
+pymupdf>=1.24.0            # PDF extraction
 
 # AI (Phase 2)
 gliner>=0.2                # NER PII zero-shot
