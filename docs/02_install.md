@@ -67,6 +67,18 @@ python -m venv test_env
 
 # Install the locally built wheel
 pip install dist/carnaval-*.whl
+
+# Copy the quickstart example script into the test environment folder
+# Windows:
+copy examples\quickstart_api.py test_env\
+# Linux/macOS:
+cp examples/quickstart_api.py test_env/
+
+# Change directory to the test environment
+cd test_env
+
+# Run the script to verify the installed wheel works perfectly
+python quickstart_api.py
 ```
 
 Installed dependencies:
