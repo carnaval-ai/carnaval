@@ -13,7 +13,7 @@ text documents containing personal or confidential data:
 emails, IBANs, addresses) that must not be sent in clear to
 an external service.
 
-**Carnaval solution**:
+**carnaval solution**:
 
 ```
 RAW DOCUMENT --> [carnaval] --> TAGGED DOCUMENT --> cloud LLM

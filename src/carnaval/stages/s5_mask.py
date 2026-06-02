@@ -73,12 +73,12 @@ DEFAULT_PLACEHOLDER_PREFIX = {
     # Companies: distinction between client (the recipient company of
     # the AR) vs supplier (the sender).
     "ORG_SINGLETON": "CLIENT_NAME",       # singleton = the deploying customer
-    "ORGANIZATION": "FOURNISSEUR",        # other ORGs = suppliers
+    "ORGANIZATION": "SUPPLIER",        # other ORGs = suppliers
     # People: contacts (sales reps, buyers, signees...)
     "PERSON": "CONTACT",
     # Addresses
-    "LOCATION": "ADRESSE",
-    "ADDRESS": "ADRESSE",
+    "LOCATION": "ADDRESS",
+    "ADDRESS": "ADDRESS",
     # Coordinates (technical identifiers, kept distinct for downstream AI clarity)
     "EMAIL": "EMAIL",
     "PHONE": "PHONE",
@@ -97,9 +97,9 @@ DEFAULT_PLACEHOLDER_PREFIX = {
     "DATE_OF_BIRTH": "DOB",
     "NRP": "NRP",
     # Commercial references client-side
-    "ORDER_REF": "REF_COMMANDE_CLIENT",
-    "CLIENT_CODE": "CODE_CLIENT",
-    "AFFAIR_NUMBER": "REF_AFFAIRE_CLIENT",
+    "ORDER_REF": "CLIENT_ORDER_REF",
+    "CLIENT_CODE": "CLIENT_CODE",
+    "AFFAIR_NUMBER": "CLIENT_AFFAIR_REF",
     # Internal / technical references
     "INTERNAL_REF": "REF",
     "TRACKING": "TRACKING",

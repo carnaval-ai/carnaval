@@ -41,7 +41,7 @@ class TestMaskBasic:
         vault = Vault(password=VALID_PWD)
         out = mask(_resolved(text, spans), vault)
         assert "[CONTACT_1]" in out.anonymized_text
-        assert "[FOURNISSEUR_1]" in out.anonymized_text
+        assert "[SUPPLIER_1]" in out.anonymized_text
         assert "Alice" not in out.anonymized_text
         assert "Globex" not in out.anonymized_text
 

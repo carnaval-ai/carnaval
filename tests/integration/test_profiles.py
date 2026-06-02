@@ -45,7 +45,7 @@ class TestAcknowledgeProfile:
         # Reference produit preservee
         assert "KHZ-DA-032-0050-M" in masked.anonymized_text
         # Numero de commande masque par placeholder semantique v7
-        assert "[REF_COMMANDE_CLIENT_1]" in masked.anonymized_text
+        assert "[CLIENT_ORDER_REF_1]" in masked.anonymized_text
 
 
 class TestInvoiceProfile:

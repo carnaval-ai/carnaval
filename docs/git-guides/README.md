@@ -1,12 +1,12 @@
-# Documentation du Projet Carnaval et Procédures Git / Push
+# Documentation du Projet carnaval et Procédures Git / Push
 
-Ce document présente l'architecture du projet Carnaval et les méthodes pour valider les modifications et les pousser proprement vers le dépôt distant, y compris les cas exceptionnels de désinfection d'historique.
+Ce document présente l'architecture du projet carnaval et les méthodes pour valider les modifications et les pousser proprement vers le dépôt distant, y compris les cas exceptionnels de désinfection d'historique.
 
 ---
 
-## 1. Présentation du Projet Carnaval
+## 1. Présentation du Projet carnaval
 
-**Carnaval** est une bibliothèque Python professionnelle conçue pour détecter, masquer (anonymiser) et réinjecter les données personnelles (PII - Personally Identifiable Information) dans des documents textuels, JSON, XML ou HTML.
+**carnaval** est une bibliothèque Python professionnelle conçue pour détecter, masquer (anonymiser) et réinjecter les données personnelles (PII - Personally Identifiable Information) dans des documents textuels, JSON, XML ou HTML.
 
 ### Architecture Principale
 - `src/carnaval/core` : Logique centrale (gestion des `Span` de texte, du coffre-fort chiffré `Vault` et du pipeline d'anonymisation).

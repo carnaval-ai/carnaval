@@ -269,7 +269,7 @@ Hacks documentes : 0 (vs 7 dans la version Presidio)
 
 ### Statut global
 
-**Carnaval V1 livre complet.** Pipeline en 7 etages, 3 profils metier, 11
+**carnaval V1 livre complet.** Pipeline en 7 etages, 3 profils metier, 11
 documents, 6 formats de sortie simultanes, vault AES-256-GCM reversible,
 zero dependance Presidio/spaCy.
 

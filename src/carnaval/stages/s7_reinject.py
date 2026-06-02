@@ -26,10 +26,10 @@ from carnaval.core.vault import Vault
 # Pattern that matches any placeholder produced by S5:
 #   [PERSON_1], [EMAIL_42], [ORG], [VAT_3], etc.
 # H3 v7: also accepts alphanumeric suffixes (opaque hashes
-# `_89d6`, `_703a`) and compound prefixes (REF_COMMANDE_CLIENT,
-# CLIENT_NAME, FOURNISSEUR). Major v7 bug fixed: without this update,
+# `_89d6`, `_703a`) and compound prefixes (CLIENT_ORDER_REF,
+# CLIENT_NAME, SUPPLIER). Major v7 bug fixed: without this update,
 # NO opaque placeholder was reinjected by the vault
-# - the final business JSON contained [REF_COMMANDE_CLIENT_89d6]
+# - the final business JSON contained [CLIENT_ORDER_REF_89d6]
 # instead of the PO reinjected from the encrypted vault.
 PLACEHOLDER_PATTERN = re.compile(r"\[([A-Z][A-Z_]*(?:_[A-Za-z0-9]+)?)\]")
 

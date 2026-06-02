@@ -1,12 +1,12 @@
 # Multilingual Test Fixtures - Acknowledgment Profile
 
 This directory contains fictional Acknowledgment of Order documents in
-8 languages, designed to test Carnaval's recognizers without using any
+8 languages, designed to test carnaval's recognizers without using any
 real customer or supplier data.
 
 ## Licence
 
-All fixtures are released under **Apache License 2.0** (same as Carnaval).
+All fixtures are released under **Apache License 2.0** (same as carnaval).
 You may freely copy, modify, and redistribute them.
 
 ## Fictional companies used

@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
  - OS: [e.g. iOS, Windows, Linux]
  - Python Version: [e.g. 3.13]
- - Carnaval Version: [e.g. 0.2.0]
+ - carnaval Version: [e.g. 0.2.0]
 
 **Additional context**
 Add any other context about the problem here.

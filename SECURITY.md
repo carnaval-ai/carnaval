@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Only the latest stable release of Carnaval is actively supported for security updates:
+Only the latest stable release of carnaval is actively supported for security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |

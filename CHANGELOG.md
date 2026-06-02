@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 ## [0.2.1] - 2026-05-31
 
 ### Added
-- New interactive benchmark page `docs/benchmark.html` comparing Carnaval to other frameworks (Presidio, etc.) with an objective Reviewer's Verdict section.
+- New interactive benchmark page `docs/benchmark.html` comparing carnaval to other frameworks (Presidio, etc.) with an objective Reviewer's Verdict section.
 
 ### Fixed
 - `docs/benchmark.html`: JS `ReferenceError` on page load (decoupled button activation from the global event object).

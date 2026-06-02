@@ -814,7 +814,7 @@
     <!-- The 7-Stage Pipeline Section -->
     <section id="pipeline" class="container">
         <h2 class="section-title">The 7-Stage <span>Anonymization Pipeline</span></h2>
-        <p class="section-desc">Carnaval divides its operation into independent, auditability-focused modules ensuring robust detection, arbitration, and secure data substitution.</p>
+        <p class="section-desc">carnaval divides its operation into independent, auditability-focused modules ensuring robust detection, arbitration, and secure data substitution.</p>
 
         <div class="pipeline-flow">
             <!-- Stage 1 -->
@@ -854,7 +854,7 @@
                 <div class="stage-num">05</div>
                 <div class="stage-badge">Encrypt</div>
                 <h3 class="stage-title">S5. Mask</h3>
-                <p class="stage-desc">Substitutes raw text values with semantic placeholders (e.g. <code>[FOURNISSEUR_1]</code>, <code>[CLIENT_NAME]</code>). Writes sensitive maps into a local vault encrypted via <strong>AES-256-GCM</strong>.</p>
+                <p class="stage-desc">Substitutes raw text values with semantic placeholders (e.g. <code>[SUPPLIER_1]</code>, <code>[CLIENT_NAME]</code>). Writes sensitive maps into a local vault encrypted via <strong>AES-256-GCM</strong>.</p>
             </div>
 
             <!-- Stage 6 -->
@@ -907,7 +907,7 @@
     <!-- Code showcase / Quick Start Section -->
     <section id="code" class="container">
         <h2 class="section-title">Developer <span>API & CLI Quick Start</span></h2>
-        <p class="section-desc">Get up and running with Carnaval in a matter of seconds. Standard Python usage follows familiar patterns designed for modern workflows.</p>
+        <p class="section-desc">Get up and running with carnaval in a matter of seconds. Standard Python usage follows familiar patterns designed for modern workflows.</p>
 
         <div class="code-showcase">
             <div class="code-header">
@@ -930,13 +930,13 @@ masked_doc, vault, metadata = <span class="hl-fn">run_anonymization</span>(
     use_gliner=<span class="hl-keyword">False</span>
 )
 <span class="hl-fn">print</span>(masked_doc.anonymized_text)
-<span class="hl-comment"># Output: "Billing to [CLIENT_NAME] from [FOURNISSEUR_1]... Order: [REF_COMMANDE_CLIENT_1]"</span>
+<span class="hl-comment"># Output: "Billing to [CLIENT_NAME] from [SUPPLIER_1]... Order: [CLIENT_ORDER_REF_1]"</span>
 
 <span class="hl-comment"># 2. Safely process the masked document in the cloud via any LLM</span>
 llm_response_json = {
-    <span class="hl-string">"provider"</span>: <span class="hl-string">"[FOURNISSEUR_1]"</span>,
+    <span class="hl-string">"provider"</span>: <span class="hl-string">"[SUPPLIER_1]"</span>,
     <span class="hl-string">"client"</span>: <span class="hl-string">"[CLIENT_NAME]"</span>,
-    <span class="hl-string">"order_reference"</span>: <span class="hl-string">"[REF_COMMANDE_CLIENT_1]"</span>,
+    <span class="hl-string">"order_reference"</span>: <span class="hl-string">"[CLIENT_ORDER_REF_1]"</span>,
     <span class="hl-string">"total_ht"</span>: <span class="hl-number">3000.0</span>
 }
 
@@ -954,14 +954,14 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
     <footer>
         <div class="container">
             <a href="#" class="footer-logo">carnaval</a>
-            <p class="footer-desc">A professional Python ecosystem for reversible anonymization and PII vault management.</p>
+            <p class="footer-desc">A lightweight Python library for reversible anonymization and PII vault management.</p>
             <div class="footer-links">
                 <a href="#playground">Simulator</a>
                 <a href="#pipeline">Architecture</a>
                 <a href="../documentation.html">Docs</a>
                 <a href="../../CONTRIBUTING.md">Contributing</a>
             </div>
-            <p class="footer-copy">Licensed under the Apache License 2.0. Built for enterprise DX orchestration.</p>
+            <p class="footer-copy">Licensed under the Apache License 2.0. Built for enterprise DX anonymization.</p>
         </div>
     </footer>
 
@@ -972,11 +972,11 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
                 title: "Globex Order Acknowledgment",
                 raw: `# Fichier source: Globex_acknowledgment_2024_001.pdf\nGlobex Inc. au capital de 50000 EUR - RCS Paris B 123456789 - SIRET 12345678900012\nBureau : 42 Main Street\n75001 PARIS\nTel : 01.23.45.67.89 - Fax : 01.23.45.67.90\nWeb : www.globex.example Email : sales@globex.example\n\nAdresse de facturation : Adresse de livraison:\nAcme Corp Acme Corp\n1 Avenue de la Liberte ZAC INDUSTRIELLE NORD\n75002 PARIS 75003 PARIS\nA l'attention de M. ANDERSON Alice\n\nVotre commande : ACM/4700001234 Le 12/03/2024 14:30:00\nNumero AR : AR-2024-001\nSuivi par : Alice Anderson - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - Globex Inc. - Ref M254C00021 - 10.76 EUR - Delai 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - Verin a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\nTotal TTC : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : FR99123456789\nIBAN : FR763000600001234567890141\nBIC : AAAAFR2XXXX\n\nEn vous remerciant de votre confiance.\nCordialement,\nAlice Anderson`,
                 
-                masked: `# Fichier source: <span class="placeholder-badge provider">[FOURNISSEUR_1]</span>[ADRESSE_1]\n<span class="placeholder-badge provider">[FOURNISSEUR_2]</span> au capital de [CAPITAL_1] EUR - RCS [ADRESSE_2] [NATID_1] - SIRET [SIRET_1]\nBureau : 42 Main Street\n[ADRESSE_3][ADRESSE_4]\nTel : [PHONE_1] - Fax : [PHONE_2]\nWeb : www.<span class="placeholder-badge provider">[FOURNISSEUR_3]</span>[URL_1] Email : [EMAIL_1]\n\nAdresse de facturation : Adresse de livraison:\n[CLIENT_NAME][FOURNISSEUR_4][CLIENT_NAME]\n1 Avenue de la [CONTACT_1] INDUSTRIELLE NORD\n[ADRESSE_5][ADRESSE_4] [ADRESSE_6][ADRESSE_4] l'attention de M. ANDERSON [CONTACT_2]\n\nVotre commande : <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> Le 12/03/2024 14:30:00\nNumero AR : [REF_1]\nSuivi par : [CONTACT_3] - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - <span class="placeholder-badge provider">[FOURNISSEUR_2]</span> - Ref M254C00021 - 10.76 [FOURNISSEUR_5] 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - [ADRESSE_7] a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\n[CONTACT_4] : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : [VAT_1]\nIBAN : [IBAN_1]\nBIC : [BIC_1]\n\nEn vous remerciant de [CONTACT_5] confiance.\nCordialement,\n[CONTACT_3][FOURNISSEUR_6][FOURNISSEUR_2]`,
+                masked: `# Fichier source: <span class="placeholder-badge provider">[SUPPLIER_1]</span>[ADDRESS_1]\n<span class="placeholder-badge provider">[SUPPLIER_2]</span> au capital de [CAPITAL_1] EUR - RCS [ADDRESS_2] [NATID_1] - SIRET [SIRET_1]\nBureau : 42 Main Street\n[ADDRESS_3][ADDRESS_4]\nTel : [PHONE_1] - Fax : [PHONE_2]\nWeb : www.<span class="placeholder-badge provider">[SUPPLIER_3]</span>[URL_1] Email : [EMAIL_1]\n\nAdresse de facturation : Adresse de livraison:\n[CLIENT_NAME][SUPPLIER_4][CLIENT_NAME]\n1 Avenue de la [CONTACT_1] INDUSTRIELLE NORD\n[ADDRESS_5][ADDRESS_4] [ADDRESS_6][ADDRESS_4] l'attention de M. ANDERSON [CONTACT_2]\n\nVotre commande : <span class="placeholder-badge reference">[CLIENT_ORDER_REF_1]</span> Le 12/03/2024 14:30:00\nNumero AR : [REF_1]\nSuivi par : [CONTACT_3] - Enregistrement : 1245678\n\nArticles :\n1 | 10 | RKMCK3 - <span class="placeholder-badge provider">[SUPPLIER_2]</span> - Ref M254C00021 - 10.76 [SUPPLIER_5] 05/04/2024\n2 | 5 | KHZ-DA-032-0050-M - [ADDRESS_7] a course reduite - 79.50 EUR - Delai 12/04/2024\n\nTotal HT : 187.10 EUR\nTVA 20% : 37.42 EUR\n[CONTACT_4] : 224.52 EUR\n\nConditions de paiement : 30 jours fin de mois\nMode de reglement : Virement\nTVA intracom : [VAT_1]\nIBAN : [IBAN_1]\nBIC : [BIC_1]\n\nEn vous remerciant de [CONTACT_5] confiance.\nCordialement,\n[CONTACT_3][SUPPLIER_6][SUPPLIER_2]`,
                 
-                vault: `{\n  "vault_id": "vlt_892d1a3c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[FOURNISSEUR_2]": "Globex Inc.",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[REF_COMMANDE_CLIENT_1]": "ACM/4700001234",\n    "[CONTACT_3]": "Alice Anderson",\n    "[IBAN_1]": "FR763000600001234567890141",\n    "[VAT_1]": "FR99123456789",\n    "[EMAIL_1]": "sales@globex.example"\n  }\n}`,
+                vault: `{\n  "vault_id": "vlt_892d1a3c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[SUPPLIER_2]": "Globex Inc.",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[CLIENT_ORDER_REF_1]": "ACM/4700001234",\n    "[CONTACT_3]": "Alice Anderson",\n    "[IBAN_1]": "FR763000600001234567890141",\n    "[VAT_1]": "FR99123456789",\n    "[EMAIL_1]": "sales@globex.example"\n  }\n}`,
                 
-                llm: `{\n  "vendor": "<span class="placeholder-badge provider">[FOURNISSEUR_2]</span>",\n  "client": "[CLIENT_NAME]",\n  "order_id": "<span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span>",\n  "total_ht": 187.10,\n  "items_count": 2\n}`,
+                llm: `{\n  "vendor": "<span class="placeholder-badge provider">[SUPPLIER_2]</span>",\n  "client": "[CLIENT_NAME]",\n  "order_id": "<span class="placeholder-badge reference">[CLIENT_ORDER_REF_1]</span>",\n  "total_ht": 187.10,\n  "items_count": 2\n}`,
                 
                 reinjected: `{\n  "vendor": "Globex Inc.",\n  "client": "Acme Corp",\n  "order_id": "ACM/4700001234",\n  "total_ht": 187.10,\n  "items_count": 2\n}`
             },
@@ -984,11 +984,11 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
                 title: "Vandelay B2B Email",
                 raw: `De: David Davis <david.davis@vandelay.example>\nA: Carol Carter <carol.carter@acme.example>\nObjet: RE: Commande ACM/2024/0438 - confirmation expedition\n\nBonjour Carol,\n\nJe confirme l'expedition de votre commande ACM/2024/0438 ce jour.\n\nSuivi : depart de notre site 30 Rue de l'Industrie a Marseille (13002),\nlivraison prevue mercredi 17/04 sur votre site.\n\nReferences inclus :\n- KHZ-DA-032-0050-M : 10 pieces\n- RKMCK3 : 25 pieces\n\nPour toute question, je reste disponible :\nTel direct : 04.91.23.45.67\nMobile : 06.78.90.12.34\n\nCordialement,\nDavid Davis\nResponsable Commercial\nVandelay Industries\nwww.vandelay.example`,
                 
-                masked: `De: [CONTACT_1] &lt;[EMAIL_1]&gt;\nA: <span class="placeholder-badge contact">[CONTACT_4]</span> &lt;[EMAIL_2]&gt;\nObjet: RE: Commande <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> - confirmation expedition\n\nBonjour <span class="placeholder-badge contact">[CONTACT_4]</span>,\n\nJe confirme l'expedition de votre commande <span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span> ce jour.\n\nSuivi : depart de notre site [ADRESSE_1] ([REF_COMMANDE_CLIENT_2]),\nlivraison prevue mercredi 17/04 sur votre site.\n\nReferences inclus :\n- <span class="placeholder-badge reference">[REF_PROD_2]</span> : 10 pieces\n- <span class="placeholder-badge reference">[REF_PROD_1]</span> : 25 pieces\n\nPour toute question, je reste disponible :\nTel direct : [PHONE_1]\nMobile : [PHONE_2]\n\nCordialement,\n[CONTACT_1]\nResponsable [CONTACT_3]\n<span class="placeholder-badge provider">[FOURNISSEUR_1]</span>\n[URL_1]`,
+                masked: `De: [CONTACT_1] &lt;[EMAIL_1]&gt;\nA: <span class="placeholder-badge contact">[CONTACT_4]</span> &lt;[EMAIL_2]&gt;\nObjet: RE: Commande <span class="placeholder-badge reference">[CLIENT_ORDER_REF_1]</span> - confirmation expedition\n\nBonjour <span class="placeholder-badge contact">[CONTACT_4]</span>,\n\nJe confirme l'expedition de votre commande <span class="placeholder-badge reference">[CLIENT_ORDER_REF_1]</span> ce jour.\n\nSuivi : depart de notre site [ADDRESS_1] ([CLIENT_ORDER_REF_2]),\nlivraison prevue mercredi 17/04 sur votre site.\n\nReferences inclus :\n- <span class="placeholder-badge reference">[REF_PROD_2]</span> : 10 pieces\n- <span class="placeholder-badge reference">[REF_PROD_1]</span> : 25 pieces\n\nPour toute question, je reste disponible :\nTel direct : [PHONE_1]\nMobile : [PHONE_2]\n\nCordialement,\n[CONTACT_1]\nResponsable [CONTACT_3]\n<span class="placeholder-badge provider">[SUPPLIER_1]</span>\n[URL_1]`,
                 
-                vault: `{\n  "vault_id": "vlt_e0921a4f",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[CONTACT_1]": "David Davis",\n    "[CONTACT_4]": "Carol Carter",\n    "[EMAIL_1]": "david.davis@vandelay.example",\n    "[EMAIL_2]": "carol.carter@acme.example",\n    "[REF_PROD_1]": "RKMCK3",\n    "[REF_PROD_2]": "KHZ-DA-032-0050-M",\n    "[REF_COMMANDE_CLIENT_1]": "ACM/2024/0438",\n    "[FOURNISSEUR_1]": "Vandelay Industries",\n    "[PHONE_1]": "04.91.23.45.67",\n    "[PHONE_2]": "06.78.90.12.34"\n  }\n}`,
+                vault: `{\n  "vault_id": "vlt_e0921a4f",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[CONTACT_1]": "David Davis",\n    "[CONTACT_4]": "Carol Carter",\n    "[EMAIL_1]": "david.davis@vandelay.example",\n    "[EMAIL_2]": "carol.carter@acme.example",\n    "[REF_PROD_1]": "RKMCK3",\n    "[REF_PROD_2]": "KHZ-DA-032-0050-M",\n    "[CLIENT_ORDER_REF_1]": "ACM/2024/0438",\n    "[SUPPLIER_1]": "Vandelay Industries",\n    "[PHONE_1]": "04.91.23.45.67",\n    "[PHONE_2]": "06.78.90.12.34"\n  }\n}`,
                 
-                llm: `{\n  "sender_name": "[CONTACT_1]",\n  "sender_company": "<span class="placeholder-badge provider">[FOURNISSEUR_1]</span>",\n  "associated_order": "<span class="placeholder-badge reference">[REF_COMMANDE_CLIENT_1]</span>",\n  "is_shipping_confirmation": true\n}`,
+                llm: `{\n  "sender_name": "[CONTACT_1]",\n  "sender_company": "<span class="placeholder-badge provider">[SUPPLIER_1]</span>",\n  "associated_order": "<span class="placeholder-badge reference">[CLIENT_ORDER_REF_1]</span>",\n  "is_shipping_confirmation": true\n}`,
                 
                 reinjected: `{\n  "sender_name": "David Davis",\n  "sender_company": "Vandelay Industries",\n  "associated_order": "ACM/2024/0438",\n  "is_shipping_confirmation": true\n}`
             },
@@ -996,11 +996,11 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
                 title: "Initech Invoice",
                 raw: `INITECH CORP - INVOICE\nDate: 2024-05-15\nInvoice Ref: FAC-2024-0892\nClient: Acme Corp\n\nDescription of Services:\n- Development of Eureka multi-agent prototype: 3000,00 EUR\n\nPayment Details:\nIBAN: FR1420041010050500013M02606\nBIC: INITHFRPXXX\n\nThank you for doing business with Initech!\nFor support, email billing@initech.example`,
                 
-                masked: `<span class="placeholder-badge provider">[FOURNISSEUR_1]</span> - INVOICE\nDate: 2024-05-15\nInvoice Ref: <span class="placeholder-badge reference">FAC-2024-0892</span>\nClient: [CLIENT_NAME]\n\nDescription of Services:\n- Development of Eureka multi-agent prototype: 3000,00 EUR\n\nPayment Details:\nIBAN: [IBAN_1]\nBIC: [BIC_1]\n\nThank you for doing business with <span class="placeholder-badge provider">[FOURNISSEUR_1]</span>!\nFor support, email [EMAIL_1]`,
+                masked: `<span class="placeholder-badge provider">[SUPPLIER_1]</span> - INVOICE\nDate: 2024-05-15\nInvoice Ref: <span class="placeholder-badge reference">FAC-2024-0892</span>\nClient: [CLIENT_NAME]\n\nDescription of Services:\n- Development of Eureka multi-agent prototype: 3000,00 EUR\n\nPayment Details:\nIBAN: [IBAN_1]\nBIC: [BIC_1]\n\nThank you for doing business with <span class="placeholder-badge provider">[SUPPLIER_1]</span>!\nFor support, email [EMAIL_1]`,
                 
-                vault: `{\n  "vault_id": "vlt_49ab213c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[FOURNISSEUR_1]": "Initech",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[IBAN_1]": "FR1420041010050500013M02606",\n    "[BIC_1]": "INITHFRPXXX",\n    "[EMAIL_1]": "billing@initech.example"\n  }\n}`,
+                vault: `{\n  "vault_id": "vlt_49ab213c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[SUPPLIER_1]": "Initech",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[IBAN_1]": "FR1420041010050500013M02606",\n    "[BIC_1]": "INITHFRPXXX",\n    "[EMAIL_1]": "billing@initech.example"\n  }\n}`,
                 
-                llm: `{\n  "invoice_ref": "<span class="placeholder-badge reference">FAC-2024-0892</span>",\n  "billing_party": "<span class="placeholder-badge provider">[FOURNISSEUR_1]</span>",\n  "client_party": "[CLIENT_NAME]",\n  "amount_due": 3000.00\n}`,
+                llm: `{\n  "invoice_ref": "<span class="placeholder-badge reference">FAC-2024-0892</span>",\n  "billing_party": "<span class="placeholder-badge provider">[SUPPLIER_1]</span>",\n  "client_party": "[CLIENT_NAME]",\n  "amount_due": 3000.00\n}`,
                 
                 reinjected: `{\n  "invoice_ref": "FAC-2024-0892",\n  "billing_party": "Initech",\n  "client_party": "Acme Corp",\n  "amount_due": 3000.00\n}`
             }

@@ -1,4 +1,4 @@
-# LinkedIn Post - Carnaval Release (EN)
+# LinkedIn Post - carnaval Release (EN)
 
 **Author**: Patrice AUBERT (drafted by AI, reviewed by Patrice)
 **Date**: 2026-05-31
@@ -14,7 +14,7 @@ I didn't write a single line of code.
 
 For the last few days, I ran an experiment: take an idea, three of today's most capable AI assistants - **Claude Code**, **Google Antigravity**, and **xAI Grok** - and orchestrate them like a small engineering team. No human coding. Just product direction, code review, and decisions.
 
-The output: **Carnaval** - a reversible PII anonymization framework for LLM pipelines.
+The output: **carnaval** - a reversible PII anonymization framework for LLM pipelines.
 
 Mask sensitive entities (names, emails, IBANs, organizations, phone numbers) in any text document, send the masked version to a cloud LLM (Sonnet, GPT, Mistral, anything), then reinject the original values into the structured response via an encrypted vault. Local-first. AES-256-GCM. GLiNER for zero-shot NER. No Presidio, no spaCy.
 
