@@ -177,7 +177,7 @@ def _scan_company_groups(line_text: str) -> list[tuple[int, int]]:
             # internes. Si on rencontre autre chose -> rupture.
             between = line_text[group_end:next_start]
             normbetw = between.strip()
-            if normbetw and normbetw.lower() not in _INTERNAL_PARTICLES and normbetw not in {"-", "–", "&", ","}:
+            if normbetw and normbetw.lower() not in _INTERNAL_PARTICLES and normbetw not in {"-", "-", "&", ","}:
                 break
             # Le token suivant ne doit etre ni du bruit ni un libelle.
             if _norm(next_text) in _NON_COMPANY_NOISE:

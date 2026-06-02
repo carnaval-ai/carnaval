@@ -73,7 +73,7 @@ def _deep_merge(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]
 
     Rules:
     - dict + dict   → recursive key-by-key merge
-    - list + list   → concatenation (no deduplication — caller's responsibility)
+    - list + list   → concatenation (no deduplication - caller's responsibility)
     - scalar + scalar → overlay wins
     - mixed types   → overlay wins (implicit warning)
     """

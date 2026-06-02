@@ -10,8 +10,8 @@ A profile declares, under `allow_lists/`, two types of protection:
   (quantity, price, discount, etc.) that no recognizer should mask, so that
   the document structure remains readable by downstream extraction services.
 
-Any detection span that overlaps a protected region — either a regex pattern
-or a lexicon word — is discarded before masking.
+Any detection span that overlaps a protected region - either a regex pattern
+or a lexicon word - is discarded before masking.
 
 The lexicon matching is case- and accent-insensitive. A word is bounded by
 word boundaries, except in Chinese writing (no separators), where matching
@@ -217,7 +217,7 @@ def apply_allow_list(
 
     - **Regex pattern** (product reference, order number, date): describes
       precise structured data. Any span that touches it, even partially,
-      is discarded — it is a false positive from a recognizer that matched
+      is discarded - it is a false positive from a recognizer that matched
       a fragment of the protected data.
     - **Lexicon word**: a business label. The span is only discarded if it
       is covered at or above `_OVERLAP_THRESHOLD`. A lexicon word appearing

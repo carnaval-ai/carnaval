@@ -188,7 +188,7 @@ def run_anonymization_from_text(
     - `[PAGE n]` markers between pages (1-based), separated by a blank line.
 
     Text that does not follow this contract (linear / "flat" extraction)
-    will still work — regex recognizers will match — but will lose
+    will still work - regex recognizers will match - but will lose
     layout-aware protections: `core.table_body` will no longer distinguish
     line items, and article references may be mistaken for phones.
 
@@ -208,7 +208,7 @@ def run_anonymization_from_text(
         repo_root: repository root directory.
 
     Returns:
-        (MaskedDocument, WrittenOutput, Config) — identical to the other entry points.
+        (MaskedDocument, WrittenOutput, Config) - identical to the other entry points.
 
     Raises:
         ValueError: if `text` is empty.
@@ -279,7 +279,7 @@ def run_anonymization_from_pdf(
         repo_root: repository root directory.
 
     Returns:
-        (MaskedDocument, WrittenOutput, Config) — identical to run_anonymization.
+        (MaskedDocument, WrittenOutput, Config) - identical to run_anonymization.
 
     Raises:
         FileNotFoundError: if the PDF does not exist.

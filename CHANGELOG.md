@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Fixed
 - `docs/benchmark.html`: JS `ReferenceError` on page load (decoupled button activation from the global event object).
-- `docs/benchmark.html`: layout — widened right column for long text labels.
+- `docs/benchmark.html`: layout - widened right column for long text labels.
 
 ### Notes
 - Patch release. No change to the runtime API or core anonymization logic; docs/website only.

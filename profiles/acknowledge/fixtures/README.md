@@ -1,4 +1,4 @@
-# Multilingual Test Fixtures — Acknowledgment Profile
+# Multilingual Test Fixtures - Acknowledgment Profile
 
 This directory contains fictional Acknowledgment of Order documents in
 8 languages, designed to test Carnaval's recognizers without using any

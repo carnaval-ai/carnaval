@@ -12873,7 +12873,7 @@ L'Ile-Perrot
 L'Islet-sur-Mer
 L'Orignal
 L'Épiphanie
-L'Île-Bizard–Sainte-Geneviève
+L'Île-Bizard-Sainte-Geneviève
 L'Île-Perrot
 La Barge
 La Belle
@@ -15455,7 +15455,7 @@ Mercerville-Hamilton Square
 Merchantville
 Mercier
 Mercier-Hochelaga-Maisonneuve
-Mercier–Hochelaga-Maisonneuve
+Mercier-Hochelaga-Maisonneuve
 Mere
 Meredith
 Meredosia
@@ -16862,7 +16862,7 @@ Nettlebed
 Nettleham
 Nettleton
 Neufchatel-Est-Lebourgneuf
-Neufchâtel-Est–Lebourgneuf
+Neufchâtel-Est-Lebourgneuf
 Neuse Forest
 Neustadt
 Neutral Bay
@@ -20547,7 +20547,7 @@ Riviere-du-Nord
 Rivière-Ouelle
 Rivière-Rouge
 Rivière-Verte
-Rivière-des-Prairies–Pointe-aux-Trembles
+Rivière-des-Prairies-Pointe-aux-Trembles
 Rivière-du-Loup
 Rivière-du-Nord
 Riwaka
@@ -20773,7 +20773,7 @@ Rosemont East
 Rosemont Homeowners/Tenants
 Rosemont-La Petite-Patrie
 Rosemont-Mount Royal
-Rosemont–La Petite-Patrie
+Rosemont-La Petite-Patrie
 Rosemount
 Rosemère
 Rosenberg
@@ -25289,7 +25289,7 @@ Ville-Emard
 Ville-Marie
 Ville-Émard
 Villeray-Saint-Michel-Parc-Extension
-Villeray–Saint-Michel–Parc-Extension
+Villeray-Saint-Michel-Parc-Extension
 Villisca
 Vilonia
 Vinalhaven

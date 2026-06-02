@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: Apache-2.0
 """Propagation of proper-name entities to their re-occurrences.
 
-A recognizer — GLiNER in particular — may detect an entity in one place
+A recognizer - GLiNER in particular - may detect an entity in one place
 and miss it elsewhere: a name framed by a title is detected, but the same
 name alone on the signature line is not. PII then leaks in clear text.
 
 This step closes the gap: as soon as a string is recognized as a person
 or organization name, its remaining exact occurrences in the document are
-marked with the same type. Only applies to proper names (PERSON / ORG) —
+marked with the same type. Only applies to proper names (PERSON / ORG) -
 an exact re-occurrence is, barring coincidence, the same entity. Title
 prefixes (M., Sra., 先生...) are stripped from the reference string,
 because a recognizer sometimes includes them inside the span.
@@ -99,7 +99,7 @@ _MIN_TOKEN_LEN = 4
 
 # ASCII unaccent table used for acronym calculation on organization names:
 # an acronym like "J.E.L" does not contain the accent on the E of
-# "Elastomeres" — the initial must therefore be de-accented before matching.
+# "Elastomeres" - the initial must therefore be de-accented before matching.
 _DEACCENT_TABLE = str.maketrans(
     "àâäáãåèéêëìíîïòóôöõùúûüýÿçñ"
     "ąćęłńóśźż"

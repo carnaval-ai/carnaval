@@ -39,7 +39,7 @@ _INTERNAL_REF_PATTERN = re.compile(
     r"|Bon\s+de\s+livraison(?:\s*N[°o]\.?)?"
     # Retour marchandise
     r"|RMA(?:\s*N[°o]\.?)?"
-    # Accuse de reception interne — LES LABELS SUIVANTS sont AUTO-REFERENTIELS
+    # Accuse de reception interne - LES LABELS SUIVANTS sont AUTO-REFERENTIELS
     # dans un document AR (ils designent le document lui-meme, pas une fuite).
     # Ils ne sont actifs que si le document n'est PAS un AR (cas mail, contrat
     # qui mentionne un AR tiers). Cf. filtre `_is_self_referent` ci-dessous.
