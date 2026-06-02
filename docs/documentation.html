@@ -123,6 +123,19 @@
             color: var(--accent-purple);
         }
         
+        .nav-num {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            min-width: 24px;
+            display: inline-block;
+        }
+        
+        .nav-link.active .nav-num {
+            color: var(--accent-purple);
+        }
+        
         .sidebar-footer {
             padding: 16px;
             border-top: 1px solid var(--border-color);
@@ -460,67 +473,67 @@
         <nav class="sidebar-nav">
             
         <a href="#sec-00_overview" class="nav-link" id="link-sec-00_overview">
-            <span class="nav-icon">👋</span>
+            
             <span class="nav-text">Overview</span>
         </a>
         
 
         <a href="#sec-01_architecture_etages" class="nav-link" id="link-sec-01_architecture_etages">
-            <span class="nav-icon">⚙️</span>
+            <span class="nav-num">01</span>
             <span class="nav-text">7-Stage Architecture</span>
         </a>
         
 
         <a href="#sec-02_install" class="nav-link" id="link-sec-02_install">
-            <span class="nav-icon">🚀</span>
+            <span class="nav-num">02</span>
             <span class="nav-text">Installation Guide</span>
         </a>
         
 
         <a href="#sec-03_deploiement_production" class="nav-link" id="link-sec-03_deploiement_production">
-            <span class="nav-icon">🌐</span>
+            <span class="nav-num">03</span>
             <span class="nav-text">Production Deployment</span>
         </a>
         
 
         <a href="#sec-04_configuration" class="nav-link" id="link-sec-04_configuration">
-            <span class="nav-icon">🔧</span>
+            <span class="nav-num">04</span>
             <span class="nav-text">Configuration & Profiles</span>
         </a>
         
 
         <a href="#sec-05_extension_listes" class="nav-link" id="link-sec-05_extension_listes">
-            <span class="nav-icon">📝</span>
+            <span class="nav-num">05</span>
             <span class="nav-text">Adding Entities to Mask</span>
         </a>
         
 
         <a href="#sec-06_extension_recognizers" class="nav-link" id="link-sec-06_extension_recognizers">
-            <span class="nav-icon">🧩</span>
+            <span class="nav-num">06</span>
             <span class="nav-text">Custom Recognizers</span>
         </a>
         
 
         <a href="#sec-07_securite" class="nav-link" id="link-sec-07_securite">
-            <span class="nav-icon">🛡️</span>
+            <span class="nav-num">07</span>
             <span class="nav-text">Security & Vault Encryption</span>
         </a>
         
 
         <a href="#sec-08_format_entree_sortie" class="nav-link" id="link-sec-08_format_entree_sortie">
-            <span class="nav-icon">💾</span>
+            <span class="nav-num">08</span>
             <span class="nav-text">Input & Output Formats</span>
         </a>
         
 
         <a href="#sec-09_troubleshooting" class="nav-link" id="link-sec-09_troubleshooting">
-            <span class="nav-icon">🔍</span>
+            <span class="nav-num">09</span>
             <span class="nav-text">Troubleshooting</span>
         </a>
         
 
         <a href="#sec-10_api_reference" class="nav-link" id="link-sec-10_api_reference">
-            <span class="nav-icon">📚</span>
+            <span class="nav-num">10</span>
             <span class="nav-text">Python API Reference</span>
         </a>
         
@@ -536,7 +549,7 @@
         
         <section id="sec-00_overview" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">00 - Overview</h1>
+                <h1 class="chapter-title">Overview</h1>
 <h2 id="what-problem-does-carnaval-solve">What problem does carnaval solve</h2>
 <p>You want to use a cloud LLM (Sonnet, GPT, Mistral...) to process</p>
 <p>text documents containing personal or confidential data:</p>
@@ -700,7 +713,7 @@
 
         <section id="sec-01_architecture_etages" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">01 - Architecture by stages</h1>
+                <h1 class="chapter-title">Architecture by stages</h1>
 <p>The carnaval pipeline is split into <strong>7 autonomous stages</strong>.</p>
 
                     <div class="diagram-card">
@@ -873,7 +886,7 @@
 
         <section id="sec-02_install" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">02 - Installation</h1>
+                <h1 class="chapter-title">Installation</h1>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li><strong>Python</strong>: 3.11 or higher (tested on 3.13)</li>
@@ -975,7 +988,7 @@ python quickstart_api.py</code></pre>
 
         <section id="sec-03_deploiement_production" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">03 - Production deployment</h1>
+                <h1 class="chapter-title">Production deployment</h1>
 <h2 id="principles">Principles</h2>
 <p>carnaval is a <strong>command-line tool</strong>, not a service. To put it into production:</p>
 <p>1. Install in a dedicated folder (cf. <a href="#sec-02_install">02_install.md</a>)</p>
@@ -1112,7 +1125,7 @@ for vault_file in Path("outbox/vault").glob("*.enc"):
 
         <section id="sec-04_configuration" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">04 - Configuration</h1>
+                <h1 class="chapter-title">Configuration</h1>
 <h2 id="configuration-layers">Configuration layers</h2>
 <p>carnaval applies 3 successive layers on load:</p>
 <pre><code class="language-plaintext">+-----------------------+
@@ -1224,7 +1237,7 @@ print(cfg.get("pipeline.use_gliner"))   # dotted-path access</code></pre>
 
         <section id="sec-05_extension_listes" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">05 - Extend lists (deny / allow) without coding</h1>
+                <h1 class="chapter-title">Extend lists (deny / allow) without coding</h1>
 <p>This is the most frequent extension: add a supplier, a name, an</p>
 <p>orthographic variant.</p>
 <h2 id="add-a-supplier">Add a supplier</h2>
@@ -1328,7 +1341,7 @@ def test_my_new_supplier_masked(outbox_dir, tmp_path):
 
         <section id="sec-06_extension_recognizers" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">06 - Extend recognizers (code a new detector)</h1>
+                <h1 class="chapter-title">Extend recognizers (code a new detector)</h1>
 <p>When deny lists are not enough (entity by pattern), you need to code</p>
 <p>a recognizer.</p>
 <h2 id="contract">Contract</h2>
@@ -1463,7 +1476,7 @@ def recognize_employees(text: str) -&gt; list[Span]:
 
         <section id="sec-07_securite" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">07 - Security</h1>
+                <h1 class="chapter-title">Security</h1>
 <h2 id="the-encrypted-vault">The encrypted vault</h2>
 <h3>Algorithm</h3>
 <div class="table-container"><table>
@@ -1616,7 +1629,7 @@ def recognize_employees(text: str) -&gt; list[Span]:
 
         <section id="sec-08_format_entree_sortie" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">08 - Input and output formats</h1>
+                <h1 class="chapter-title">Input and output formats</h1>
 <h2 id="input">Input</h2>
 <h3>Raw .txt file</h3>
 <ul>
@@ -1775,7 +1788,7 @@ python reinject.py response.xml --vault outbox/vault/doc_vault.enc</code></pre>
 
         <section id="sec-09_troubleshooting" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">09 - Troubleshooting</h1>
+                <h1 class="chapter-title">Troubleshooting</h1>
 <h2 id="vaulterror-wrong-password-or-corrupted-vault">VaultError: Wrong password or corrupted vault</h2>
 <p><strong>Cause</strong>: the <code>CARNAVAL_VAULT_PASSWORD</code> used for <code>reinject.py</code> does</p>
 <p>not match the one used for <code>anonymize.py</code>.</p>
@@ -1918,7 +1931,7 @@ pytest --lf                                    # only the tests that failed</cod
 
         <section id="sec-10_api_reference" class="doc-section">
             <div class="doc-content-wrapper">
-                <h1 class="chapter-title">10 - Python API</h1>
+                <h1 class="chapter-title">Python API</h1>
 <h2 id="programmatic-usage">Programmatic usage</h2>
 <p>carnaval can also be used as a Python library.</p>
 <h3>Simple anonymization</h3>
