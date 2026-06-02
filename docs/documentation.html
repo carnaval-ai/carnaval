@@ -537,6 +537,12 @@
             <span class="nav-text">Python API Reference</span>
         </a>
         
+
+        <a href="#sec-11_tests_validation" class="nav-link" id="link-sec-11_tests_validation">
+            <span class="nav-num">11</span>
+            <span class="nav-text">Testing & Validation</span>
+        </a>
+        
         </nav>
         <div class="sidebar-footer">
             <a href="index.html" class="btn-back">
@@ -2153,6 +2159,62 @@ def call_bedrock_claude(text: str) -&gt; dict:
         }),
     )
     return json.loads(r["body"].read())</code></pre>
+            </div>
+        </section>
+        
+
+        <section id="sec-11_tests_validation" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">Testing & Validation</h1>
+<p>This section describes the automated test suite for <strong>carnaval</strong>, how to execute it, and how developers can add new tests.</p>
+<hr>
+<h2 id="directory-structure">Directory Structure</h2>
+<p>The repository includes a dedicated test harness under <code>tests/</code>:</p>
+<ul>
+<li><strong><code>tests/conftest.py</code></strong>: Global path helper and configurations.</li>
+<li><strong><code>tests/test_template.py</code></strong>: Boilerplate code containing copy-pasteable test templates for unit and integration testing.</li>
+<li><strong><code>tests/unit/</code></strong>: Unit tests for core components and pipeline stages (stages 1 to 7, vault, spans, config loader).</li>
+<li><strong><code>tests/recognizers/</code></strong>: Tests for neural (GLiNER) and regex-based entity recognizers.</li>
+<li><strong><code>tests/integration/</code></strong>: End-to-end integration tests using business profiles (running the pipeline on fictional sample documents).</li>
+</ul>
+<hr>
+<h2 id="how-to-run-tests">How to Run Tests</h2>
+<p>Before running tests, ensure you have active developer dependencies installed:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+pip install pytest pytest-cov</code></pre>
+<h3>1. Run Standard Tests (Fast)</h3>
+<p>To run the unit and integration tests <em>excluding</em> heavy AI models downloads:</p>
+<pre><code class="language-bash">pytest -v -k "not test_ai"</code></pre>
+<p><em>Expected output: <code>182 passed, 5 deselected</code>.</em></p>
+<h3>2. Run All Tests (Including GLiNER)</h3>
+<p>To run all tests, including zero-shot neural entity recognizers (downloads GLiNER model ~500 MB):</p>
+<pre><code class="language-bash">pytest -v</code></pre>
+<p><em>Expected output: <code>187 passed</code>.</em></p>
+<h3>3. Run Coverage Analysis</h3>
+<p>To check coverage percentage (the library maintains a strict <strong>~95% coverage</strong>):</p>
+<pre><code class="language-bash">pytest --cov=src/carnaval --cov-report=term-missing</code></pre>
+<hr>
+<h2 id="writing-a-new-test-(boilerplate)">Writing a New Test (Boilerplate)</h2>
+<p>We provide a pre-configured template <a href="file:///C:/Temp/Claude/Carnaval-publishable-EN/tests/test_template.py">tests/test_template.py</a> containing boilerplate code.</p>
+<p>To write a new test:</p>
+<p>1. Copy the relevant code class block from the template.</p>
+<p>2. Save it under <code>tests/unit/test_your_feature.py</code> or <code>tests/integration/test_your_feature.py</code>.</p>
+<p>3. Add your custom test assertions.</p>
+<p>4. Execute <code>pytest</code> to verify it passes.</p>
+<hr>
+<h2 id="the-validation-corpus">The Validation Corpus</h2>
+<p><code>carnaval</code> is validated against a dedicated test corpus of several hundreds of fake documents representing the worst B2B data quality and privacy cases encountered in production. The suite covers:</p>
+<ul>
+<li><strong>Case & Accent Variations</strong>: Handling of accents and casing (e.g. <code>Stephanie</code> / <code>Stéphanie</code> / <code>STEPHANIE</code>).</li>
+<li><strong>Valid & Invalid Identifiers</strong>: Validation algorithms, including mod-97 verification for IBAN and BIC formats.</li>
+<li><strong>Country-Specific Identifiers</strong>: French regulatory IDs like <code>NIR</code> (social security number), <code>VAT</code> (TVA), and company registration numbers (<code>SIREN</code> and <code>SIRET</code>).</li>
+<li><strong>Entity Overlaps</strong>: Resolving overlapping boundaries in Stage 4 (e.g. email containing subdomains).</li>
+<li><strong>Punctuation & Layout Layouts</strong>: Handling names attached to punctuation (e.g. <code>"LASTNAME Firstname"</code>, <code>"Mr. LASTNAME"</code>).</li>
+<li><strong>Dirty PDF Extractions</strong>: Sanitizing noisy PDF texts with parasite characters like pipes (e.g. <code>"Chi | mieBERTAUX"</code>).</li>
+<li><strong>Multi-Occurrence Consistency</strong>: Guaranteeing that the same real entity in multiple places maps to the exact same placeholder index.</li>
+<li><strong>Tricky False Positives</strong>: Filtering out common business terms mistaken as BICs (e.g. <code>"PARC"</code>).</li>
+<li><strong>Multilingual Documents</strong>: Processing long-form B2B documents containing content mixed across multiple active languages.</li>
+</ul>
             </div>
         </section>
         
