@@ -109,7 +109,7 @@ CARNAVAL_VAULT_PASSWORD=your_strong_secret_of_at_least_32_characters
 pytest -m "not slow"
 ```
 
-Expected result: `179 passed, 5 deselected` (for a total of 184 tests in the test suite; the 5 deselected tests are slow AI recognizer tests that require downloading neural network models like GLiNER ~500 MB).
+Expected result: `182 passed, 5 deselected` (for a total of 187 tests in the test suite; the 5 deselected tests are slow AI recognizer tests that require downloading neural network models like GLiNER ~500 MB).
 
 ### 6. Run a live test
 

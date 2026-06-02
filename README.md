@@ -18,7 +18,7 @@
 - License: **Apache 2.0**
 - Stack: Python 3.11 / 3.12 / 3.13, GLiNER (zero-shot NER), regex, AES-256-GCM, PyMuPDF
 - **No external PII framework** (no Presidio, no spaCy NER)
-- 184 tests passing, ~95% coverage, mypy-checked, CI on every push
+- 187 tests passing, ~95% coverage, mypy-checked, CI on every push
 - Used internally in production at one enterprise (anonymization of supplier acknowledgments before LLM extraction). Public API may evolve until v1.0.
 
 ## Installation
@@ -114,12 +114,12 @@ Private profiles (real client data) in `profiles_private/` (git-ignored).
 ## Tests & Validation Corpus
 
 ```bash
-pytest                          # Run standard tests (179 passing, 5 slow/AI deselected)
+pytest                          # Run standard tests (182 passing, 5 slow/AI deselected)
 pytest -m slow                  # Run neural network tests (downloads GLiNER multi-PII model ~500 MB)
 pytest --cov=src/carnaval       # Run with coverage report (~95% coverage)
 ```
 
-The test suite consists of **184 total tests** validating `carnaval` against a dedicated corpus of hundreds of fake documents. This corpus represents the worst real-world B2B data quality and privacy cases encountered in production, covering:
+The test suite consists of **187 total tests** validating `carnaval` against a dedicated corpus of hundreds of fake documents. This corpus represents the worst real-world B2B data quality and privacy cases encountered in production, covering:
 - **Case & Accent Variations** (e.g. Stephanie / Stéphanie / STEPHANIE)
 - **Valid & Invalid Identifiers** (IBAN/BIC checks with mod-97 verification)
 - **Country-Specific Identifiers** (NIR, VAT/TVA, SIREN / SIRET)

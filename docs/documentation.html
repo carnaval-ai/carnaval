@@ -959,7 +959,7 @@ python quickstart_api.py</code></pre>
 <p><strong>Important</strong>: never commit <code>.env</code>. The <code>.gitignore</code> already excludes it.</p>
 <h3>5. Verify the installation</h3>
 <pre><code class="language-bash">pytest -m "not slow"</code></pre>
-<p>Expected result: <code>179 passed, 5 deselected</code> (for a total of 184 tests in the test suite; the 5 deselected tests are slow AI recognizer tests that require downloading neural network models like GLiNER ~500 MB).</p>
+<p>Expected result: <code>182 passed, 5 deselected</code> (for a total of 187 tests in the test suite; the 5 deselected tests are slow AI recognizer tests that require downloading neural network models like GLiNER ~500 MB).</p>
 <h3>6. Run a live test</h3>
 <pre><code class="language-bash">python anonymize.py profiles/acknowledge/fixtures/sample_ack_globex.txt \
     --profile acknowledge --no-gliner</code></pre>

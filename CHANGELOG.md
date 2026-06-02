@@ -38,4 +38,4 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - Vault encryption via AES-256-GCM for reversibility.
 - 3 out-of-the-box business profiles: `acknowledge` (order acknowledgments), `invoice` (invoices), `email` (B2B emails).
 - Supported export formats: TXT, JSON, JSONL, XML, CoNLL, HTML.
-- Unit and integration test suite (184 tests, 95% coverage).
+- Unit and integration test suite (187 tests, 95% coverage).
