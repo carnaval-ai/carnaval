@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carnaval - Documentation Portal</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- PrismJS Dark Theme -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-sidebar: #0b0f1a;
+            --bg-card: #0e1424;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --accent-purple: #c084fc;
+            --accent-purple-glow: rgba(192, 132, 252, 0.12);
+            --accent-teal: #2dd4bf;
+            --accent-teal-glow: rgba(45, 212, 191, 0.12);
+            --accent-blue: #3b82f6;
+            
+            --font-title: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            
+            --sidebar-width: 300px;
+            --header-height: 60px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+        }
+        
+        /* Layout */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .logo-text {
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-title);
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+        }
+        
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-purple-glow), var(--accent-teal-glow));
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            color: var(--accent-purple);
+        }
+        
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .btn-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-title);
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-back:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+            color: var(--text-primary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-width: 0;
+            padding: 40px;
+            max-width: 1000px;
+        }
+        
+        .doc-section {
+            padding-top: 20px;
+            margin-bottom: 80px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+        }
+        
+        .doc-section:last-child {
+            border-bottom: none;
+        }
+        
+        /* Typography Styling */
+        h1.chapter-title {
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 36px;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+        
+        h2 {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-top: 36px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background-color: var(--accent-purple);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-family: var(--font-title);
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--accent-teal);
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+        
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(192, 132, 252, 0.4);
+            transition: all 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-teal);
+            border-bottom-color: var(--accent-teal);
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 32px 0;
+        }
+        
+        /* Lists */
+        ul {
+            margin-left: 24px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        li {
+            font-size: 15px;
+        }
+        
+        /* Code blocks */
+        pre {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px !important;
+            margin: 20px 0 !important;
+            overflow-x: auto;
+        }
+        
+        code {
+            font-family: var(--font-mono) !important;
+            font-size: 13.5px !important;
+        }
+        
+        :not(pre) > code {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--accent-purple);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px !important;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        
+        /* Tables */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--bg-card);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        th {
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 14px 16px;
+            font-family: var(--font-title);
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        td {
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Custom styled diagrams */
+        .diagram-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .diagram-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        
+        .svg-diagram {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* 7 stages flow graphic */
+        .stages-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        
+        .stage-step {
+            flex: 1;
+            min-width: 110px;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--accent-purple);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .stage-num {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .stage-name {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .stage-desc {
+            font-size: 10px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+        
+        .stage-arrow {
+            color: var(--text-muted);
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .stage-reinject-panel {
+            border-top: 1px dashed var(--border-color);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Responsive design */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background-color: var(--bg-sidebar);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 90;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .btn-menu {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 100px 24px 40px 24px;
+            }
+            .mobile-header {
+                display: flex;
+            }
+            .stages-flow {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .stage-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="mobile-header">
+        <div class="logo-text">carnaval</div>
+        <button class="btn-menu" id="menuToggle">☰</button>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="favicon.png" class="logo-img" alt="Logo">
+            <div class="logo-text">carnaval</div>
+        </div>
+        <nav class="sidebar-nav">
+            
+        <a href="#sec-00_overview" class="nav-link" id="link-sec-00_overview">
+            <span class="nav-icon">👋</span>
+            <span class="nav-text">Overview</span>
+        </a>
+        
+
+        <a href="#sec-01_architecture_etages" class="nav-link" id="link-sec-01_architecture_etages">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">7-Stage Architecture</span>
+        </a>
+        
+
+        <a href="#sec-02_install" class="nav-link" id="link-sec-02_install">
+            <span class="nav-icon">🚀</span>
+            <span class="nav-text">Installation Guide</span>
+        </a>
+        
+
+        <a href="#sec-03_deploiement_production" class="nav-link" id="link-sec-03_deploiement_production">
+            <span class="nav-icon">🌐</span>
+            <span class="nav-text">Production Deployment</span>
+        </a>
+        
+
+        <a href="#sec-04_configuration" class="nav-link" id="link-sec-04_configuration">
+            <span class="nav-icon">🔧</span>
+            <span class="nav-text">Configuration & Profiles</span>
+        </a>
+        
+
+        <a href="#sec-05_extension_listes" class="nav-link" id="link-sec-05_extension_listes">
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Adding Entities to Mask</span>
+        </a>
+        
+
+        <a href="#sec-06_extension_recognizers" class="nav-link" id="link-sec-06_extension_recognizers">
+            <span class="nav-icon">🧩</span>
+            <span class="nav-text">Custom Recognizers</span>
+        </a>
+        
+
+        <a href="#sec-07_securite" class="nav-link" id="link-sec-07_securite">
+            <span class="nav-icon">🛡️</span>
+            <span class="nav-text">Security & Vault Encryption</span>
+        </a>
+        
+
+        <a href="#sec-08_format_entree_sortie" class="nav-link" id="link-sec-08_format_entree_sortie">
+            <span class="nav-icon">💾</span>
+            <span class="nav-text">Input & Output Formats</span>
+        </a>
+        
+
+        <a href="#sec-09_troubleshooting" class="nav-link" id="link-sec-09_troubleshooting">
+            <span class="nav-icon">🔍</span>
+            <span class="nav-text">Troubleshooting</span>
+        </a>
+        
+
+        <a href="#sec-10_api_reference" class="nav-link" id="link-sec-10_api_reference">
+            <span class="nav-icon">📚</span>
+            <span class="nav-text">Python API Reference</span>
+        </a>
+        
+        </nav>
+        <div class="sidebar-footer">
+            <a href="index.html" class="btn-back">
+                <span>←</span> Back to Homepage
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <section id="sec-00_overview" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">00 - Overview</h1>
+<h2 id="what-problem-does-carnaval-solve">What problem does carnaval solve</h2>
+<p>You want to use a cloud LLM (Sonnet, GPT, Mistral...) to process</p>
+<p>text documents containing personal or confidential data:</p>
+<ul>
+<li>Supplier acknowledgments of receipt</li>
+<li>Invoices</li>
+<li>Professional emails</li>
+<li>Contracts, CVs, medical records, ...</li>
+</ul>
+<p><strong>Problem</strong>: these documents contain sensitive entities (names,</p>
+<p>emails, IBANs, addresses) that must not be sent in clear to</p>
+<p>an external service.</p>
+<p><strong>Carnaval solution</strong>:</p>
+
+                    <div class="diagram-card">
+                        <div class="diagram-title">Reversible Anonymization Workflow</div>
+                        <svg viewBox="0 0 800 220" class="svg-diagram">
+                            <!-- Definitions for filters and gradients -->
+                            <defs>
+                                <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#1d4ed8" />
+                                </linearGradient>
+                                <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#c084fc" />
+                                    <stop offset="100%" stop-color="#7c3aed" />
+                                </linearGradient>
+                                <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#2dd4bf" />
+                                    <stop offset="100%" stop-color="#0d9488" />
+                                </linearGradient>
+                                <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feGaussianBlur stdDeviation="5" result="blur" />
+                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                </filter>
+                            </defs>
+                            
+                            <!-- Path: Raw Doc to Carnaval -->
+                            <path d="M 120,60 L 220,60" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                            <!-- Path: Carnaval to Tagged Doc -->
+                            <path d="M 360,60 L 460,60" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                            <!-- Path: Tagged Doc to LLM -->
+                            <path d="M 580,60 L 680,60" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                            
+                            <!-- Path: LLM to JSON Response -->
+                            <path d="M 740,110 L 740,160 M 740,160 L 580,160" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                            <!-- Path: JSON Response to Carnaval -->
+                            <path d="M 460,160 L 360,160" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                            <!-- Path: Carnaval to Final Doc -->
+                            <path d="M 220,160 L 120,160" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+
+                            <!-- Marker definition -->
+                            <defs>
+                                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+
+                            <!-- Node 1: Raw Document -->
+                            <rect x="10" y="30" width="110" height="60" rx="6" fill="#1e293b" stroke="#334155" />
+                            <text x="65" y="55" fill="#f8fafc" font-size="12" font-family="Outfit" font-weight="600" text-anchor="middle">RAW DOC</text>
+                            <text x="65" y="73" fill="#94a3b8" font-size="10" font-family="Inter" text-anchor="middle">(Clear text PII)</text>
+
+                            <!-- Node 2: Carnaval (Anonymize) -->
+                            <rect x="220" y="25" width="140" height="70" rx="8" fill="url(#purpleGrad)" filter="url(#glow)" />
+                            <text x="290" y="55" fill="#f8fafc" font-size="14" font-family="Outfit" font-weight="700" text-anchor="middle">[carnaval]</text>
+                            <text x="290" y="75" fill="#e9d5ff" font-size="11" font-family="Inter" text-anchor="middle">1. Anonymize &amp; Vault</text>
+                            
+                            <!-- Node 3: Tagged Document -->
+                            <rect x="460" y="30" width="120" height="60" rx="6" fill="#1e293b" stroke="#334155" />
+                            <text x="520" y="55" fill="#f8fafc" font-size="12" font-family="Outfit" font-weight="600" text-anchor="middle">TAGGED DOC</text>
+                            <text x="520" y="73" fill="#a7f3d0" font-size="10" font-family="Inter" text-anchor="middle">[PERSON_1], etc.</text>
+
+                            <!-- Node 4: Cloud LLM -->
+                            <rect x="680" y="30" width="110" height="80" rx="6" fill="url(#blueGrad)" />
+                            <text x="735" y="65" fill="#f8fafc" font-size="14" font-family="Outfit" font-weight="700" text-anchor="middle">Cloud LLM</text>
+                            <text x="735" y="85" fill="#bfdbfe" font-size="10" font-family="Inter" text-anchor="middle">GPT / Claude / Mistral</text>
+
+                            <!-- Node 5: JSON/XML Response -->
+                            <rect x="460" y="130" width="120" height="60" rx="6" fill="#1e293b" stroke="#334155" />
+                            <text x="520" y="155" fill="#f8fafc" font-size="12" font-family="Outfit" font-weight="600" text-anchor="middle">RESPONSE</text>
+                            <text x="520" y="173" fill="#fed7aa" font-size="10" font-family="Inter" text-anchor="middle">(With tags)</text>
+
+                            <!-- Node 6: Carnaval (Reinject) -->
+                            <rect x="220" y="125" width="140" height="70" rx="8" fill="url(#tealGrad)" />
+                            <text x="290" y="155" fill="#f8fafc" font-size="14" font-family="Outfit" font-weight="700" text-anchor="middle">[carnaval]</text>
+                            <text x="290" y="175" fill="#ccfbf1" font-size="11" font-family="Inter" text-anchor="middle">2. Reinject &amp; Restore</text>
+
+                            <!-- Node 7: Final Document -->
+                            <rect x="10" y="130" width="110" height="60" rx="6" fill="#1e293b" stroke="#32453e" />
+                            <text x="65" y="155" fill="#f8fafc" font-size="12" font-family="Outfit" font-weight="600" text-anchor="middle">FINAL DOC</text>
+                            <text x="65" y="173" fill="#2dd4bf" font-size="10" font-family="Inter" font-weight="600" text-anchor="middle">PII Restored ✓</text>
+                        </svg>
+                    </div>
+                    
+<p>1. <strong>Before sending</strong>: replace sensitive entities with tags</p>
+<p><code>[PERSON_1]</code>, <code>[EMAIL_2]</code>, <code>[ORG]</code>, etc. Store the mappings in a</p>
+<p>locally encrypted vault.</p>
+<p>2. <strong>After the response</strong>: restore the original values in the</p>
+<p>returned JSON or XML structure.</p>
+<h2 id="principles">Principles</h2>
+<h3>1. Reversibility</h3>
+<p>Each masked entity is associated with a unique placeholder. The mapping</p>
+<p>is stored encrypted (AES-256-GCM) on the local disk. Without the password,</p>
+<p>it is impossible to retrieve the original values.</p>
+<h3>2. Consistency</h3>
+<p>The same original value always receives the <strong>same</strong> placeholder in a</p>
+<p>run. Example: "Alice Doe" appears 5 times in the text? -> 5 times</p>
+<p><code>[PERSON_1]</code>. The LLM can therefore reason about references.</p>
+<h3>3. Locality</h3>
+<p>No network call for anonymization. GLiNER runs locally (model</p>
+<p>~500 MB downloaded once). Lingua for language detection. Everything runs on your</p>
+<p>machine.</p>
+<h3>4. Multi-format</h3>
+<p>A single anonymization pass produces the result in 6 common formats:</p>
+<ul>
+<li><strong>TXT</strong>: raw text with tags (for piping to LLM)</li>
+<li><strong>JSON</strong>: exploitable structure (text + entities)</li>
+<li><strong>JSONL</strong>: streaming (1 entity per line)</li>
+<li><strong>XML</strong>: legacy SI / EDI integration</li>
+<li><strong>CoNLL</strong>: NER model training</li>
+<li><strong>HTML</strong>: colorized visualization for debug</li>
+</ul>
+<h3>5. Modular by stages</h3>
+<p>The pipeline consists of 7 autonomous stages. Each stage has a clear contract</p>
+<p>(input -> output) and can be tested, replaced or debugged in</p>
+<p>isolation.</p>
+<h3>6. Business profiles</h3>
+<p>A profile describes a <strong>document type</strong> (acknowledge, invoice, email...)</p>
+<p>with its typical entities, deny lists, arbitration rules.</p>
+<p>Profiles are editable YAML files without touching the code.</p>
+<h3>7. No magic</h3>
+<p>No opaque framework between the user and the pipeline. Each</p>
+<p>recognizer is a <strong>pure Python function</strong> that takes text and returns</p>
+<p>Spans. No inheritance, no class hierarchy, no implicit hook.</p>
+<h2 id="what-carnaval-does-not-do">What carnaval does not do</h2>
+<ul>
+<li><strong>No OCR</strong>: input = already extracted text. To extract from a PDF,</li>
+</ul>
+<p>use an upstream tool (pdfplumber, pypdf, tesseract...).</p>
+<ul>
+<li><strong>No LLM call</strong>: carnaval prepares and restores, the network call</li>
+</ul>
+<p>is your responsibility.</p>
+<ul>
+<li><strong>No built-in batch</strong>: one file at a time. To process in batch,</li>
+</ul>
+<p>write a shell or Python loop around <code>anonymize.py</code>.</p>
+<h2 id="to-go-further">To go further</h2>
+<ul>
+<li><a href="#sec-01_architecture_etages">01_architecture_etages.md</a> - the pipeline</li>
+</ul>
+<p>in detail</p>
+<ul>
+<li><a href="#sec-04_configuration">04_configuration.md</a> - configuration and profiles</li>
+<li><a href="#sec-07_securite">07_securite.md</a> - the vault and the password</li>
+</ul>
+            </div>
+        </section>
+        
+
+        <section id="sec-01_architecture_etages" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">01 - Architecture by stages</h1>
+<p>The carnaval pipeline is split into <strong>7 autonomous stages</strong>.</p>
+
+                    <div class="diagram-card">
+                        <div class="diagram-title">The 7 Stages Pipeline Architecture</div>
+                        <div class="stages-flow">
+                            <div class="stage-step" style="border-top-color: #f43f5e;">
+                                <div class="stage-num">S1</div>
+                                <div class="stage-name">Intake</div>
+                                <div class="stage-desc">Read &amp; Validate file</div>
+                            </div>
+                            <div class="stage-arrow">→</div>
+                            <div class="stage-step" style="border-top-color: #fb923c;">
+                                <div class="stage-num">S2</div>
+                                <div class="stage-name">Preprocess</div>
+                                <div class="stage-desc">Language &amp; Norm</div>
+                            </div>
+                            <div class="stage-arrow">→</div>
+                            <div class="stage-step" style="border-top-color: #eab308;">
+                                <div class="stage-num">S3</div>
+                                <div class="stage-name">Detect</div>
+                                <div class="stage-desc">Run Recognizers</div>
+                            </div>
+                            <div class="stage-arrow">→</div>
+                            <div class="stage-step" style="border-top-color: #2dd4bf;">
+                                <div class="stage-num">S4</div>
+                                <div class="stage-name">Resolve</div>
+                                <div class="stage-desc">Remove Overlaps</div>
+                            </div>
+                            <div class="stage-arrow">→</div>
+                            <div class="stage-step" style="border-top-color: #3b82f6;">
+                                <div class="stage-num">S5</div>
+                                <div class="stage-name">Mask</div>
+                                <div class="stage-desc">Replace with tags</div>
+                            </div>
+                            <div class="stage-arrow">→</div>
+                            <div class="stage-step" style="border-top-color: #a855f7;">
+                                <div class="stage-num">S6</div>
+                                <div class="stage-name">Output</div>
+                                <div class="stage-desc">Write 6 formats</div>
+                            </div>
+                        </div>
+                        <div class="stage-reinject-panel">
+                            <div class="stage-step" style="border-top-color: #ec4899; margin: 0 auto; max-width: 320px;">
+                                <div class="stage-num">S7</div>
+                                <div class="stage-name">Reinject (Reversible Phase)</div>
+                                <div class="stage-desc">Input: Response with placeholders<br>Output: Response with original PII values</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+<h2 id="s1---intake-read-the-file">S1 - Intake: read the file</h2>
+<p><strong>Input</strong>: <code>Path</code> to a <code>.txt</code> file</p>
+<p><strong>Output</strong>: <code>RawDocument</code> (raw text + metadata)</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul>
+<li>Check existence and accessibility</li>
+<li>Read in UTF-8 (fallback to latin-1 on failure)</li>
+<li>Reject empty or too large files (<code>max_size_bytes</code>)</li>
+<li>Capture metadata: size, mtime, encoding</li>
+</ul>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s1_intake.py</code></p>
+<p><strong>Tests</strong>: <code>tests/unit/test_s1_intake.py</code></p>
+<hr>
+<h2 id="s2---preprocess-normalization-+-language">S2 - Preprocess: normalization + language</h2>
+<p><strong>Input</strong>: <code>RawDocument</code></p>
+<p><strong>Output</strong>: <code>NormalizedDocument</code> (normalized text + detected language)</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul>
+<li>Detect language (lingua: FR/EN/DE/JA)</li>
+<li>Remove BOM</li>
+<li>Normalize multiple spaces (option <code>normalize_spaces</code>)</li>
+<li>Clean <code>|</code> parasites in the middle of words (option <code>cleanup_pipes</code>,</li>
+</ul>
+<p>disabled by default due to business risk)</p>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s2_preprocess.py</code></p>
+<hr>
+<h2 id="s3---detect-execute-recognizers">S3 - Detect: execute recognizers</h2>
+<p><strong>Input</strong>: <code>NormalizedDocument</code> + <code>Config</code></p>
+<p><strong>Output</strong>: <code>DetectedDocument</code> (list of raw <code>Span</code>, not deduplicated)</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul>
+<li>Load deny lists from config</li>
+<li>Execute each recognizer:</li>
+<li><strong>Universal</strong>: email, URL, IBAN, BIC, header_source</li>
+<li><strong>FR</strong> (if French language): phone, fiscal, address, name_patterns</li>
+<li><strong>Deny lists</strong>: organization_singleton, organizations, people</li>
+<li><strong>AI</strong>: GLiNER (zero-shot multilingual)</li>
+<li>Collect all Spans without arbitration (S4 will sort)</li>
+</ul>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s3_detect.py</code></p>
+<hr>
+<h2 id="s4---resolve-deduplication-of-overlaps">S4 - Resolve: deduplication of overlaps</h2>
+<p><strong>Input</strong>: <code>DetectedDocument</code></p>
+<p><strong>Output</strong>: <code>ResolvedDocument</code> (non-overlapping, ordered Spans)</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul>
+<li>For each group of overlapping Spans, keep only one.</li>
+<li>Selection criteria (descending):</li>
+</ul>
+<p>1. <strong>Length</strong>: the longest span wins (encompassing)</p>
+<p>2. <strong>Score</strong>: higher wins</p>
+<p>3. <strong>Recognizer priority</strong>: <code>OrgSingleton</code> > <code>OrganizationsDenyList</code> > ... > <code>GLiNER</code></p>
+<p><strong>Why not "score first?"</strong> Because an EMAIL (score 0.95) that contains a</p>
+<p>subdomain (URL score 0.7) must prevail: the encompassing span wins even</p>
+<p>if its score is slightly lower, otherwise the integrity of the</p>
+<p>email is lost.</p>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s4_resolve.py</code></p>
+<hr>
+<h2 id="s5---mask-placeholders-+-vault-feeding">S5 - Mask: placeholders + vault feeding</h2>
+<p><strong>Input</strong>: <code>ResolvedDocument</code> + <code>Vault</code></p>
+<p><strong>Output</strong>: <code>MaskedDocument</code> (anonymized text + Spans enriched with placeholder)</p>
+<p><strong>Responsibilities</strong>:</p>
+<ul>
+<li>For each Span, allocate a placeholder:</li>
+<li>Singleton (<code>ORG_SINGLETON</code>) -> <code>[ORG]</code> (no index)</li>
+<li>Other -> <code>[TYPE_n]</code> with n incremental per type</li>
+<li>Guarantee <strong>consistency</strong>: if a value already has a placeholder in the</li>
+</ul>
+<p>vault, reuse it (all occurrences -> same tag).</p>
+<ul>
+<li>Build the anonymized text (substitution <strong>from right to left</strong> to</li>
+</ul>
+<p>avoid breaking offsets).</p>
+<ul>
+<li>Record each mapping in the vault.</li>
+</ul>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s5_mask.py</code></p>
+<hr>
+<h2 id="s6---output-multi-format-writing">S6 - Output: multi-format writing</h2>
+<p><strong>Input</strong>: <code>MaskedDocument</code> + <code>Vault</code> + outbox path</p>
+<p><strong>Output</strong>: <code>WrittenOutput</code> (paths of 8 files written)</p>
+<p><strong>Responsibilities</strong>: write to <code>outbox/</code>:</p>
+<ul>
+<li><code>txt/<stem>_anonymise.txt</code></li>
+<li><code>json/<stem>_anonymise.json</code> (text + entities + meta)</li>
+<li><code>jsonl/<stem>_entities.jsonl</code> (1 entity per line)</li>
+<li><code>xml/<stem>_anonymise.xml</code></li>
+<li><code>conll/<stem>_anonymise.conll</code> (BIO)</li>
+<li><code>html/<stem>_anonymise.html</code> (visualization)</li>
+<li><code>vault/<stem>_vault.enc</code> (AES-256-GCM)</li>
+<li><code>meta/<stem>_meta.json</code> (audit, <strong>without sensitive data</strong>)</li>
+</ul>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s6_output.py</code></p>
+<p><strong>Serializers</strong>: <code>src/carnaval/core/serializers.py</code></p>
+<hr>
+<h2 id="s7---reinject-restoration-(inverse-stage)">S7 - Reinject: restoration (inverse stage)</h2>
+<p><strong>Input</strong>: JSON or XML with placeholders + Vault</p>
+<p><strong>Output</strong>: JSON or XML with original values restored</p>
+<p><strong>Auto-detection</strong> of format by the first character:</p>
+<ul>
+<li><code>{</code> or <code>[</code> -> JSON</li>
+<li><code><</code> -> XML</li>
+<li>other -> fallback to raw text</li>
+</ul>
+<p><strong>Code</strong>: <code>src/carnaval/stages/s7_reinject.py</code></p>
+<hr>
+<h2 id="orchestration-pipelinepy">Orchestration: pipeline.py</h2>
+<p>The <code>src/carnaval/pipeline.py</code> module chains S1->S6:</p>
+<pre><code class="language-python">masked, written, config = run_anonymization(
+    input_path=...,
+    outbox_dir=...,
+    vault_password=...,
+    profile="acknowledge",
+)</code></pre>
+<p>Each stage emits a structured log (without sensitive data, thanks to the</p>
+<p><code>_redact_sensitive</code> filter of the logger).</p>
+            </div>
+        </section>
+        
+
+        <section id="sec-02_install" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">02 - Installation</h1>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><strong>Python</strong>: 3.11 or higher (tested on 3.13)</li>
+<li><strong>OS</strong>: Windows, Linux, macOS</li>
+<li><strong>RAM</strong>: 2 GB minimum (GLiNER loads a ~500 MB model)</li>
+<li><strong>Disk</strong>: ~1 GB (for the venv + HuggingFace model caches)</li>
+<li><strong>Network</strong>: required on first launch (GLiNER download).</li>
+</ul>
+<p>After that, everything works offline.</p>
+<h2 id="installation">Installation</h2>
+<h3>Method A: Standard Installation (from PyPI)</h3>
+<p>If you only want to use <code>carnaval</code> as a dependency in your project, install it directly from PyPI:</p>
+<pre><code class="language-bash">pip install carnaval</code></pre>
+<h3>Method B: Local Source & Development Installation</h3>
+<p>If you want to run tests, contribute, or build/test packaging distributions locally:</p>
+<p>#### 1. Clone or retrieve the code</p>
+<pre><code class="language-bash">git clone &lt;url&gt;
+cd carnaval</code></pre>
+<p>#### 2. Create a virtual environment</p>
+<pre><code class="language-bash">python -m venv .venv
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# Linux / macOS / Git Bash
+source .venv/bin/activate</code></pre>
+<p>#### 3. Install in editable development mode</p>
+<pre><code class="language-bash">pip install --upgrade pip
+pip install -e .</code></pre>
+<p>#### 4. Building and Testing the Distributable Wheels (Optional)</p>
+<p>To verify the packaging build structure locally (ensuring all static data directories and compiled modules are correctly bundled):</p>
+<pre><code class="language-bash"># Install the build tool
+pip install build
+
+# Build the source distribution (tar.gz) and wheel (.whl)
+python -m build
+
+# Create a clean temporary environment to test the wheel
+python -m venv test_env
+.\test_env\Scripts\Activate.ps1   # Windows
+# or: source test_env/bin/activate # Linux/macOS
+
+# Install the locally built wheel
+pip install dist/carnaval-*.whl
+
+# Copy the quickstart example script into the test environment folder
+# Windows:
+copy examples\quickstart_api.py test_env\
+# Linux/macOS:
+cp examples/quickstart_api.py test_env/
+
+# Change directory to the test environment
+cd test_env
+
+# Run the script to verify the installed wheel works perfectly
+python quickstart_api.py</code></pre>
+<p>Installed dependencies:</p>
+<ul>
+<li><code>pycryptodome</code>: AES-256-GCM encryption</li>
+<li><code>PyYAML</code>, <code>python-dotenv</code>: config</li>
+<li><code>structlog</code>: logs</li>
+<li><code>lingua-language-detector</code>: language detection</li>
+<li><code>gliner</code>: PII NER (via torch + transformers)</li>
+<li><code>pytest</code>, <code>pytest-cov</code>: tests</li>
+</ul>
+<h3>4. Configure the vault password</h3>
+<pre><code class="language-bash">cp .env.example .env</code></pre>
+<p>Edit <code>.env</code>:</p>
+<pre><code class="language-plaintext">CARNAVAL_VAULT_PASSWORD=your_strong_secret_of_at_least_32_characters</code></pre>
+<p><strong>Important</strong>: never commit <code>.env</code>. The <code>.gitignore</code> already excludes it.</p>
+<h3>5. Verify the installation</h3>
+<pre><code class="language-bash">pytest -m "not slow"</code></pre>
+<p>Expected result: <code>179 passed, 2 deselected</code> (the 2 slow tests</p>
+<p>require downloading the GLiNER model ~500 MB).</p>
+<h3>6. Run a live test</h3>
+<pre><code class="language-bash">python anonymize.py profiles/acknowledge/fixtures/sample_ack_globex.txt \
+    --profile acknowledge --no-gliner</code></pre>
+<p>Verify that <code>outbox/txt/sample_ack_globex_anonymise.txt</code> is created.</p>
+<h2 id="activate-gliner-(first-call)">Activate GLiNER (first call)</h2>
+<p>The model is automatically downloaded from HuggingFace on the first</p>
+<p>call. This takes <strong>~2-5 minutes</strong> depending on your connection (~500 MB).</p>
+<pre><code class="language-bash">python anonymize.py profiles/acknowledge/fixtures/sample_ack_globex.txt \
+    --profile acknowledge</code></pre>
+<p>Subsequent calls use the local cache (~/.cache/huggingface).</p>
+<h2 id="offline-installation-(no-network)">Offline installation (no network)</h2>
+<p>To deploy in an environment without internet:</p>
+<p>1. On a connected machine:</p>
+<pre><code class="language-bash">   pip download -r requirements.txt -d wheels/
+   python -c "from gliner import GLiNER; GLiNER.from_pretrained('urchade/gliner_multi_pii-v1')"</code></pre>
+<p>2. Copy <code>wheels/</code> and <code>~/.cache/huggingface/</code> to the target machine.</p>
+<p>3. On the target machine:</p>
+<pre><code class="language-bash">   pip install --no-index --find-links=wheels/ -r requirements.txt</code></pre>
+<h2 id="final-verification">Final verification</h2>
+<pre><code class="language-bash">python -c "from carnaval.pipeline import run_anonymization; print('OK')"</code></pre>
+<p>If OK is displayed, the installation is complete.</p>
+            </div>
+        </section>
+        
+
+        <section id="sec-03_deploiement_production" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">03 - Production deployment</h1>
+<h2 id="principles">Principles</h2>
+<p>carnaval is a <strong>command-line tool</strong>, not a service. To put it into production:</p>
+<p>1. Install in a dedicated folder (cf. <a href="#sec-02_install">02_install.md</a>)</p>
+<p>2. Store the vault password in an enterprise vault (HashiCorp Vault,</p>
+<p>AWS Secrets Manager, Azure Key Vault...)</p>
+<p>3. Connect upstream/downstream of an existing pipeline (cron, NiFi, Airflow,</p>
+<p>PowerShell scheduler...)</p>
+<h2 id="typical-deployment-architecture">Typical deployment architecture</h2>
+<pre><code class="language-plaintext">+-----------+
+| PDF       |   (PDF -&gt; TXT)
+| Extractor |
++-----+-----+
+      |
+      v
+   inbox/&lt;doc&gt;.txt
+      |
+      v
++-----------+
+| anonymize.py (carnaval)
++-----+-----+
+      |
+      v
+   outbox/txt/&lt;doc&gt;_anonymise.txt
+      |
+      v
++-----------+
+| LLM call  | (Sonnet via Bedrock, etc.)
++-----+-----+
+      |
+      v
+   response.json
+      |
+      v
++-----------+
+| reinject.py (carnaval)
++-----+-----+
+      |
+      v
+   final.json --&gt; business consumer</code></pre>
+<h2 id="environment-variables">Environment variables</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Variable</th>
+<th>Role</th>
+<th>Critical</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>`CARNAVAL_VAULT_PASSWORD`</td>
+<td>Vault password</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>`CARNAVAL_LOG_LEVEL`</td>
+<td>Log level (DEBUG/INFO/WARNING/ERROR)</td>
+<td>No</td>
+</tr>
+</tbody></table></div>
+<h2 id="password-management-in-production">Password management in production</h2>
+<p><strong>Bad</strong>: <code>.env</code> file on the server in clear text.</p>
+<p><strong>Good</strong>:</p>
+<ul>
+<li>Linux: environment variable injected by systemd (<code>EnvironmentFile=/etc/secrets/carnaval</code>)</li>
+<li>Windows: system variable injected by the service or scheduled task</li>
+<li>Cloud: secret manager (Vault, AWS SM, Azure KV) retrieved on each run</li>
+</ul>
+<p>PowerShell example:</p>
+<pre><code class="language-powershell">$env:CARNAVAL_VAULT_PASSWORD = (Get-VaultSecret -Path 'carnaval/vault-pwd').Value
+python anonymize.py inbox\doc.txt --profile acknowledge</code></pre>
+<h2 id="audit-and-logs">Audit and logs</h2>
+<p>Structured JSON logs (<code>--log-level INFO</code>) emit per stage:</p>
+<pre><code class="language-json">{"event":"s5_mask_done","by_category":{"PERSON":2,"EMAIL":1},"timestamp":"..."}</code></pre>
+<p><strong>No clear text values</strong> in the logs ( <code>_redact_sensitive</code> filter active).</p>
+<p>For SIEM integration:</p>
+<pre><code class="language-bash">python anonymize.py inbox/doc.txt --profile acknowledge \
+    --log-level INFO 2&gt;&gt; /var/log/carnaval/audit.jsonl</code></pre>
+<h2 id="expected-performance">Expected performance</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Configuration</th>
+<th>Latency per document</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>GLiNER off (regex + denylist)</td>
+<td>**<2 seconds**</td>
+</tr>
+<tr>
+<td>GLiNER on, CPU x86 16 GB RAM</td>
+<td>**15-20 seconds**</td>
+</tr>
+<tr>
+<td>GLiNER on, GPU CUDA</td>
+<td>**<5 seconds** (not tested)</td>
+</tr>
+</tbody></table></div>
+<p>The first call includes downloading the HuggingFace model</p>
+<p>(~80-120s with a decent connection).</p>
+<h2 id="vault-lifecycle-strategy">Vault lifecycle strategy</h2>
+<h3>Rotation</h3>
+<p>The vault password can be changed: all active vaults must then be re-encrypted. Procedure:</p>
+<pre><code class="language-python">import os
+from pathlib import Path
+from carnaval.core.vault import Vault
+
+old_pwd = os.environ["OLD_PASSWORD"]
+new_pwd = os.environ["NEW_PASSWORD"]
+
+for vault_file in Path("outbox/vault").glob("*.enc"):
+    v = Vault(password=old_pwd, path=vault_file)
+    v.load()
+    v_new = Vault(password=new_pwd, path=vault_file)
+    v_new.forward = v.forward
+    v_new.backward = v.backward
+    v_new.save()</code></pre>
+<h3>Purge</h3>
+<p>Vaults can be purged after N days (after the downstream LLM</p>
+<p>has finished processing and reinjection is done).</p>
+<pre><code class="language-bash">find outbox/vault -name "*.enc" -mtime +30 -delete</code></pre>
+<h2 id="network-security">Network security</h2>
+<p>carnaval opens <strong>no network ports</strong>. It reads a file, writes to</p>
+<p><code>outbox/</code>. No service, no bind. Easier to audit.</p>
+<h2 id="monitoring">Monitoring</h2>
+<p>Recommended metrics to report:</p>
+<ul>
+<li>Number of documents anonymized per hour</li>
+<li>Average latency per stage</li>
+<li>Failures (Spans=0, language=unknown, vault save failure)</li>
+<li>Size of the outbox/vault folder (alert if > X GB)</li>
+</ul>
+            </div>
+        </section>
+        
+
+        <section id="sec-04_configuration" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">04 - Configuration</h1>
+<h2 id="configuration-layers">Configuration layers</h2>
+<p>carnaval applies 3 successive layers on load:</p>
+<pre><code class="language-plaintext">+-----------------------+
+| 1. config/            |  (technical defaults - universal regex)
++-----------------------+
+            |
+            v
++-----------------------+
+| 2. profiles/&lt;type&gt;/   |  (document type - acknowledge, invoice, email...)
++-----------------------+
+            |
+            v
++-----------------------+
+| 3. profiles_private/  |  (real client data - GIT IGNORE)
++-----------------------+
+            |
+            v
+       Resolved Config</code></pre>
+<p>Merge strategy:</p>
+<ul>
+<li><code>dict + dict</code>: recursion (key by key)</li>
+<li><code>list + list</code>: concatenation (deny lists are enriched)</li>
+<li><code>scalar + scalar</code>: the upper layer wins</li>
+</ul>
+<h2 id="profile-layout">Profile layout</h2>
+<pre><code class="language-plaintext">profiles/&lt;name&gt;/
+|-- profile.yaml           # description (name, language, expected entities)
+|-- deny_lists/            # lists to MASK
+|   |-- organizations.yaml
+|   |-- organization_singleton.yaml
+|   `-- people.yaml
+|-- allow_lists/           # lists to PRESERVE (anti false positives)
+|   `-- product_refs.yaml
+|-- patterns/              # type-specific regex (rare)
+|-- policies/              # arbitration rules (rare)
+`-- fixtures/              # fictional examples for tests
+    `-- sample.txt</code></pre>
+<h2 id="`config/pipelineyaml`-file">`config/pipeline.yaml` file</h2>
+<pre><code class="language-yaml">pipeline:
+  default_language: fr
+  use_gliner: true
+  gliner_threshold: 0.4
+  cleanup_pipes: false
+  score_threshold: 0.4
+
+placeholder:
+  format: "[{prefix}_{index}]"
+  singleton_format: "[{prefix}]"
+
+ai:
+  gliner_model: "urchade/gliner_multi_pii-v1"
+  gliner_labels:
+    - person
+    - email
+    - phone number
+    - address
+    - organization</code></pre>
+<h2 id="deny-lists">Deny lists</h2>
+<p>Simple format - a key at the YAML root:</p>
+<pre><code class="language-yaml"># config/deny_lists/organizations.yaml or profiles/&lt;type&gt;/deny_lists/organizations.yaml
+organizations:
+  - "Globex Inc."
+  - "Initech"
+  - "Vandelay"</code></pre>
+<p>For email/web domains:</p>
+<pre><code class="language-yaml">supplier_domains:
+  - "globex.example"
+  - "initech.example"</code></pre>
+<h2 id="singleton-organization">Singleton organization</h2>
+<p>The client's single parent company (appearing in all its documents) receives</p>
+<p><strong>a single placeholder</strong> without index:</p>
+<pre><code class="language-yaml"># profiles/&lt;type&gt;/deny_lists/organization_singleton.yaml
+organization_singleton:
+  - "Acme Corp"
+  - "Acme Corporation"
+  - "ACME CORP"
+  - "ACMECORP"</code></pre>
+<p>All variants above will produce <code>[ORG]</code> (unique).</p>
+<h2 id="people">People</h2>
+<pre><code class="language-yaml"># profiles/&lt;type&gt;/deny_lists/people.yaml
+people:
+  - "Alice Anderson"
+  - "Bob Brown"</code></pre>
+<h2 id="allow-lists-(informative)">Allow lists (informative)</h2>
+<p>Allow lists are <strong>documentary</strong>. The pipeline does not use them</p>
+<p>explicitly - their respect is guaranteed by:</p>
+<ul>
+<li>Specific regex that only match the correct forms</li>
+<li>The GLiNER score threshold</li>
+<li>Dedup that prioritizes deterministic recognizers</li>
+</ul>
+<pre><code class="language-yaml"># profiles/&lt;type&gt;/allow_lists/product_refs.yaml
+product_ref_patterns:
+  - "[A-Z]{2,4}-[A-Z0-9]{2,8}-\\d{2,4}"</code></pre>
+<h2 id="run-with-a-profile">Run with a profile</h2>
+<pre><code class="language-bash">python anonymize.py doc.txt --profile acknowledge
+python anonymize.py doc.txt --profile invoice --no-gliner
+python anonymize.py doc.txt --profile acknowledge --private my_client</code></pre>
+<h2 id="inspect-the-resolved-config">Inspect the resolved config</h2>
+<pre><code class="language-python">from carnaval.core.config_loader import load_config
+
+cfg = load_config(profile="acknowledge", private_profile="my_client")
+print(cfg.layers)            # ['base:...', 'profile:acknowledge', 'private:my_client']
+print(cfg.deny_lists)         # resolved dict
+print(cfg.get("pipeline.use_gliner"))   # dotted-path access</code></pre>
+            </div>
+        </section>
+        
+
+        <section id="sec-05_extension_listes" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">05 - Extend lists (deny / allow) without coding</h1>
+<p>This is the most frequent extension: add a supplier, a name, an</p>
+<p>orthographic variant.</p>
+<h2 id="add-a-supplier">Add a supplier</h2>
+<p>Edit <code>profiles/<type>/deny_lists/organizations.yaml</code>:</p>
+<pre><code class="language-yaml">organizations:
+  - "Globex Inc."
+  - "Initech"
+  - "My New Supplier SAS"     # &lt;-- addition
+  - "MyNewSupplier"           # orthographic variant</code></pre>
+<p>Run an anonymization -> the new name is detected immediately.</p>
+<p>No restart, no recompilation, no index rebuild.</p>
+<h2 id="add-a-singleton-variant">Add a singleton variant</h2>
+<p>The client's unique parent company:</p>
+<pre><code class="language-yaml"># profiles/&lt;type&gt;/deny_lists/organization_singleton.yaml
+organization_singleton:
+  - "Acme Corp"
+  - "Acme Corporation"
+  - "ACME CORP."         # variant with period
+  - "Acme  Corp"         # variant with double space
+  - "ACMECORP"           # without space</code></pre>
+<p>All variants -> same placeholder <code>[ORG]</code>.</p>
+<h2 id="add-a-recurring-person-name">Add a recurring person name</h2>
+<pre><code class="language-yaml"># profiles/&lt;type&gt;/deny_lists/people.yaml
+people:
+  - "Alice Anderson"
+  - "Bob Brown"
+  - "John Doe"           # &lt;-- addition
+  - "Jane Doe"</code></pre>
+<p>NB: these are <strong>full names</strong>. For names detected by context</p>
+<p>(Mr. LAST First, LAST, First), no need to list them: the regex</p>
+<p><code>name_patterns</code> catches them.</p>
+<h2 id="add-an-email-domain">Add an email domain</h2>
+<pre><code class="language-yaml">supplier_domains:
+  - "globex.example"
+  - "mydomain.com"     # &lt;-- addition</code></pre>
+<p>Will be detected by UrlRecognizer / EmailRecognizer.</p>
+<h2 id="client-specific-(private-profile)">Client-specific (private profile)</h2>
+<p>To <strong>not</strong> expose your real data in the public repo:</p>
+<p>1. Create <code>profiles_private/my_client_acknowledge/</code></p>
+<p>2. Reproduce the minimal structure there:</p>
+<pre><code class="language-plaintext">profiles_private/my_client_acknowledge/
+|-- profile.yaml
+`-- deny_lists/
+    `-- organizations.yaml</code></pre>
+<pre><code class="language-yaml"># profiles_private/my_client_acknowledge/profile.yaml
+profile:
+  name: my_client_acknowledge
+  extends: acknowledge       # informative
+  description: "Private profile client X"</code></pre>
+<pre><code class="language-yaml"># profiles_private/my_client_acknowledge/deny_lists/organizations.yaml
+organizations:
+  - "My Real Supplier 1"
+  - "My Real Supplier 2"</code></pre>
+<p>The merge <strong>adds</strong> the private suppliers to those of the public profile.</p>
+<p>Launch:</p>
+<pre><code class="language-bash">python anonymize.py doc.txt \
+    --profile acknowledge \
+    --private my_client_acknowledge</code></pre>
+<h2 id="verify-coverage-of-a-list">Verify coverage of a list</h2>
+<p>To test that a new variant is properly detected, run on a</p>
+<p>sample text:</p>
+<pre><code class="language-bash">echo "Test: My New Supplier SAS delivers tomorrow" &gt; /tmp/test.txt
+python anonymize.py /tmp/test.txt --profile acknowledge --no-gliner --console
+cat outbox/txt/test_anonymise.txt
+# Should display: "Test: [ORG_1] delivers tomorrow"</code></pre>
+<h2 id="common-pitfalls">Common pitfalls</h2>
+<ul>
+<li><strong>Case sensitive?</strong> No, by default deny lists match ignoring</li>
+</ul>
+<p>case. <code>acme corp</code> also matches.</p>
+<ul>
+<li><strong>Variants with accents?</strong> Python IGNORECASE does not support</li>
+</ul>
+<p>unicode folding by default. For <code>Stephanie</code>, also add</p>
+<p><code>Stéphanie</code> to the list.</p>
+<ul>
+<li><strong>Substring risk?</strong> The pattern uses word boundaries, so</li>
+</ul>
+<p><code>Acme</code> will not match inside <code>acmeic</code>. The "loose" variant</p>
+<p>without word boundary is available if needed (see</p>
+<p><code>organizations.py:recognize_organizations_loose</code>).</p>
+<h2 id="validation-profile-tests">Validation: profile tests</h2>
+<p>If you extend a lot, add a test:</p>
+<pre><code class="language-python"># tests/integration/test_my_profile.py
+def test_my_new_supplier_masked(outbox_dir, tmp_path):
+    text = "Order from My New Supplier SAS"
+    inbox = tmp_path / "in.txt"
+    inbox.write_text(text, encoding="utf-8")
+
+    masked, _, _ = run_anonymization(
+        input_path=inbox,
+        outbox_dir=outbox_dir,
+        vault_password="test_password_long_enough",
+        profile="acknowledge",
+        use_gliner=False,
+    )
+    assert "My New Supplier" not in masked.anonymized_text</code></pre>
+            </div>
+        </section>
+        
+
+        <section id="sec-06_extension_recognizers" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">06 - Extend recognizers (code a new detector)</h1>
+<p>When deny lists are not enough (entity by pattern), you need to code</p>
+<p>a recognizer.</p>
+<h2 id="contract">Contract</h2>
+<p>A carnaval recognizer is <strong>a pure function</strong>:</p>
+<pre><code class="language-python">def my_recognizer(text: str) -&gt; list[Span]:
+    ...</code></pre>
+<p>That's it. No inheritance, no framework, no hook to implement.</p>
+<h2 id="example-recognize-a-french-social-security-number">Example: recognize a French social security number</h2>
+<pre><code class="language-python"># src/carnaval/recognizers/regex/social_security_fr.py
+"""Recognizer for French social security numbers (NIR)."""
+
+import re
+from carnaval.core.span import Span
+from carnaval.recognizers.base import regex_to_spans
+
+
+# NIR: 1 digit (gender) + 2 digits (year) + 2 digits (month) + 5 digits
+# (birth commune) + 3 digits (order number) + 2 digits (key)
+NIR_PATTERN = re.compile(
+    r"\b[12]\s?\d{2}\s?\d{2}\s?\d{2,5}\s?\d{3}\s?\d{2}\b"
+)
+
+
+def recognize_nir_fr(text: str, score: float = 0.85) -&gt; list[Span]:
+    return regex_to_spans(
+        NIR_PATTERN, text,
+        entity_type="NIR",
+        recognizer="NirFrRegex",
+        score=score,
+    )</code></pre>
+<h2 id="wire-the-new-recognizer">Wire the new recognizer</h2>
+<p>Edit <code>src/carnaval/stages/s3_detect.py</code>, add the import and the function</p>
+<p>in the appropriate tuple:</p>
+<pre><code class="language-python">from carnaval.recognizers.regex.social_security_fr import recognize_nir_fr
+
+_FR_REGEX_RECOGNIZERS = (
+    recognize_phone_fr,
+    recognize_all_fiscal_fr,
+    recognize_address_fr,
+    recognize_name_patterns,
+    recognize_nir_fr,      # &lt;-- addition
+)</code></pre>
+<h2 id="add-the-placeholder">Add the placeholder</h2>
+<p>In <code>src/carnaval/stages/s5_mask.py</code>, add the mapping:</p>
+<pre><code class="language-python">DEFAULT_PLACEHOLDER_PREFIX = {
+    ...,
+    "NIR": "NIR",
+}</code></pre>
+<p>Without this entry, the default prefix will be the entity_type itself, which</p>
+<p>may also be suitable.</p>
+<h2 id="add-priority-in-dedup">Add priority in dedup</h2>
+<p>In <code>src/carnaval/stages/s4_resolve.py</code>:</p>
+<pre><code class="language-python">DEFAULT_RECOGNIZER_PRIORITY = {
+    ...,
+    "NirFrRegex": 85,
+}</code></pre>
+<h2 id="add-to-the-reinjection-pattern">Add to the reinjection pattern</h2>
+<p>In <code>src/carnaval/stages/s7_reinject.py</code>, the pattern is generic:</p>
+<pre><code class="language-python">PLACEHOLDER_PATTERN = re.compile(
+    r"\[([A-Z]+(?:_\d+)?)\]"
+)</code></pre>
+<p>It already matches <code>[NIR_1]</code>, <code>[NIR_2]</code>, etc. <strong>No modification necessary</strong>.</p>
+<h2 id="mandatory-tests">Mandatory tests</h2>
+<p>Create <code>tests/recognizers/test_nir.py</code>:</p>
+<pre><code class="language-python">import pytest
+from carnaval.recognizers.regex.social_security_fr import recognize_nir_fr
+
+class TestNirRecognizer:
+    @pytest.mark.parametrize("text,expected", [
+        ("NIR 1 85 04 75 116 089 25", True),
+        ("Numero 1850475116089 25", True),
+        ("No NIR here", False),
+        ("Reference 12345", False),
+    ])
+    def test_match(self, text, expected):
+        assert (len(recognize_nir_fr(text)) &gt; 0) == expected</code></pre>
+<p>And at least one integration test:</p>
+<pre><code class="language-python"># tests/integration/test_nir_pipeline.py
+def test_nir_masked_end_to_end(tmp_path):
+    ...</code></pre>
+<h2 id="run-all-tests">Run all tests</h2>
+<pre><code class="language-bash">pytest -m "not slow"</code></pre>
+<p>Target: everything remains green after adding the recognizer.</p>
+<h2 id="ai-recognizer-(gliner-zero-shot)">AI recognizer (GLiNER zero-shot)</h2>
+<p>GLiNER already detects <code>person</code>, <code>email</code>, <code>address</code>, etc. To add a</p>
+<p>new label:</p>
+<pre><code class="language-yaml"># config/pipeline.yaml
+ai:
+  gliner_labels:
+    - person
+    - email
+    - ...
+    - social security number    # &lt;-- new label</code></pre>
+<p>And in <code>src/carnaval/recognizers/ai/gliner_engine.py</code>, add the</p>
+<p>mapping:</p>
+<pre><code class="language-python">LABEL_TO_ENTITY_TYPE = {
+    ...,
+    "social security number": "NIR",
+}</code></pre>
+<p>GLiNER will try to detect the pattern in zero-shot mode, without</p>
+<p>retraining.</p>
+<h2 id="dictionary-based-recognizer-from-external-source">Dictionary-based recognizer from external source</h2>
+<p>For a very long list (>1000 entries) that changes often (e.g. employee</p>
+<p>list synchronized with an Active Directory), you can:</p>
+<p>1. Store the list in an external file <code>data/employees.txt</code></p>
+<p>2. Load lazily:</p>
+<pre><code class="language-python">@functools.lru_cache(maxsize=1)
+def _load_employees() -&gt; list[str]:
+    path = Path(__file__).parent.parent.parent / "data" / "employees.txt"
+    return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+def recognize_employees(text: str) -&gt; list[Span]:
+    return recognize_people(text, _load_employees())</code></pre>
+<h2 id="best-practices">Best practices</h2>
+<ul>
+<li><strong>One responsibility per recognizer</strong>: one file = one entity type.</li>
+<li><strong>Positive AND negative tests</strong>: 5 True cases + 5 False cases minimum.</li>
+<li><strong>No side effects</strong>: the function receives <code>text</code>, returns <code>list[Span]</code>,</li>
+</ul>
+<p>nothing else.</p>
+<ul>
+<li><strong>Pattern compiled at module level</strong>: avoids recompilation on each</li>
+</ul>
+<p>call.</p>
+<ul>
+<li><strong>Realistic score</strong>: 0.95+ for very specific regex with checksum, 0.5-0.7</li>
+</ul>
+<p>for generic regex prone to false positives.</p>
+            </div>
+        </section>
+        
+
+        <section id="sec-07_securite" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">07 - Security</h1>
+<h2 id="the-encrypted-vault">The encrypted vault</h2>
+<h3>Algorithm</h3>
+<div class="table-container"><table>
+<thead><tr>
+<th>Element</th>
+<th>Value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Symmetric encryption</td>
+<td>AES-256-GCM</td>
+</tr>
+<tr>
+<td>Key derivation</td>
+<td>PBKDF2-HMAC-SHA256, 600,000 iterations</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>16 random bytes per file</td>
+</tr>
+<tr>
+<td>GCM nonce</td>
+<td>16 random bytes per file</td>
+</tr>
+<tr>
+<td>Authentication tag</td>
+<td>16 bytes (integrity verification)</td>
+</tr>
+<tr>
+<td>Binary format</td>
+<td>`[salt 16][nonce 16][tag 16][ciphertext N]`</td>
+</tr>
+</tbody></table></div>
+<h3>Strength</h3>
+<ul>
+<li>AES-256-GCM mode: authenticated encryption. Any alteration of the file</li>
+</ul>
+<p>is detected on read (VaultError).</p>
+<ul>
+<li>PBKDF2 600k iterations: slows down dictionary/brute force attacks</li>
+</ul>
+<p>(non-trivial delay even with GPU).</p>
+<ul>
+<li>Random nonce per file: no reuse, no leakage by comparison</li>
+</ul>
+<p>of figures.</p>
+<h3>Limitation</h3>
+<ul>
+<li>The password must be strong. Minimum 16 characters, ideally >32, randomly</li>
+</ul>
+<p>generated.</p>
+<ul>
+<li>The password in RAM during execution. If the machine is compromised at</li>
+</ul>
+<p>the OS level, the clear text values are accessible. <strong>This is not an HSM</strong>.</p>
+<h2 id="the-password">The password</h2>
+<h3>Generate a strong password</h3>
+<p>Linux/macOS:</p>
+<pre><code class="language-bash">openssl rand -base64 48</code></pre>
+<p>Windows PowerShell:</p>
+<pre><code class="language-powershell">[Convert]::ToBase64String([Security.Cryptography.RandomNumberGenerator]::GetBytes(48))</code></pre>
+<h3>Storage</h3>
+<p><strong>DO NOT</strong>:</p>
+<ul>
+<li>Commit to the repo (<code>.env</code> is git-ignored by default, keep it).</li>
+<li>Log even partially.</li>
+<li>Pass as command line argument (visible in <code>ps</code>, history).</li>
+<li>Hardcode in the code.</li>
+</ul>
+<p><strong>DO</strong>:</p>
+<ul>
+<li>Environment variable <code>CARNAVAL_VAULT_PASSWORD</code>, injected by:</li>
+<li>Systemd: <code>EnvironmentFile=/etc/secrets/carnaval</code> (mode 600)</li>
+<li>Windows: system variable of the service / scheduled task</li>
+<li>Cloud: secret manager (Vault, AWS SM, Azure KV) read at startup</li>
+</ul>
+<h3>Rotation</h3>
+<p>See <a href="#sec-03_deploiement_production-rotation">03_deploiement_production.md</a>.</p>
+<h2 id="anti-leak-in-logs">Anti-leak in logs</h2>
+<p>The structured logger (<code>carnaval/core/logger.py</code>) includes a processor</p>
+<p><code>_redact_sensitive</code> that prohibits any value under the following keys:</p>
+<pre><code class="language-python">SENSITIVE_KEYS = frozenset({
+    "original", "raw_text", "raw", "text",
+    "mapping", "vault", "vault_contents",
+    "password", "secret",
+    "forward", "backward",
+})</code></pre>
+<p>If a caller attempts <code>log.info("event", original="Alice")</code>, the emitted log will be:</p>
+<p><code>{"event":"event","original":"<REDACTED>"}</code>.</p>
+<p>This is a <strong>default safeguard</strong>. If you add keys in the code,</p>
+<p>remember to enrich this frozenset.</p>
+<h2 id="no-network-leakage">No network leakage</h2>
+<p>carnaval opens <strong>no network ports</strong> and makes <strong>no outgoing calls</strong></p>
+<p>after the initial GLiNER model download. You can:</p>
+<ul>
+<li>Test with <code>tcpdump</code> / wireshark</li>
+<li>Deploy in a container without network interface</li>
+<li>Block all outbound firewall for the user running carnaval</li>
+</ul>
+<h2 id="attack-surface">Attack surface</h2>
+<h3>Compromised vault.enc file</h3>
+<p>Without the password, the content is unreadable (AES-256-GCM). With the password,</p>
+<p>all original values are accessible.</p>
+<p><strong>Mitigation</strong>:</p>
+<ul>
+<li>Store <code>outbox/vault/</code> in an encrypted partition at rest</li>
+<li>Purge vaults after processing (cron: <code>find ... -mtime +30 -delete</code>)</li>
+<li>Password rotation (cf. deployment doc)</li>
+</ul>
+<h3>Input file inbox/</h3>
+<p>The input file contains sensitive data <strong>in clear text</strong>. You must:</p>
+<ul>
+<li>Restrict POSIX rights (chmod 600)</li>
+<li>Delete it after anonymization</li>
+<li>Store on an encrypted partition</li>
+</ul>
+<h3>Metadata meta.json</h3>
+<p>The file <code>outbox/meta/<stem>_meta.json</code> contains:</p>
+<ul>
+<li>Number of entities per category (statistical, non-sensitive)</li>
+<li>Source path (may be sensitive if the filename reflects the client)</li>
+</ul>
+<p>No <strong>original values</strong> are in the meta.</p>
+<h2 id="audit">Audit</h2>
+<p>For SOC traces:</p>
+<pre><code class="language-bash">python anonymize.py inbox/doc.txt --profile acknowledge \
+    --log-level INFO 2&gt;&gt; /var/log/carnaval/audit.jsonl</code></pre>
+<p>Format of each line:</p>
+<pre><code class="language-json">{"event":"s5_mask_done","by_category":{"PERSON":2,"EMAIL":1},"timestamp":"..."}</code></pre>
+<p>Traceability: we know how many entities of each type were masked,</p>
+<p>but we never know WHICH ONES (zero leakage).</p>
+<h2 id="rgpd-compliance">RGPD compliance</h2>
+<p>carnaval allows implementing <strong>pseudonymization</strong> within the meaning of</p>
+<p>RGPD (art. 4.5):</p>
+<ul>
+<li>Personal data replaced by identifiers that no longer allow</li>
+</ul>
+<p>identification without additional data</p>
+<ul>
+<li>Additional data (vault) is kept separately</li>
+</ul>
+<p>and technically protected</p>
+<p><strong>Note</strong>: carnaval is not an RGPD certificate. It is a technical</p>
+<p>tool that helps with compliance. Overall compliance depends on the</p>
+<p>usage context, retention periods, DPA contracts with external</p>
+<p>LLMs, etc.</p>
+            </div>
+        </section>
+        
+
+        <section id="sec-08_format_entree_sortie" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">08 - Input and output formats</h1>
+<h2 id="input">Input</h2>
+<h3>Raw .txt file</h3>
+<ul>
+<li>Encoding: UTF-8 (automatic latin-1 fallback)</li>
+<li>Max size: 50 MB by default (configurable)</li>
+<li>No imposed structure: raw text</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-plaintext">Hello Alice Anderson,
+Your order from Globex Inc. is confirmed.
+Contact: alice@globex.example</code></pre>
+<h2 id="simultaneous-outputs">Simultaneous outputs</h2>
+<p>A single anonymization pass produces <strong>6 formats</strong> in <code>outbox/</code>:</p>
+<h3>1. TXT - `outbox/txt/<stem>_anonymise.txt`</h3>
+<p>Text with tags, ready to pipe to an LLM.</p>
+<pre><code class="language-plaintext">Hello [PERSON_1],
+Your order from [ORG_1] is confirmed.
+Contact: [EMAIL_1]</code></pre>
+<h3>2. JSON - `outbox/json/<stem>_anonymise.json`</h3>
+<p>Exploitable structure for APIs.</p>
+<pre><code class="language-json">{
+  "anonymized_text": "Hello [PERSON_1]...",
+  "language": "fr",
+  "entities": [
+    {
+      "start": 8,
+      "end": 22,
+      "type": "PERSON",
+      "placeholder": "[PERSON_1]",
+      "score": 0.95,
+      "recognizer": "GLiNER"
+    }
+  ],
+  "by_category": {"PERSON": 1, "ORGANIZATION": 1, "EMAIL": 1},
+  "source": "/path/inbox/doc.txt"
+}</code></pre>
+<h3>3. JSONL - `outbox/jsonl/<stem>_entities.jsonl`</h3>
+<p>One entity per line, streaming-friendly.</p>
+<pre><code class="language-jsonl">{"start": 8, "end": 22, "type": "PERSON", "placeholder": "[PERSON_1]", "score": 0.95, "recognizer": "GLiNER"}
+{"start": 40, "end": 51, "type": "ORGANIZATION", "placeholder": "[ORG_1]", "score": 1.0, "recognizer": "OrganizationsDenyList"}</code></pre>
+<h3>4. XML - `outbox/xml/<stem>_anonymise.xml`</h3>
+<p>Legacy / EDI integration.</p>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;anomarkResult&gt;
+  &lt;anonymizedText&gt;Hello [PERSON_1]...&lt;/anonymizedText&gt;
+  &lt;language&gt;fr&lt;/language&gt;
+  &lt;source&gt;/path/inbox/doc.txt&lt;/source&gt;
+  &lt;byCategory&gt;
+    &lt;category name="PERSON"&gt;1&lt;/category&gt;
+    &lt;category name="ORGANIZATION"&gt;1&lt;/category&gt;
+  &lt;/byCategory&gt;
+  &lt;entities&gt;
+    &lt;entity start="8" end="22" type="PERSON" placeholder="[PERSON_1]" .../&gt;
+  &lt;/entities&gt;
+&lt;/anomarkResult&gt;</code></pre>
+<h3>5. CoNLL - `outbox/conll/<stem>_anonymise.conll`</h3>
+<p>CoNLL-2003 BIO format for NER model training.</p>
+<pre><code class="language-plaintext">Hello O
+
+Alice B-PERSON
+Anderson I-PERSON
+
+Your O
+order O
+from O
+Globex B-ORGANIZATION
+Inc. I-ORGANIZATION</code></pre>
+<h3>6. HTML - `outbox/html/<stem>_anonymise.html`</h3>
+<p>Interactive visualization with colorized spans. Useful for debug and</p>
+<p>functional reviews.</p>
+<h2 id="vault-and-metadata">Vault and metadata</h2>
+<h3>Vault - `outbox/vault/<stem>_vault.enc`</h3>
+<p>AES-256-GCM encrypted binary file. Essential for reinjection.</p>
+<h3>Meta - `outbox/meta/<stem>_meta.json`</h3>
+<p>Non-sensitive audit.</p>
+<pre><code class="language-json">{
+  "source": "/path/inbox/doc.txt",
+  "language": "fr",
+  "num_spans": 3,
+  "by_category": {"PERSON": 1, "ORGANIZATION": 1, "EMAIL": 1},
+  "outputs": {
+    "txt": "...",
+    "json": "...",
+    "...": "..."
+  },
+  "timestamp": 1715680000.0,
+  "duration_seconds": 12.5
+}</code></pre>
+<h2 id="re-injection-supported-input-formats">Re-injection: supported input formats</h2>
+<p>S7 accepts JSON and XML. Auto-detection by the first character:</p>
+<div class="table-container"><table>
+<thead><tr>
+<th>First char</th>
+<th>Detected format</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>`{` or `[`</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>`<`</td>
+<td>XML</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>Raw text</td>
+</tr>
+</tbody></table></div>
+<h3>JSON example</h3>
+<pre><code class="language-bash"># Sonnet response
+cat &gt; response.json &lt;&lt;EOF
+{
+  "supplier": "[ORG_1]",
+  "contact": "[PERSON_1]",
+  "amount": 1200
+}
+EOF
+
+python reinject.py response.json --vault outbox/vault/doc_vault.enc</code></pre>
+<p>Produces <code>response_final.json</code>:</p>
+<pre><code class="language-json">{
+  "supplier": "Globex Inc.",
+  "contact": "Alice Anderson",
+  "amount": 1200
+}</code></pre>
+<h3>XML example</h3>
+<pre><code class="language-bash">cat &gt; response.xml &lt;&lt;EOF
+&lt;order&gt;
+  &lt;supplier&gt;[ORG_1]&lt;/supplier&gt;
+  &lt;contact email="[EMAIL_1]"&gt;[PERSON_1]&lt;/contact&gt;
+&lt;/order&gt;
+EOF
+
+python reinject.py response.xml --vault outbox/vault/doc_vault.enc</code></pre>
+<p>Produces <code>response_final.xml</code>:</p>
+<pre><code class="language-xml">&lt;order&gt;
+  &lt;supplier&gt;Globex Inc.&lt;/supplier&gt;
+  &lt;contact email="alice@globex.example"&gt;Alice Anderson&lt;/contact&gt;
+&lt;/order&gt;</code></pre>
+<p>XML attributes, element text and tails are all processed.</p>
+<h2 id="add-a-custom-output-format">Add a custom output format</h2>
+<p>Edit <code>src/carnaval/core/serializers.py</code>, add a function</p>
+<p><code>to_<format>(doc: MaskedDocument) -> str</code>. Wire it in</p>
+<p><code>stages/s6_output.py</code>.</p>
+<p>Ideas for additional formats:</p>
+<ul>
+<li><strong>Markdown</strong> with annotations</li>
+<li><strong>YAML</strong> for configuration</li>
+<li><strong>CSV</strong> for spreadsheet (1 row = 1 entity)</li>
+<li><strong>OWL/RDF</strong> for knowledge graph</li>
+</ul>
+            </div>
+        </section>
+        
+
+        <section id="sec-09_troubleshooting" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">09 - Troubleshooting</h1>
+<h2 id="vaulterror-wrong-password-or-corrupted-vault">VaultError: Wrong password or corrupted vault</h2>
+<p><strong>Cause</strong>: the <code>CARNAVAL_VAULT_PASSWORD</code> used for <code>reinject.py</code> does</p>
+<p>not match the one used for <code>anonymize.py</code>.</p>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li>Check the environment variable</li>
+<li>If the password was changed between the two runs, the vault can no longer</li>
+</ul>
+<p>be decrypted. Either regenerate the vault (re-anonymize the text),</p>
+<p>or recover the old password.</p>
+<h2 id="vaulterror-password-too-short">VaultError: Password too short</h2>
+<p><strong>Cause</strong>: less than 16 characters.</p>
+<p><strong>Fix</strong>: use a password >= 16 chars, ideally >= 32.</p>
+<pre><code class="language-bash">openssl rand -base64 48</code></pre>
+<h2 id="intakeerror-file-not-found-/-empty-/-too-large">IntakeError: File not found / empty / too large</h2>
+<ul>
+<li><strong>Not found</strong>: check the path (relative vs absolute)</li>
+<li><strong>Empty</strong>: carnaval rejects 0-byte files. Check the upstream</li>
+</ul>
+<p>PDF extraction.</p>
+<ul>
+<li><strong>Too large</strong>: default max size 50 MB. Increase via:</li>
+<pre><code class="language-python">  intake(path, max_size_bytes=100 * 1024 * 1024)</code></pre>
+</ul>
+<h2 id="gliner-download-stuck">GLiNER: download stuck</h2>
+<p><strong>Symptom</strong>: on first call, hangs on "Fetching files...".</p>
+<p><strong>Cause</strong>: firewall/proxy blocks huggingface.co.</p>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li>Check access to <code>huggingface.co</code> / <code>cdn-lfs.huggingface.co</code></li>
+<li>Configure HTTPS proxy: <code>HTTPS_PROXY=...</code></li>
+<li>Download on another machine and copy <code>~/.cache/huggingface/</code> to</li>
+</ul>
+<p>the target machine</p>
+<p>Alternative: disable GLiNER (<code>--no-gliner</code>) - the pipeline falls back to</p>
+<p>regex + denylist only.</p>
+<h2 id="slow-performance">Slow performance</h2>
+<div class="table-container"><table>
+<thead><tr>
+<th>Symptom</th>
+<th>Probable cause</th>
+<th>Fix</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>First call >60s</td>
+<td>HF model download</td>
+<td>Normal, wait</td>
+</tr>
+<tr>
+<td>Each call >15s</td>
+<td>GLiNER on CPU</td>
+<td>Acceptable, or GPU if available</td>
+</tr>
+<tr>
+<td>With `--no-gliner` still slow</td>
+<td>Very long text</td>
+<td>Check size (large document = many Spans)</td>
+</tr>
+</tbody></table></div>
+<h2 id="too-many-false-positives">Too many false positives</h2>
+<p><strong>Symptom</strong>: non-sensitive words are masked (e.g. "PARC" becomes <code>[BIC_1]</code>).</p>
+<p><strong>Possible causes</strong>:</p>
+<ul>
+<li>GLiNER threshold too low: increase via <code>--gliner-threshold 0.6</code></li>
+<li>Mis-calibrated custom recognizer</li>
+</ul>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li>Inspect the JSON output: see which <code>recognizer</code> produces the false positive</li>
+<li>Adjust the regex in question, or increase the score threshold</li>
+</ul>
+<h2 id="not-enough-detection-(leak)">Not enough detection (leak)</h2>
+<p><strong>Symptom</strong>: an obvious name is not masked.</p>
+<p><strong>Causes</strong>:</p>
+<ul>
+<li>GLiNER disabled (<code>--no-gliner</code>): missing contextual PERSON detection</li>
+<li>The name is not in the deny lists and is not matchable by regex</li>
+<li>The GLiNER threshold is too high</li>
+</ul>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li>Enable GLiNER, lower the threshold to 0.3</li>
+<li>Add the name to <code>deny_lists/people.yaml</code></li>
+</ul>
+<h2 id="parasitic-text-(-`|`-characters-in-the-middle-of-words)">Parasitic text ( `|` characters in the middle of words)</h2>
+<p><strong>Symptom</strong>: PDF extraction failure, text like <code>Chi | mieBERTAUX</code>.</p>
+<p><strong>Fix</strong>: enable <code>--cleanup-pipes</code>:</p>
+<pre><code class="language-bash">python anonymize.py inbox/doc.txt --profile acknowledge --cleanup-pipes</code></pre>
+<p>Warning: risk of modifying business content (rare but possible).</p>
+<h2 id="latin-1-encoding-in-output">latin-1 encoding in output</h2>
+<p><strong>Cause</strong>: the source file was in latin-1 (the fallback was activated).</p>
+<p><strong>Fix</strong>: none. The content is preserved. If you want to force UTF-8</p>
+<p>upstream, convert the file before: <code>iconv -f latin1 -t utf8 in.txt > out.txt</code>.</p>
+<h2 id="importerror-no-module-named-'carnaval'">ImportError: No module named 'carnaval'</h2>
+<p><strong>Cause</strong>: execution without the venv activated, or outside the project folder.</p>
+<p><strong>Fix</strong>:</p>
+<ul>
+<li>Activate the venv: <code>.\.venv\Scripts\activate</code></li>
+<li>Run from the project root: <code>python anonymize.py ...</code></li>
+</ul>
+<h2 id="iban-checksum-error">IBAN checksum error</h2>
+<p><strong>Symptom</strong>: a valid IBAN is not detected.</p>
+<p><strong>Cause</strong>: the validator requires mod 97 = 1. Verify on</p>
+<p><a href="https://www.iban.com/iban-checker">iban.com/iban-checker</a> that the IBAN is</p>
+<p>formally valid.</p>
+<p>If the IBAN is valid but not detected, open an issue with an</p>
+<p>anonymized example (without the real value, mask it yourself first!).</p>
+<h2 id="tests-fail-after-a-change">Tests fail after a change</h2>
+<p><strong>Fix</strong>: isolate by stage.</p>
+<pre><code class="language-bash">pytest tests/unit/test_s3_detect.py -v       # single file
+pytest tests/unit/test_s3_detect.py::TestDetect::test_email_only -v   # single test
+pytest --lf                                    # only the tests that failed</code></pre>
+<p>Read the error trace, the assertion message often gives the expected</p>
+<p>value vs received.</p>
+<h2 id="logs-invisible-/-empty">Logs invisible / empty</h2>
+<p><strong>Cause</strong>: high log level.</p>
+<p><strong>Fix</strong>:</p>
+<pre><code class="language-bash">python anonymize.py inbox/doc.txt --profile acknowledge \
+    --log-level DEBUG --console</code></pre>
+<p><code>--console</code> makes logs readable (JSON mode by default for</p>
+<p>machine-readability).</p>
+<h2 id="rarer-symptoms">Rarer symptoms</h2>
+<p>If nothing in this list matches your case:</p>
+<p>1. Reproduce with a minimal text</p>
+<p>2. Run with <code>--log-level DEBUG --console</code></p>
+<p>3. Capture the complete trace</p>
+<p>4. Open an issue with:</p>
+<ul>
+<li>Python version</li>
+<li>OS</li>
+<li>Input text (anonymized!)</li>
+<li>Exact command</li>
+<li>Complete output</li>
+<li>Error trace</li>
+</ul>
+            </div>
+        </section>
+        
+
+        <section id="sec-10_api_reference" class="doc-section">
+            <div class="doc-content-wrapper">
+                <h1 class="chapter-title">10 - Python API</h1>
+<h2 id="programmatic-usage">Programmatic usage</h2>
+<p>carnaval can also be used as a Python library.</p>
+<h3>Simple anonymization</h3>
+<pre><code class="language-python">from pathlib import Path
+from carnaval.pipeline import run_anonymization
+
+masked, written, config = run_anonymization(
+    input_path=Path("inbox/doc.txt"),
+    outbox_dir=Path("outbox"),
+    vault_password="my_long_secret_of_at_least_32_chars",
+    profile="acknowledge",
+    private_profile=None,
+    use_gliner=True,
+    gliner_threshold=0.4,
+    cleanup_pipes=False,
+    language=None,             # auto-detection if None
+)
+
+print(f"Anonymized: {masked.anonymized_text}")
+print(f"Spans: {len(masked.spans)}")
+print(f"Files written: {written.txt_path}, ...")</code></pre>
+<h3>Anonymization without disk writes</h3>
+<pre><code class="language-python">from carnaval.core.vault import Vault
+from carnaval.stages.s1_intake import intake
+from carnaval.stages.s2_preprocess import preprocess
+from carnaval.stages.s3_detect import detect
+from carnaval.stages.s4_resolve import resolve
+from carnaval.stages.s5_mask import mask
+from carnaval.core.config_loader import load_config
+
+cfg = load_config(profile="acknowledge")
+raw = intake("inbox/doc.txt")
+norm = preprocess(raw, cleanup_pipes=False)
+det = detect(norm, cfg, use_gliner=True)
+res = resolve(det)
+
+vault = Vault(password="my_long_secret_of_at_least_32_chars")
+masked = mask(res, vault)
+
+# `masked.anonymized_text` contains the text with tags.
+# `vault` contains the mappings in memory (not persisted).</code></pre>
+<h3>JSON reinjection</h3>
+<pre><code class="language-python">import json
+from carnaval.core.vault import Vault
+from carnaval.stages.s7_reinject import reinject_json_data, reinject_json_string
+
+vault = Vault(password="my_secret", path="outbox/vault/doc_vault.enc")
+vault.load()
+
+# From a dict
+sonnet_response = {"supplier": "[ORG_1]", "contact": "[PERSON_1]"}
+restored = reinject_json_data(sonnet_response, vault)
+# {"supplier": "Globex Inc.", "contact": "Alice Anderson"}
+
+# From a JSON string
+json_str = '{"x": "[PERSON_1]"}'
+restored_str = reinject_json_string(json_str, vault)</code></pre>
+<h3>XML reinjection</h3>
+<pre><code class="language-python">from carnaval.stages.s7_reinject import reinject_xml_string
+
+xml_str = '&lt;order supplier="[ORG_1]"&gt;[PERSON_1]&lt;/order&gt;'
+restored = reinject_xml_string(xml_str, vault)</code></pre>
+<h3>Auto-detection</h3>
+<pre><code class="language-python">from carnaval.stages.s7_reinject import reinject_string
+
+# Accepts JSON, XML, or raw text. Auto-detects.
+restored = reinject_string(content, vault)</code></pre>
+<h2 id="key-modules">Key modules</h2>
+<h3>`carnaval.core.span.Span`</h3>
+<pre><code class="language-python">@dataclass(frozen=True)
+class Span:
+    start: int
+    end: int
+    entity_type: str
+    text: str
+    score: float = 1.0
+    recognizer: str = ""
+    metadata: dict[str, Any] = ...
+
+    @property
+    def length(self) -&gt; int: ...
+    def overlaps(self, other: Span) -&gt; bool: ...
+    def contains(self, other: Span) -&gt; bool: ...
+    def shift(self, delta: int) -&gt; Span: ...
+    def to_dict(self) -&gt; dict: ...
+    def to_dict_safe(self) -&gt; dict: ...   # without the original value</code></pre>
+<h3>`carnaval.core.vault.Vault`</h3>
+<pre><code class="language-python">class Vault:
+    def __init__(self, password: str, path: Path | None = None): ...
+    def store(self, placeholder: str, original: str) -&gt; None: ...
+    def get_original(self, placeholder: str) -&gt; str | None: ...
+    def get_placeholder(self, original: str) -&gt; str | None: ...
+    def save(self) -&gt; None: ...
+    def load(self) -&gt; None: ...
+    def export_mapping(self) -&gt; dict: ...
+    def __len__(self) -&gt; int: ...</code></pre>
+<p>Errors: <code>VaultError</code> (password too short, corrupted vault, file</p>
+<p>missing...).</p>
+<h3>`carnaval.core.config_loader.load_config`</h3>
+<pre><code class="language-python">def load_config(
+    base_dir: Path | str | None = None,
+    profile: str | None = None,
+    private_profile: str | None = None,
+    repo_root: Path | str | None = None,
+) -&gt; Config: ...
+
+@dataclass
+class Config:
+    raw: dict
+    layers: list[str]
+
+    @property
+    def pipeline(self) -&gt; dict: ...
+    @property
+    def deny_lists(self) -&gt; dict: ...
+    @property
+    def allow_lists(self) -&gt; dict: ...
+    @property
+    def policies(self) -&gt; dict: ...
+    @property
+    def ai_models(self) -&gt; dict: ...
+
+    def get(self, dotted_key: str, default=None): ...</code></pre>
+<h3>`carnaval.core.logger`</h3>
+<pre><code class="language-python">from carnaval.core.logger import configure_logging, get_logger
+
+configure_logging(level="INFO", json_format=True)
+log = get_logger("my_module")
+log.info("event", duration=1.23)</code></pre>
+<p>The <code>_redact_sensitive</code> processor automatically filters sensitive keys</p>
+<p>(<code>password</code>, <code>original</code>, <code>vault</code>, ...) -> <code><REDACTED></code>.</p>
+<h3>`carnaval.recognizers.*`</h3>
+<p>Recognizers as pure functions:</p>
+<pre><code class="language-python">from carnaval.recognizers.regex.email import recognize_email
+from carnaval.recognizers.regex.phone_fr import recognize_phone_fr
+from carnaval.recognizers.regex.fiscal_fr import recognize_all_fiscal_fr
+from carnaval.recognizers.regex.iban_bic import recognize_iban, recognize_bic
+from carnaval.recognizers.denylist.organizations import recognize_organizations
+from carnaval.recognizers.ai.gliner_engine import recognize_with_gliner
+
+spans = recognize_email("Contact alice@example.com")
+spans2 = recognize_organizations(text, organizations=["Globex", "Initech"])</code></pre>
+<h2 id="document-models">Document models</h2>
+<pre><code class="language-python">from carnaval.stages.documents import (
+    RawDocument,           # S1 output
+    NormalizedDocument,    # S2 output
+    DetectedDocument,      # S3 output
+    ResolvedDocument,      # S4 output
+    MaskedDocument,        # S5 output
+    WrittenOutput,         # S6 output
+)</code></pre>
+<p>All are <code>dataclass(frozen=True)</code>. Access fields in read-only mode.</p>
+<h2 id="serializers">Serializers</h2>
+<pre><code class="language-python">from carnaval.core.serializers import (
+    to_txt, to_json, to_jsonl, to_xml, to_conll, to_html,
+)
+
+masked: MaskedDocument = ...
+txt = to_txt(masked)
+json_str = to_json(masked)
+html = to_html(masked)</code></pre>
+<h2 id="complete-example-custom-pipeline">Complete example: custom pipeline</h2>
+<pre><code class="language-python">"""Custom pipeline: anonymization without disk writes + LLM call."""
+
+from pathlib import Path
+from carnaval.core.config_loader import load_config
+from carnaval.core.vault import Vault
+from carnaval.stages.s1_intake import intake
+from carnaval.stages.s2_preprocess import preprocess
+from carnaval.stages.s3_detect import detect
+from carnaval.stages.s4_resolve import resolve
+from carnaval.stages.s5_mask import mask
+from carnaval.stages.s7_reinject import reinject_json_data
+
+
+def process_document(path: Path, password: str) -&gt; dict:
+    # 1. Anonymize
+    cfg = load_config(profile="acknowledge")
+    raw = intake(path)
+    norm = preprocess(raw)
+    det = detect(norm, cfg, use_gliner=True)
+    res = resolve(det)
+    vault = Vault(password=password)
+    masked = mask(res, vault)
+
+    # 2. Call the LLM (e.g. Bedrock Claude)
+    response = call_bedrock_claude(masked.anonymized_text)
+    # response = {"supplier": "[ORG_1]", "contact": "[PERSON_1]", ...}
+
+    # 3. Restore
+    return reinject_json_data(response, vault)
+
+
+def call_bedrock_claude(text: str) -&gt; dict:
+    # Placeholder
+    import boto3, json
+    client = boto3.client("bedrock-runtime", region_name="eu-west-3")
+    r = client.invoke_model(
+        modelId="anthropic.claude-sonnet-4-7",
+        body=json.dumps({
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 4000,
+            "messages": [{"role": "user", "content": [
+                {"type": "text", "text": "Extract structured data:\n" + text}
+            ]}],
+        }),
+    )
+    return json.loads(r["body"].read())</code></pre>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- PrismJS CDN for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', (e) => {
+                sidebar.classList.toggle('active');
+                e.stopPropagation();
+            });
+        }
+        
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && e.target !== menuToggle) {
+                sidebar.classList.remove('active');
+            }
+        });
+        
+        // Scroll spy effect to highlight active sidebar link
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateActiveLink() {
+            let currentActiveSectionId = '';
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                // If section top is above the middle of screen and bottom is below middle
+                if (rect.top <= window.innerHeight / 2.5 && rect.bottom >= window.innerHeight / 2.5) {
+                    currentActiveSectionId = section.id;
+                }
+            });
+            
+            if (currentActiveSectionId) {
+                navLinks.forEach(link => {
+                    if (link.id === 'link-' + currentActiveSectionId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        window.addEventListener('scroll', updateActiveLink);
+        window.addEventListener('resize', updateActiveLink);
+        updateActiveLink(); // Initial check
+    </script>
+</body>
+</html>
