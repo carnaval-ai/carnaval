@@ -67,7 +67,7 @@ Legacy / EDI integration.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<anomarkResult>
+<carnavalResult>
   <anonymizedText>Hello [PERSON_1]...</anonymizedText>
   <language>fr</language>
   <source>/path/inbox/doc.txt</source>
@@ -78,7 +78,7 @@ Legacy / EDI integration.
   <entities>
     <entity start="8" end="22" type="PERSON" placeholder="[PERSON_1]" .../>
   </entities>
-</anomarkResult>
+</carnavalResult>
 ```
 
 ### 5. CoNLL - `outbox/conll/<stem>_anonymise.conll`

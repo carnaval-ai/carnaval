@@ -255,7 +255,7 @@ def call_bedrock_claude(text: str) -> dict:
     import boto3, json
     client = boto3.client("bedrock-runtime", region_name="eu-west-3")
     r = client.invoke_model(
-        modelId="anthropic.claude-sonnet-4-7",
+        modelId="anthropic.claude-3-5-sonnet-20241022-v2:0",  # Replace with your target Bedrock model ID
         body=json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": 4000,

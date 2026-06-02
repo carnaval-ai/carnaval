@@ -1,7 +1,7 @@
 # carnaval
 
 [![CI](https://github.com/carnaval-ai/carnaval/actions/workflows/ci.yml/badge.svg)](https://github.com/carnaval-ai/carnaval/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/carnaval-ai/carnaval/branch/master/graph/badge.svg)](https://codecov.io/gh/carnaval-ai/carnaval)
+[![codecov](https://codecov.io/gh/carnaval-ai/carnaval/branch/main/graph/badge.svg)](https://codecov.io/gh/carnaval-ai/carnaval)
 [![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue.svg)](http://mypy-lang.org/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -111,13 +111,24 @@ Private profiles (real client data) in `profiles_private/` (git-ignored).
 | [docs/09_troubleshooting.md](docs/09_troubleshooting.md) | Common errors |
 | [docs/10_api_reference.md](docs/10_api_reference.md) | Python API |
 
-## Tests
+## Tests & Validation Corpus
 
 ```bash
-pytest                          # all (except slow)
-pytest -m slow                  # real AI tests (downloads GLiNER ~500 MB)
-pytest --cov=src/carnaval       # coverage
+pytest                          # Run standard tests (179 passing, 5 slow/AI deselected)
+pytest -m slow                  # Run neural network tests (downloads GLiNER multi-PII model ~500 MB)
+pytest --cov=src/carnaval       # Run with coverage report (~95% coverage)
 ```
+
+The test suite consists of **184 total tests** validating `carnaval` against a dedicated corpus of hundreds of fake documents. This corpus represents the worst real-world B2B data quality and privacy cases encountered in production, covering:
+- **Case & Accent Variations** (e.g. Stephanie / Stéphanie / STEPHANIE)
+- **Valid & Invalid Identifiers** (IBAN/BIC checks with mod-97 verification)
+- **Country-Specific Identifiers** (NIR, VAT/TVA, SIREN / SIRET)
+- **Overlapping Entities** (Stage 4 arbitration for emails with subdomains, etc.)
+- **Punctuation & Complex Layouts** (Names attached to punctuation, "LASTNAME Firstname", "Mr. LASTNAME")
+- **Dirty PDF Extractions** (Noisy text containing pipe characters like "Chi | mieBERTAUX")
+- **Multi-Occurrence Consistency** (Mapping identical entities to the same placeholder index)
+- **Tricky False Positives** (Business terms mistaken as BICs, e.g. "PARC")
+- **Multilingual long documents**
 
 ## Examples
 

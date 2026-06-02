@@ -959,8 +959,7 @@ python quickstart_api.py</code></pre>
 <p><strong>Important</strong>: never commit <code>.env</code>. The <code>.gitignore</code> already excludes it.</p>
 <h3>5. Verify the installation</h3>
 <pre><code class="language-bash">pytest -m "not slow"</code></pre>
-<p>Expected result: <code>179 passed, 2 deselected</code> (the 2 slow tests</p>
-<p>require downloading the GLiNER model ~500 MB).</p>
+<p>Expected result: <code>179 passed, 5 deselected</code> (for a total of 184 tests in the test suite; the 5 deselected tests are slow AI recognizer tests that require downloading neural network models like GLiNER ~500 MB).</p>
 <h3>6. Run a live test</h3>
 <pre><code class="language-bash">python anonymize.py profiles/acknowledge/fixtures/sample_ack_globex.txt \
     --profile acknowledge --no-gliner</code></pre>
@@ -982,6 +981,19 @@ python quickstart_api.py</code></pre>
 <h2 id="final-verification">Final verification</h2>
 <pre><code class="language-bash">python -c "from carnaval.pipeline import run_anonymization; print('OK')"</code></pre>
 <p>If OK is displayed, the installation is complete.</p>
+<h2 id="the-validation-corpus-&-hard-cases">The Validation Corpus & Hard Cases</h2>
+<p>carnaval is validated against a dedicated test corpus of several hundreds of fake documents representing the worst real-world B2B data quality and privacy cases encountered in production. The suite covers the following challenging scenarios:</p>
+<ul>
+<li><strong>Case & Accent Variations</strong>: Handling of accents and uppercase/lowercase variants (e.g., <code>Stephanie</code>, <code>Stéphanie</code>, <code>STEPHANIE</code>).</li>
+<li><strong>Valid & Invalid Identifiers</strong>: Real-world validation checks, including mod-97 verification for IBAN and BIC formats.</li>
+<li><strong>Country-Specific Identifiers</strong>: French regulatory IDs like <code>NIR</code> (social security number), <code>VAT</code> (TVA), and company registration numbers (<code>SIREN</code> and <code>SIRET</code>).</li>
+<li><strong>Entity Overlaps</strong>: Resolving overlapping boundaries in Stage 4 (e.g., an email address containing a subdomain or a product reference overlapping with a business name).</li>
+<li><strong>Punctuation & Layout Layouts</strong>: Parsing names directly attached to punctuation, and layouts such as <code>"LASTNAME Firstname"</code> or <code>"Mr. LASTNAME"</code>.</li>
+<li><strong>Dirty PDF Extractions</strong>: Cleaning up noisy PDF texts with parasite characters like pipes (e.g., <code>"Chi | mieBERTAUX"</code>).</li>
+<li><strong>Multi-Occurrence Consistency</strong>: Ensuring the same real entity across multiple places in a document maps to the exact same placeholder index.</li>
+<li><strong>Tricky False Positives</strong>: Filtering out common business terms mistaken as BICs (e.g. <code>"PARC"</code>).</li>
+<li><strong>Multilingual Documents</strong>: Supporting long-form documents containing content mixed across multiple active languages.</li>
+</ul>
             </div>
         </section>
         
@@ -1510,6 +1522,7 @@ def recognize_employees(text: str) -&gt; list[Span]:
 <td>`[salt 16][nonce 16][tag 16][ciphertext N]`</td>
 </tr>
 </tbody></table></div>
+<p><em>(Note: while NIST SP 800-38D recommends a 12-byte nonce for GCM, carnaval uses a 16-byte nonce for backwards compatibility with existing vaults. A 12-byte nonce layout is planned for the next major version release).</em></p>
 <h3>Strength</h3>
 <ul>
 <li>AES-256-GCM mode: authenticated encryption. Any alteration of the file</li>
@@ -1673,7 +1686,7 @@ Contact: [EMAIL_1]</code></pre>
 <h3>4. XML - `outbox/xml/<stem>_anonymise.xml`</h3>
 <p>Legacy / EDI integration.</p>
 <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;anomarkResult&gt;
+&lt;carnavalResult&gt;
   &lt;anonymizedText&gt;Hello [PERSON_1]...&lt;/anonymizedText&gt;
   &lt;language&gt;fr&lt;/language&gt;
   &lt;source&gt;/path/inbox/doc.txt&lt;/source&gt;
@@ -1684,7 +1697,7 @@ Contact: [EMAIL_1]</code></pre>
   &lt;entities&gt;
     &lt;entity start="8" end="22" type="PERSON" placeholder="[PERSON_1]" .../&gt;
   &lt;/entities&gt;
-&lt;/anomarkResult&gt;</code></pre>
+&lt;/carnavalResult&gt;</code></pre>
 <h3>5. CoNLL - `outbox/conll/<stem>_anonymise.conll`</h3>
 <p>CoNLL-2003 BIO format for NER model training.</p>
 <pre><code class="language-plaintext">Hello O
@@ -2130,7 +2143,7 @@ def call_bedrock_claude(text: str) -&gt; dict:
     import boto3, json
     client = boto3.client("bedrock-runtime", region_name="eu-west-3")
     r = client.invoke_model(
-        modelId="anthropic.claude-sonnet-4-7",
+        modelId="anthropic.claude-3-5-sonnet-20241022-v2:0",  # Replace with your target Bedrock model ID
         body=json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": 4000,

@@ -994,7 +994,7 @@
         <div class="container header-content">
             <a href="#" class="logo">
                 carnaval
-                <span class="logo-tag">v0.2.0</span>
+                <span class="logo-tag">v0.2.3</span>
             </a>
             <div class="nav-links">
                 <a href="#quickstart" class="nav-hide-mobile">Quickstart</a>
@@ -1042,8 +1042,8 @@
                 <div class="stat-lbl">Vault Encryption</div>
             </div>
             <div class="stat-item">
-                <div class="stat-val">Zero</div>
-                <div class="stat-lbl">Cloud PII Leaks</div>
+                <div class="stat-val">Local</div>
+                <div class="stat-lbl">PII Protection</div>
             </div>
             <div class="stat-item">
                 <div class="stat-val">6</div>
@@ -1162,7 +1162,7 @@ print(restored_json)
                 <div class="stage-num">01</div>
                 <div class="stage-badge">Ingest</div>
                 <h3 class="stage-title">S1. Intake</h3>
-                <p class="stage-desc">Loads input documents safely. Resolves file encodings with auto-fallback from UTF-8 to Latin-1. Enforces file limits up to 10 MB to prevent resource exhaustion.</p>
+                <p class="stage-desc">Loads input documents safely. Resolves file encodings with auto-fallback from UTF-8 to Latin-1. Enforces file limits up to 50 MB to prevent resource exhaustion.</p>
             </div>
 
             <!-- Stage 2 -->
@@ -1170,7 +1170,7 @@ print(restored_json)
                 <div class="stage-num">02</div>
                 <div class="stage-badge">Normalise</div>
                 <h3 class="stage-title">S2. Preprocess</h3>
-                <p class="stage-desc">Standardizes text structure. Sanitizes pipeline delimiters (pipes), collapses redundant white spaces, strips BOMs, and detects the document language (French, English, German, or Spanish).</p>
+                <p class="stage-desc">Standardizes text structure. Sanitizes pipeline delimiters (pipes), collapses redundant white spaces, strips BOMs, and detects the document language (French, English, German, or Japanese, with others supported in best-effort mode).</p>
             </div>
 
             <!-- Stage 3 -->
@@ -1248,7 +1248,7 @@ print(restored_json)
                 <div>
                     <h3 class="usecase-title">GDPR & Data Sovereignty</h3>
                     <p class="usecase-desc">
-                        Comply with strict European data sovereignty laws by guaranteeing that customer PII (Personally Identifiable Information) never transits outside authorized localized boundaries during cloud processing.
+                        Comply with strict European data sovereignty laws by guaranteeing that customer PII (Personally Identifiable Information) never transits outside authorized localized boundaries during cloud processing. <em>Designed to prevent sending cleartext PII to the cloud (note: 100% recall is not guaranteed; actual coverage depends on custom denylists and the configured GLiNER threshold).</em>
                     </p>
                 </div>
                 <div class="usecase-tag">GDPR Compliance</div>

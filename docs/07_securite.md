@@ -13,6 +13,8 @@
 | Authentication tag | 16 bytes (integrity verification) |
 | Binary format | `[salt 16][nonce 16][tag 16][ciphertext N]` |
 
+*(Note: while NIST SP 800-38D recommends a 12-byte nonce for GCM, carnaval uses a 16-byte nonce for backwards compatibility with existing vaults. A 12-byte nonce layout is planned for the next major version release).* 
+
 ### Strength
 
 - AES-256-GCM mode: authenticated encryption. Any alteration of the file

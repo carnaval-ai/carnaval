@@ -109,8 +109,7 @@ CARNAVAL_VAULT_PASSWORD=your_strong_secret_of_at_least_32_characters
 pytest -m "not slow"
 ```
 
-Expected result: `179 passed, 2 deselected` (the 2 slow tests
-require downloading the GLiNER model ~500 MB).
+Expected result: `179 passed, 5 deselected` (for a total of 184 tests in the test suite; the 5 deselected tests are slow AI recognizer tests that require downloading neural network models like GLiNER ~500 MB).
 
 ### 6. Run a live test
 
@@ -155,3 +154,18 @@ python -c "from carnaval.pipeline import run_anonymization; print('OK')"
 ```
 
 If OK is displayed, the installation is complete.
+
+
+## The Validation Corpus & Hard Cases
+
+carnaval is validated against a dedicated test corpus of several hundreds of fake documents representing the worst real-world B2B data quality and privacy cases encountered in production. The suite covers the following challenging scenarios:
+
+- **Case & Accent Variations**: Handling of accents and uppercase/lowercase variants (e.g., `Stephanie`, `Stéphanie`, `STEPHANIE`).
+- **Valid & Invalid Identifiers**: Real-world validation checks, including mod-97 verification for IBAN and BIC formats.
+- **Country-Specific Identifiers**: French regulatory IDs like `NIR` (social security number), `VAT` (TVA), and company registration numbers (`SIREN` and `SIRET`).
+- **Entity Overlaps**: Resolving overlapping boundaries in Stage 4 (e.g., an email address containing a subdomain or a product reference overlapping with a business name).
+- **Punctuation & Layout Layouts**: Parsing names directly attached to punctuation, and layouts such as `"LASTNAME Firstname"` or `"Mr. LASTNAME"`.
+- **Dirty PDF Extractions**: Cleaning up noisy PDF texts with parasite characters like pipes (e.g., `"Chi | mieBERTAUX"`).
+- **Multi-Occurrence Consistency**: Ensuring the same real entity across multiple places in a document maps to the exact same placeholder index.
+- **Tricky False Positives**: Filtering out common business terms mistaken as BICs (e.g. `"PARC"`).
+- **Multilingual Documents**: Supporting long-form documents containing content mixed across multiple active languages.

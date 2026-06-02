@@ -710,7 +710,7 @@
         <div class="container header-content">
             <a href="#" class="logo">
                 carnaval
-                <span class="logo-tag">v0.2.0</span>
+                <span class="logo-tag">v0.2.3</span>
             </a>
             <div class="nav-links">
                 <a href="#playground">Interactive Playground</a>
@@ -822,7 +822,7 @@
                 <div class="stage-num">01</div>
                 <div class="stage-badge">Ingest</div>
                 <h3 class="stage-title">S1. Intake</h3>
-                <p class="stage-desc">Loads input documents safely. Resolves file encodings with auto-fallback from UTF-8 to Latin-1. Enforces file limits up to 10 MB to prevent resource exhaustion.</p>
+                <p class="stage-desc">Loads input documents safely. Resolves file encodings with auto-fallback from UTF-8 to Latin-1. Enforces file limits up to 50 MB to prevent resource exhaustion.</p>
             </div>
 
             <!-- Stage 2 -->
@@ -830,7 +830,7 @@
                 <div class="stage-num">02</div>
                 <div class="stage-badge">Normalise</div>
                 <h3 class="stage-title">S2. Preprocess</h3>
-                <p class="stage-desc">Standardizes text structure. Sanitizes pipeline delimiters (pipes), collapses redundant white spaces, strips BOMs, and detects the document language (French, English, German, or Spanish).</p>
+                <p class="stage-desc">Standardizes text structure. Sanitizes pipeline delimiters (pipes), collapses redundant white spaces, strips BOMs, and detects the document language (French, English, German, or Japanese, with others supported in best-effort mode).</p>
             </div>
 
             <!-- Stage 3 -->
@@ -883,7 +883,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                 </div>
                 <h3 class="feature-title">True Zero-Cloud Moat</h3>
-                <p class="feature-desc">By encrypting masking tables locally with AES-256-GCM, plain text PII never leaves your computing boundary. The cloud LLM only processes standardized, non-identifying semantic tokens.</p>
+                <p class="feature-desc">By encrypting masking tables locally with AES-256-GCM, plain text PII never leaves your computing boundary. Designed to prevent sending cleartext PII to the cloud (note: 100% recall is not guaranteed; actual coverage depends on custom denylists and the configured GLiNER threshold). The cloud LLM only processes standardized, non-identifying semantic tokens.</p>
             </div>
 
             <div class="feature-card">
