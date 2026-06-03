@@ -1011,7 +1011,7 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
                 
                 vault: `{\n  "vault_id": "vlt_892d1a3c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[SUPPLIER_2]": "Globex Inc.",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[CONTACT_4]": "Anderson",\n    "[CONTACT_3]": "Alice Anderson",\n    "[ADDRESS_2]": "42 Main Street",\n    "[REF_ARTICLE_1]": "M254C00021",\n    "[REF_PROD_1]": "RKMCK3",\n    "[REF_PROD_2]": "KHZ-DA-032-0050-M",\n    "[CLIENT_ORDER_REF_1]": "ACM/4700001234",\n    "[IBAN_1]": "FR763000600001234567890141",\n    "[VAT_1]": "FR99123456789",\n    "[EMAIL_1]": "sales@globex.example"\n  }\n}`,
                 
-                llm: `{\n  "vendor": "<span class=\"placeholder-badge provider\">[SUPPLIER_2]</span>",\n  "client": "[CLIENT_NAME]",\n  "order_id": "<span class=\"placeholder-badge reference\">[CLIENT_ORDER_REF_1]</span>",\n  "total_ht": 187.10,\n  "items_count": 2\n}`,
+                llm: `{\n  "vendor": "<span class=\"placeholder-badge provider\">[SUPPLIER_2]</span>",\n  "client": "<span class=\"placeholder-badge client\">[CLIENT_NAME]</span>",\n  "order_id": "<span class=\"placeholder-badge reference\">[CLIENT_ORDER_REF_1]</span>",\n  "total_ht": 187.10,\n  "items_count": 2\n}`,
                 
                 reinjected: `{\n  "vendor": "Globex Inc.",\n  "client": "Acme Corp",\n  "order_id": "ACM/4700001234",\n  "total_ht": 187.10,\n  "items_count": 2\n}`
             },
@@ -1023,7 +1023,7 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
                 
                 vault: `{\n  "vault_id": "vlt_e0921a4f",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[CONTACT_1]": "David Davis",\n    "[CONTACT_4]": "Carol Carter",\n    "[EMAIL_1]": "david.davis@vandelay.example",\n    "[EMAIL_2]": "carol.carter@acme.example",\n    "[REF_PROD_1]": "RKMCK3",\n    "[REF_PROD_2]": "KHZ-DA-032-0050-M",\n    "[CLIENT_ORDER_REF_1]": "ACM/2024/0438",\n    "[SUPPLIER_1]": "Vandelay Industries",\n    "[PHONE_1]": "04.91.23.45.67",\n    "[PHONE_2]": "06.78.90.12.34"\n  }\n}`,
                 
-                llm: `{\n  "sender_name": "[CONTACT_1]",\n  "sender_company": "<span class=\"placeholder-badge provider\">[SUPPLIER_1]</span>",\n  "associated_order": "<span class=\"placeholder-badge reference\">[CLIENT_ORDER_REF_1]</span>",\n  "is_shipping_confirmation": true\n}`,
+                llm: `{\n  "sender_name": "<span class=\"placeholder-badge contact\">[CONTACT_1]</span>",\n  "sender_company": "<span class=\"placeholder-badge provider\">[SUPPLIER_1]</span>",\n  "associated_order": "<span class=\"placeholder-badge reference\">[CLIENT_ORDER_REF_1]</span>",\n  "is_shipping_confirmation": true\n}`,
                 
                 reinjected: `{\n  "sender_name": "David Davis",\n  "sender_company": "Vandelay Industries",\n  "associated_order": "ACM/2024/0438",\n  "is_shipping_confirmation": true\n}`
             },
@@ -1035,7 +1035,7 @@ restored_json = <span class="hl-fn">reinject_original_values</span>(
                 
                 vault: `{\n  "vault_id": "vlt_49ab213c",\n  "algorithm": "AES-256-GCM",\n  "keys": {\n    "[SUPPLIER_1]": "Initech",\n    "[CLIENT_NAME]": "Acme Corp",\n    "[IBAN_1]": "FR1420041010050500013M02606",\n    "[BIC_1]": "INITHFRPXXX",\n    "[EMAIL_1]": "billing@initech.example"\n  }\n}`,
                 
-                llm: `{\n  "invoice_ref": "<span class=\"placeholder-badge reference\">FAC-2024-0892</span>",\n  "billing_party": "<span class=\"placeholder-badge provider\">[SUPPLIER_1]</span>",\n  "client_party": "[CLIENT_NAME]",\n  "amount_due": 3000.00\n}`,
+                llm: `{\n  "invoice_ref": "<span class=\"placeholder-badge reference\">FAC-2024-0892</span>",\n  "billing_party": "<span class=\"placeholder-badge provider\">[SUPPLIER_1]</span>",\n  "client_party": "<span class=\"placeholder-badge client\">[CLIENT_NAME]</span>",\n  "amount_due": 3000.00\n}`,
                 
                 reinjected: `{\n  "invoice_ref": "FAC-2024-0892",\n  "billing_party": "Initech",\n  "client_party": "Acme Corp",\n  "amount_due": 3000.00\n}`
             }
