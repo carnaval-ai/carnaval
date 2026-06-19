@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>AppartCheck - Compagnon de visite</title>
+  
+  <!-- Inter Font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <button class="btn-icon-back" id="backBtn" style="display: none;" aria-label="Retour">
+        <svg style="width: 20px; height: 20px;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path>
+        </svg>
+      </button>
+      <div class="header-title-wrapper">
+        <h1 id="title">Mes Visites</h1>
+        <p class="sub" id="subtitle">Chargement de l'application...</p>
+      </div>
+    </div>
+    <button class="btn-theme-toggle" id="themeToggleBtn" aria-label="Changer le thème">
+      <!-- Sun/Moon icon inserted by app.js -->
+    </button>
+  </header>
+
+  <!-- Main App Root -->
+  <main id="app">
+    <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+      <div style="border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
+    </div>
+    <style>
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+  </main>
+
+  <!-- Hidden Inputs for Files Capture & Gallery -->
+  <input type="file" id="fileInput" accept="image/*" capture="environment" style="display: none;">
+  <input type="file" id="galInput" accept="image/*" style="display: none;">
+  <input type="file" id="importInput" accept="application/json,.json" style="display: none;">
+
+  <!-- Fullscreen Photo Viewer Overlay -->
+  <div class="overlay" id="viewer">
+    <div class="overlay-content">
+      <img id="viewerImg" alt="Visuel plein écran">
+      <div class="overlay-actions">
+        <button class="btn-close" id="viewerClose">Fermer</button>
+        <button class="btn-delete" id="viewerDel">Supprimer la photo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Auteur : Patrice Aubert</p>
+    <p style="font-size: 10px; margin-top: 4px; color: var(--text-muted);">Version PWA 2.0 • Fonctionne 100% hors-ligne via IndexedDB</p>
+  </footer>
+
+  <!-- Core Javascript File -->
+  <script src="app.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => {
+            console.log('AppartCheck ServiceWorker registered with scope:', reg.scope);
+          })
+          .catch(err => {
+            console.error('AppartCheck ServiceWorker registration failed:', err);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
